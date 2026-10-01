@@ -351,11 +351,24 @@ html body cart-remove-button .button:active {
   }
 }
 
-/* 6. FOOTER ---------------------------------------------------------------------- */
+/* 6. FOOTER -------------------------------------------------------------------
+   Centered, neatly stacked: one even rhythm between the policy links, with a
+   slightly larger gap between the copyright line and the stack. */
+html body footer .policies,
 html body footer .policies li {
+  margin: 0;
+  padding: 0;
+}
+
+html body footer .policies .copyright__content {
   margin: 0;
 }
 
-html body footer .copyright__content {
-  margin-bottom: 2px;
+html body footer .footer__copyright > .copyright__content {
+  display: block;
+  margin: 0 0 6px;
+}
+
+html body footer .footer__copyright .policies {
+  margin-top: 0;
 }

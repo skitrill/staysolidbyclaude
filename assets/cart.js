@@ -116,11 +116,13 @@ class CartItems extends HTMLElement {
         if (cartDrawerWrapper) cartDrawerWrapper.classList.toggle('is-empty', parsedState.item_count === 0);
 
         this.getSectionsToRender().forEach((section => {
-          const elementToReplace =
-            document.getElementById(section.id).querySelector(section.selector) || document.getElementById(section.id);
+          const sectionElement = document.getElementById(section.id);
+          if (!sectionElement) return;
+          const elementToReplace = sectionElement.querySelector(section.selector) || sectionElement;
           elementToReplace.innerHTML =
             this.getSectionInnerHTML(parsedState.sections[section.section], section.selector);
         }));
+        this.updateHeaderBag(parsedState.item_count);
         const updatedValue = parsedState.items[line - 1] ? parsedState.items[line - 1].quantity : undefined;
         let message = '';
         if (items.length === parsedState.items.length && updatedValue !== parseInt(quantityElement.value)) {
@@ -149,6 +151,16 @@ class CartItems extends HTMLElement {
       .finally(() => {
         this.disableLoading(line);
       });
+  }
+
+  updateHeaderBag(itemCount) {
+    const bagLink = document.getElementById('CustomMenuBagLink');
+    if (bagLink) bagLink.classList.toggle('custom-menu-item--bag', itemCount > 0);
+    const cartBubble = document.getElementById('CartBubble');
+    if (cartBubble) {
+      cartBubble.textContent = itemCount;
+      cartBubble.setAttribute('data-cart-count', itemCount);
+    }
   }
 
   updateLiveRegions(line, message) {
