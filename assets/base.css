@@ -3993,7 +3993,7 @@ main,
   flex-direction: column !important;
   justify-content: center;
   align-items: center;
-  gap: 2px !important;
+  gap: 0 !important;
   list-style: none !important;
   padding: 0;
   margin: 0;
@@ -4017,7 +4017,7 @@ main,
   font-size: 11px;
   color: #000 !important;
   text-decoration: none !important;
-  padding: 2px 4px;
+  padding: 1px 4px;
   transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
