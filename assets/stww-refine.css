@@ -148,7 +148,12 @@ html body .product__info-container .price .price__badge-sold-out {
   width: auto !important;
 }
 
-html body .product__info-container .price .price__badge-sold-out {
+/* SOLD OUT only when Dawn marks the price block sold out */
+html body .product__info-container .price:not(.price--sold-out) .price__badge-sold-out {
+  display: none !important;
+}
+
+html body .product__info-container .price.price--sold-out .price__badge-sold-out {
   display: inline-block !important;
   margin: 0;
   padding: 0;
