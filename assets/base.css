@@ -847,7 +847,7 @@ h6:empty {
 .link-with-icon {
   display: inline-flex;
   font-size: 1.12rem;
-  font-weight: 600;
+  font-weight: 400;
   letter-spacing: calc(0.08rem + 0.03em);
   text-decoration: none;
   margin-bottom: 4.5rem;
@@ -3313,7 +3313,7 @@ textarea {
 .shopify-policy__body h3 {
   margin-top: 3rem;
   text-align: center;
-  font-weight: 600;
+  font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }

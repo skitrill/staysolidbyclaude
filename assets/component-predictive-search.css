@@ -186,7 +186,7 @@ predictive-search[loading]
 }
 
 .predictive-search__item-query-result *:not(mark) {
-  font-weight: bolder;
+  font-weight: 400;
 }
 
 .predictive-search__item-query-result mark {

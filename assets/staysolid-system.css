@@ -40,10 +40,13 @@
   --ss-text-lg: 17px;  /* product and page titles */
   --ss-track-label: 0.06em; /* uppercase sans / mono labels */
   --ss-track-wide: 0.1em;   /* buttons, tiny caps */
+  /* one weight: Source Code Pro regular everywhere. Hierarchy comes from size,
+     colour and tracking, never from bold. The named steps are kept so a heavier
+     weight can be reintroduced in one place if it is ever wanted. */
   --ss-weight-regular: 400;
-  --ss-weight-medium: 500;
-  --ss-weight-semibold: 600;
-  --ss-weight-bold: 700;
+  --ss-weight-medium: 400;
+  --ss-weight-semibold: 400;
+  --ss-weight-bold: 400;
 
   /* space: 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 */
   --ss-1: 4px;
@@ -73,7 +76,8 @@
   --font-body-family: var(--ss-font-sans);
   --font-heading-family: var(--ss-font-sans);
   --font-body-weight: 400;
-  --font-heading-weight: 600;
+  --font-heading-weight: 400;
+  --font-body-weight-bold: 400;
   --color-base-text: 17, 17, 17;
   --color-shadow: 17, 17, 17;
   --color-base-background-1: 244, 243, 239;
@@ -146,6 +150,15 @@ html body .h3,
 html body .h4,
 html body .h5 {
   font-size: var(--ss-text-md);
+}
+
+html body b,
+html body strong,
+html body th,
+html body dt,
+html body legend,
+html body summary {
+  font-weight: var(--ss-weight-regular);
 }
 
 /* metadata utility: mono, quiet */
