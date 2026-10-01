@@ -62,7 +62,7 @@
 
 .article-card__footer {
   letter-spacing: calc(0.08rem + 0.03em);
-  font-size: 1.12rem;
+  font-size: 1.064rem;
 }
 
 .article-card__footer:not(:last-child) {

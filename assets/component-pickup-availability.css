@@ -114,7 +114,7 @@ pickup-availability-drawer[open] {
 }
 
 .pickup-availability-variant {
-  font-size: 1.04rem;
+  font-size: 0.988rem;
   line-height: calc(1 + 0.2 / var(--font-body-scale));
   margin: 0 0 1.2rem;
   text-transform: capitalize;
@@ -143,7 +143,7 @@ pickup-availability-drawer[open] {
 
 .pickup-availability-address {
   font-style: normal;
-  font-size: 0.96rem;
+  font-size: 0.912rem;
   line-height: calc(1 + 0.5 / var(--font-body-scale));
 }
 

@@ -8,7 +8,7 @@
   display: flex;
   height: 4rem;
   padding: 0 1.5rem 0 1.5rem;
-  font-size: 1.04rem;
+  font-size: 0.988rem;
   background-color: transparent;
 }
 
@@ -29,7 +29,7 @@
 .disclosure__list {
   position: relative;
   overflow-y: auto;
-  font-size: 1.12rem;
+  font-size: 1.064rem;
   padding-bottom: 0.5rem;
   padding-top: 0.5rem;
   scroll-padding: 0.5rem 0;

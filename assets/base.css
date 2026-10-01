@@ -586,7 +586,7 @@ body,
 }
 
 .text-body {
-  font-size: 1.2rem;
+  font-size: 1.14rem;
   letter-spacing: calc(0.048rem + 0.03em);
   line-height: calc(1 + 0.8 / var(--font-body-scale));
   font-family: var(--font-body-family);
@@ -615,58 +615,58 @@ h5,
 }
 
 .hxl {
-  font-size: calc(var(--font-heading-scale) * 4rem);
+  font-size: calc(var(--font-heading-scale) * 3.8rem);
 }
 
 @media only screen and (min-width: 750px) {
   .hxl {
-    font-size: calc(var(--font-heading-scale) * 4.96rem);
+    font-size: calc(var(--font-heading-scale) * 4.712rem);
   }
 }
 
 .h0 {
-  font-size: calc(var(--font-heading-scale) * 3.2rem);
+  font-size: calc(var(--font-heading-scale) * 3.04rem);
 }
 
 @media only screen and (min-width: 750px) {
   .h0 {
-    font-size: calc(var(--font-heading-scale) * 4.16rem);
+    font-size: calc(var(--font-heading-scale) * 3.952rem);
   }
 }
 
 h1,
 .h1 {
-  font-size: calc(var(--font-heading-scale) * 2.4rem);
+  font-size: calc(var(--font-heading-scale) * 2.28rem);
 }
 
 @media only screen and (min-width: 750px) {
   h1,
   .h1 {
-    font-size: calc(var(--font-heading-scale) * 3.2rem);
+    font-size: calc(var(--font-heading-scale) * 3.04rem);
   }
 }
 
 h2,
 .h2 {
-  font-size: calc(var(--font-heading-scale) * 1.6rem);
+  font-size: calc(var(--font-heading-scale) * 1.52rem);
 }
 
 @media only screen and (min-width: 750px) {
   h2,
   .h2 {
-    font-size: calc(var(--font-heading-scale) * 1.92rem);
+    font-size: calc(var(--font-heading-scale) * 1.824rem);
   }
 }
 
 h3,
 .h3 {
-  font-size: calc(var(--font-heading-scale) * 1.36rem);
+  font-size: calc(var(--font-heading-scale) * 1.292rem);
 }
 
 @media only screen and (min-width: 750px) {
   h3,
   .h3 {
-    font-size: calc(var(--font-heading-scale) * 1.44rem);
+    font-size: calc(var(--font-heading-scale) * 1.368rem);
   }
 }
 
@@ -674,18 +674,18 @@ h4,
 .h4 {
   font-family: var(--font-heading-family);
   font-style: var(--font-heading-style);
-  font-size: calc(var(--font-heading-scale) * 1.2rem);
+  font-size: calc(var(--font-heading-scale) * 1.14rem);
 }
 
 h5,
 .h5 {
-  font-size: calc(var(--font-heading-scale) * 0.96rem);
+  font-size: calc(var(--font-heading-scale) * 0.912rem);
 }
 
 @media only screen and (min-width: 750px) {
   h5,
   .h5 {
-    font-size: calc(var(--font-heading-scale) * 1.04rem);
+    font-size: calc(var(--font-heading-scale) * 0.988rem);
   }
 }
 
@@ -710,31 +710,31 @@ blockquote {
 }
 
 .caption {
-  font-size: 0.8rem;
+  font-size: 0.76rem;
   letter-spacing: calc(0.056rem + 0.03em);
   line-height: calc(1 + 0.7 / var(--font-body-scale));
 }
 
 @media screen and (min-width: 750px) {
   .caption {
-    font-size: 0.96rem;
+    font-size: 0.912rem;
   }
 }
 
 .caption-with-letter-spacing {
-  font-size: 0.8rem;
+  font-size: 0.76rem;
   letter-spacing: calc(0.104rem + 0.03em);
   line-height: calc(1 + 0.2 / var(--font-body-scale));
   text-transform: uppercase;
 }
 
 .caption-with-letter-spacing--medium {
-  font-size: 0.96rem;
+  font-size: 0.912rem;
   letter-spacing: calc(0.128rem + 0.03em);
 }
 
 .caption-with-letter-spacing--large {
-  font-size: 1.12rem;
+  font-size: 1.064rem;
   letter-spacing: calc(0.144rem + 0.03em);
 }
 
@@ -744,7 +744,7 @@ blockquote {
 .field__input,
 .form__label,
 .select__select {
-  font-size: 1.04rem;
+  font-size: 0.988rem;
   line-height: calc(1 + 0.5 / var(--font-body-scale));
   letter-spacing: calc(0.032rem + 0.03em);
 }
@@ -756,7 +756,7 @@ blockquote {
 table:not([class]) {
   table-layout: fixed;
   border-collapse: collapse;
-  font-size: 1.12rem;
+  font-size: 1.064rem;
   border-style: hidden;
   box-shadow: 0 0 0 0.1rem rgba(var(--color-foreground), 0.2);
   /* draws the table border  */
@@ -832,7 +832,7 @@ h6:empty {
   text-underline-offset: 0.3rem;
   color: rgb(var(--color-link));
   background-color: transparent;
-  font-size: 1.12rem;
+  font-size: 1.064rem;
   font-family: inherit;
 }
 
@@ -846,7 +846,7 @@ h6:empty {
 
 .link-with-icon {
   display: inline-flex;
-  font-size: 1.12rem;
+  font-size: 1.064rem;
   font-weight: 400;
   letter-spacing: calc(0.08rem + 0.03em);
   text-decoration: none;
@@ -1197,19 +1197,19 @@ summary::-webkit-details-marker {
 }
 
 .subtitle {
-  font-size: 1.44rem;
+  font-size: 1.368rem;
   line-height: calc(1 + 0.8 / var(--font-body-scale));
   letter-spacing: calc(0.048rem + 0.03em);
   color: rgba(var(--color-foreground), 0.7);
 }
 
 .subtitle--small {
-  font-size: 1.12rem;
+  font-size: 1.064rem;
   letter-spacing: calc(0.08rem + 0.03em);
 }
 
 .subtitle--medium {
-  font-size: 1.28rem;
+  font-size: 1.216rem;
   letter-spacing: calc(0.064rem + 0.03em);
 }
 
@@ -1535,7 +1535,7 @@ button.shopify-payment-button__button--unbranded {
   padding: 0 3rem;
   cursor: pointer;
   font: inherit;
-  font-size: 1.2rem;
+  font-size: 1.14rem;
   text-decoration: none;
   color: rgb(var(--color-button-text));
   transition: box-shadow var(--duration-short) ease;
@@ -1620,13 +1620,13 @@ button.shopify-payment-button__button--unbranded {
 .button-label,
 .shopify-challenge__button,
 .customer button {
-  font-size: 1.2rem;
+  font-size: 1.14rem;
   letter-spacing: calc(0.08rem + 0.03em);
   line-height: calc(1 + 0.2 / var(--font-body-scale));
 }
 
 .button--tertiary {
-  font-size: 0.96rem;
+  font-size: 0.912rem;
   padding: 1rem 1.5rem;
   min-width: calc(9rem + var(--buttons-border-width) * 2);
   min-height: calc(3.5rem + var(--buttons-border-width) * 2);
@@ -1695,7 +1695,7 @@ button.shopify-payment-button__button--unbranded {
 }
 
 .share-button__button {
-  font-size: 1.12rem;
+  font-size: 1.064rem;
   display: flex;
   align-items: center;
   color: rgb(var(--color-link));
@@ -1876,7 +1876,7 @@ details[open] > .share-button__fallback {
   appearance: none;
   background-color: rgb(var(--color-background));
   color: rgb(var(--color-foreground));
-  font-size: 1.28rem;
+  font-size: 1.216rem;
   width: 100%;
   box-sizing: border-box;
   transition: box-shadow var(--duration-short) ease;
@@ -1928,7 +1928,7 @@ details[open] > .share-button__fallback {
   font-family: var(--font-body-family);
   font-style: var(--font-body-style);
   font-weight: var(--font-body-weight);
-  font-size: 0.96rem;
+  font-size: 0.912rem;
   color: rgba(var(--color-foreground), 0.75);
 }
 
@@ -2023,7 +2023,7 @@ details[open] > .share-button__fallback {
 
 .field__label,
 .customer .field label {
-  font-size: 1.28rem;
+  font-size: 1.216rem;
   left: calc(var(--inputs-border-width) + 2rem);
   top: calc(1rem + var(--inputs-border-width));
   margin-bottom: 0;
@@ -2042,7 +2042,7 @@ details[open] > .share-button__fallback {
 .customer .field input:focus ~ label,
 .customer .field input:not(:placeholder-shown) ~ label,
 .customer .field input:-webkit-autofill ~ label {
-  font-size: 0.8rem;
+  font-size: 0.76rem;
   top: calc(var(--inputs-border-width) + 0.5rem);
   left: calc(var(--inputs-border-width) + 2rem);
   letter-spacing: calc(0.032rem + 0.03em);
@@ -2122,17 +2122,17 @@ input[type='checkbox'] {
 .form__message {
   align-items: center;
   display: flex;
-  font-size: 1.12rem;
+  font-size: 1.064rem;
   line-height: 1;
   margin-top: 1rem;
 }
 
 .form__message--large {
-  font-size: 1.28rem;
+  font-size: 1.216rem;
 }
 
 .customer .field .form__message {
-  font-size: 1.12rem;
+  font-size: 1.064rem;
   text-align: left;
 }
 
@@ -2157,7 +2157,7 @@ input[type='checkbox'] {
 
 .form-status {
   margin: 0;
-  font-size: 1.28rem;
+  font-size: 1.216rem;
 }
 
 .form-status-list {
@@ -2217,7 +2217,7 @@ input[type='checkbox'] {
 .quantity__button {
   width: calc(4.5rem / var(--font-body-scale));
   flex-shrink: 0;
-  font-size: 1.44rem;
+  font-size: 1.368rem;
   border: 0;
   background-color: transparent;
   cursor: pointer;
@@ -2279,7 +2279,7 @@ input[type='checkbox'] {
 .quantity__rules {
   margin-top: 1.2rem;
   position: relative;
-  font-size: 0.96rem;
+  font-size: 0.912rem;
 }
 
 .quantity__rules .caption {
@@ -2386,7 +2386,7 @@ product-info .loading-overlay:not(.hidden) ~ *,
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 0.72rem;
+  font-size: 0.684rem;
   bottom: 0.8rem;
   left: 2.2rem;
   line-height: calc(1 + 0.1 / var(--font-body-scale));
@@ -2983,7 +2983,7 @@ details-disclosure > details {
   border: 1px solid transparent;
   border-radius: var(--badge-corner-radius);
   display: inline-block;
-  font-size: 0.96rem;
+  font-size: 0.912rem;
   letter-spacing: calc(0.08rem + 0.03em);
   line-height: 1;
   padding: 0.5rem 1.3rem 0.6rem 1.3rem;
@@ -3216,7 +3216,7 @@ footer {
 /* === cart section font and alignment fix === */
 #shopify-section-template--17254420447426__cart-items,
 #shopify-section-template--17254420447426__cart-items * {
-  font-size: 9.6px !important;
+  font-size: 9.12px !important;
   text-align: center !important;
   line-height: 1.4 !important;
 }
@@ -3286,7 +3286,7 @@ textarea {
 }
 
 .cart-count {
-  font-size: 8px;
+  font-size: 7.6px;
   vertical-align: middle;
   margin-left: 1px;
 }
@@ -3300,7 +3300,7 @@ textarea {
 .shopify-policy__body p,
 .shopify-policy__body ul li {
   text-align: justify;
-  font-size: 9.6px;
+  font-size: 9.12px;
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
@@ -3401,7 +3401,7 @@ textarea {
 
 .password-content {
   margin-bottom: 24px;
-  font-size: 1.2rem;
+  font-size: 1.14rem;
   line-height: 1.6;
 }
 
@@ -3415,7 +3415,7 @@ textarea {
   width: 100%;
   padding: 10px 14px;
   border-radius: 6px;
-  font-size: 1.12rem;
+  font-size: 1.064rem;
   border: 1px solid #999;
   margin-bottom: 12px;
   background: transparent;
@@ -3440,7 +3440,7 @@ textarea {
 
 .policy__link a {
   color: #000 !important; /* Ensures default black in light mode */
-  font-size: 11.2px;
+  font-size: 10.64px;
 }
 
 .policy__link a:hover {
@@ -3584,7 +3584,7 @@ main,
   justify-content: center !important;
   align-items: center !important;
   gap: 12px !important;
-  font-size: 11.2px !important;
+  font-size: 10.64px !important;
   text-transform: uppercase !important;
   margin-bottom: 5px !important;
   margin-top: 10px !important;
@@ -3617,7 +3617,7 @@ main,
 @media screen and (max-width: 600px) {
   .custom-menu {
     gap: 10px !important;
-    font-size: 7.2px !important;
+    font-size: 6.84px !important;
   }
 }
 
@@ -3638,7 +3638,7 @@ main,
 
 @media screen and (max-width: 768px) {
   .custom-menu {
-    font-size: 0.64rem;
+    font-size: 0.608rem;
     gap: 0.7rem;
   }
 
@@ -3787,7 +3787,7 @@ main,
 
 .select__select {
   width: 100%;
-  font-size: 10.4px;
+  font-size: 9.88px;
   background: transparent;
 }
 #main-cart-footer {
@@ -3876,7 +3876,7 @@ cart-items.page-width {
   input[type="password"],
   textarea,
   .password-form input {
-    font-size: 10.4px !important;
+    font-size: 9.88px !important;
     width: 100% !important;
     padding: 10px 12px !important;
     box-sizing: border-box !important;
@@ -3902,11 +3902,11 @@ cart-items.page-width {
     overflow-x: hidden;
     padding: 0;
     margin: 0;
-    font-size: 11.2px;
+    font-size: 10.64px;
   }
 
   .custom-menu {
-    font-size: 12px !important;
+    font-size: 11.4px !important;
     padding: 10px 15px;
   }
 
@@ -3950,7 +3950,7 @@ cart-items.page-width {
   }
 
   .policy__link {
-    font-size: 9.6px !important;
+    font-size: 9.12px !important;
     margin: 4px 0;
   }
 
@@ -3964,7 +3964,7 @@ cart-items.page-width {
 @media (max-width: 768px) {
   body {
     padding: 1rem;
-    font-size: 11.2px;
+    font-size: 10.64px;
   }
 
   .product-container {
@@ -4002,18 +4002,18 @@ cart-items.page-width {
   .add-to-bag {
     width: 100%;
     padding: 1rem;
-    font-size: 12.8px;
+    font-size: 12.16px;
   }
 
   .store-credit {
-    font-size: 9.6px;
+    font-size: 9.12px;
     padding: 0.75rem;
     margin-bottom: 1rem;
   }
 
   footer {
     text-align: center;
-    font-size: 9.6px;
+    font-size: 9.12px;
     padding-top: 2rem;
   }
 
