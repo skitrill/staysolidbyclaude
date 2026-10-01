@@ -167,11 +167,11 @@ details[open].menu-opening > .menu-drawer__submenu {
 .menu-drawer__menu-item {
   padding: 1.1rem 3.2rem;
   text-decoration: none;
-  font-size: 1.44rem;
+  font-size: 1.368rem;
 }
 
 .no-js .menu-drawer__menu-item {
-  font-size: 1.28rem;
+  font-size: 1.216rem;
 }
 
 .no-js .menu-drawer__submenu .menu-drawer__menu-item {
@@ -238,7 +238,7 @@ details[open].menu-opening > .menu-drawer__submenu {
   text-decoration: none;
   display: flex;
   align-items: center;
-  font-size: 1.12rem;
+  font-size: 1.064rem;
   width: 100%;
   background-color: transparent;
   font-family: var(--font-body-family);
@@ -266,7 +266,7 @@ details[open].menu-opening > .menu-drawer__submenu {
   text-decoration: none;
   padding: 1.2rem;
   margin-left: -1.2rem;
-  font-size: 1.12rem;
+  font-size: 1.064rem;
   color: rgb(var(--color-foreground));
 }
 

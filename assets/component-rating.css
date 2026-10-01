@@ -22,7 +22,7 @@
       ) * 100%
   );
   letter-spacing: calc(var(--letter-spacing) * 0.8rem + 0.03em);
-  font-size: calc(var(--font-size) * 0.8rem);
+  font-size: calc(var(--font-size) * 0.76rem);
   line-height: 1;
   display: inline-block;
   font-family: Times;

@@ -45,12 +45,12 @@
 }
 
 .customer h2.form__message {
-  font-size: calc(var(--font-heading-scale) * 1.44rem);
+  font-size: calc(var(--font-heading-scale) * 1.368rem);
 }
 
 @media only screen and (min-width: 750px) {
   .customer h2.form__message {
-    font-size: calc(var(--font-heading-scale) * 1.76rem);
+    font-size: calc(var(--font-heading-scale) * 1.672rem);
   }
 }
 
@@ -69,7 +69,7 @@
   border-bottom: 0.01rem solid rgba(var(--color-foreground), 0.08);
   box-shadow: none;
   width: 100%;
-  font-size: 1.28rem;
+  font-size: 1.216rem;
   position: relative;
 }
 
@@ -115,7 +115,7 @@
 }
 
 .customer thead th {
-  font-size: 0.96rem;
+  font-size: 0.912rem;
   letter-spacing: calc(0.056rem + 0.03em);
   text-transform: uppercase;
 }
@@ -245,7 +245,7 @@
   .customer td::before {
     color: rgba(var(--color-foreground), 0.75);
     content: attr(data-label);
-    font-size: 1.12rem;
+    font-size: 1.064rem;
     padding-right: 2rem;
     text-transform: uppercase;
     flex-grow: 1;
@@ -354,7 +354,7 @@
 .login h3 {
   margin-top: 1.5rem;
   text-align: left;
-  font-size: calc(var(--font-heading-scale) * 1.28rem);
+  font-size: calc(var(--font-heading-scale) * 1.216rem);
 }
 
 #customer_login_guest button {
@@ -443,7 +443,7 @@
 
 :is(.account, .order) p {
   margin: 0 0 2rem;
-  font-size: 1.28rem;
+  font-size: 1.216rem;
 }
 
 :is(.account, .order) h1 {
@@ -489,7 +489,7 @@
   text-decoration: none;
   box-shadow: 0 0 0 0.1rem rgba(var(--color-link), 0.2);
   border: 0.1rem solid transparent;
-  font-size: 0.96rem;
+  font-size: 0.912rem;
 }
 
 .account table td:first-of-type a:hover {
@@ -509,7 +509,7 @@
 
 .order tfoot tr:last-of-type td,
 .order tfoot tr:last-of-type th {
-  font-size: 1.76rem;
+  font-size: 1.672rem;
   padding-top: 1.5rem;
   padding-bottom: 4rem;
 }
@@ -522,7 +522,7 @@
 }
 
 .order tfoot tr:last-of-type td:before {
-  font-size: 1.76rem;
+  font-size: 1.672rem;
 }
 
 .order table p,
@@ -533,7 +533,7 @@
 
 .order > div:nth-of-type(2) > div:first-of-type h2 ~ p {
   margin-bottom: 0;
-  font-size: 1.12rem;
+  font-size: 1.064rem;
 }
 
 .order > div:nth-of-type(2) > div:first-of-type h2 ~ p:last-of-type {
@@ -541,7 +541,7 @@
 }
 
 .order .item-props {
-  font-size: 1.12rem;
+  font-size: 1.064rem;
   margin-top: 0.05px;
   display: flex;
   flex-direction: column;
@@ -557,7 +557,7 @@
   border: 0.01rem solid rgba(var(--color-foreground), 0.2);
   padding: 1rem;
   margin-top: 1rem;
-  font-size: 1.12rem;
+  font-size: 1.064rem;
   text-align: left;
 }
 
@@ -573,7 +573,7 @@
   display: block;
   margin-top: 1rem;
   margin-bottom: 0.5rem;
-  font-size: 0.96rem;
+  font-size: 0.912rem;
 }
 
 @media screen and (min-width: 750px) {
@@ -584,7 +584,7 @@
 
 .order tbody ul {
   list-style: none;
-  font-size: 0.96rem;
+  font-size: 0.912rem;
   text-align: right;
   padding-left: 0;
   margin-top: 1rem;
@@ -614,7 +614,7 @@
 }
 
 .order .properties {
-  font-size: 1.12rem;
+  font-size: 1.064rem;
   margin-top: 1rem;
 }
 
@@ -643,7 +643,7 @@
 }
 
 .order .unit-price {
-  font-size: 0.88rem;
+  font-size: 0.836rem;
   letter-spacing: calc(0.056rem + 0.03em);
   line-height: calc(1 + 0.2 / var(--font-body-scale));
   margin-top: 0.2rem;
@@ -652,7 +652,7 @@
 }
 
 .order .regular-price {
-  font-size: 1.04rem;
+  font-size: 0.988rem;
 }
 
 /* Addresses */
@@ -679,7 +679,7 @@
 label[for='AddressCountryNew'],
 label[for='AddressProvinceNew'] {
   display: block;
-  font-size: 1.12rem;
+  font-size: 1.064rem;
   margin-bottom: 0.6rem;
 }
 
@@ -717,13 +717,13 @@ li[data-address] {
 
 li[data-address] > h2 {
   text-align: center;
-  font-size: calc(var(--font-heading-scale) * 1.44rem);
+  font-size: calc(var(--font-heading-scale) * 1.368rem);
   margin-bottom: 0;
 }
 
 @media only screen and (min-width: 750px) {
   li[data-address] > h2 {
-    font-size: calc(var(--font-heading-scale) * 1.76rem);
+    font-size: calc(var(--font-heading-scale) * 1.672rem);
   }
 }
 
