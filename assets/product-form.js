@@ -6,7 +6,9 @@ if (!customElements.get('product-form')) {
       this.form = this.querySelector('form');
       this.form.querySelector('[name=id]').disabled = false;
       this.form.addEventListener('submit', this.onSubmitHandler.bind(this));
-      this.cart = document.querySelector('cart-notification') || document.querySelector('cart-drawer');
+      // a cart drawer keeps its own flow; the page cart confirms on the button
+      // itself instead of opening a notification popup
+      this.cart = document.querySelector('cart-drawer');
       this.submitButton = this.querySelector('[type="submit"]');
       if (document.querySelector('cart-drawer')) this.submitButton.setAttribute('aria-haspopup', 'dialog');
     }
@@ -47,7 +49,9 @@ if (!customElements.get('product-form')) {
             this.error = true;
             return;
           } else if (!this.cart) {
-            window.location = window.routes.cart_url;
+            publish(PUB_SUB_EVENTS.cartUpdate, {source: 'product-form'});
+            this.showAddedState();
+            this.refreshBagCount();
             return;
           }
 
@@ -72,6 +76,36 @@ if (!customElements.get('product-form')) {
           if (!this.error) this.submitButton.removeAttribute('aria-disabled');
           this.querySelector('.loading-overlay__spinner').classList.add('hidden');
         });
+    }
+
+    showAddedState() {
+      const label = this.submitButton.querySelector('span');
+      if (!label) return;
+      const addedLabel = this.submitButton.dataset.addedLabel || 'Added ✓';
+      if (label.textContent !== addedLabel) this.defaultSubmitLabel = label.textContent;
+      label.textContent = addedLabel;
+      this.submitButton.classList.add('is-added');
+      clearTimeout(this.addedStateTimer);
+      this.addedStateTimer = setTimeout(() => {
+        // a variant change may have rewritten the label meanwhile; only undo our own text
+        if (label.textContent === addedLabel) label.textContent = this.defaultSubmitLabel;
+        this.submitButton.classList.remove('is-added');
+      }, 1000);
+    }
+
+    refreshBagCount() {
+      fetch(`${routes.cart_url}.js`)
+        .then((response) => response.json())
+        .then((cart) => {
+          const count = document.getElementById('CartBubble');
+          if (count) {
+            count.textContent = cart.item_count;
+            count.setAttribute('data-cart-count', cart.item_count);
+          }
+          const bag = document.getElementById('CustomMenuBagLink');
+          if (bag) bag.classList.toggle('custom-menu-item--bag', cart.item_count > 0);
+        })
+        .catch((e) => console.error(e));
     }
 
     handleErrorMessage(errorMessage = false) {

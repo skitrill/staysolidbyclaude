@@ -4,11 +4,6 @@
   max-width: none !important;
 }
 @media screen and (min-width: 990px) {
-  .product__info-container .price {
-    text-align: left !important;
-    width: 100% !important;
-    font-size: 8.8px !important;
-  }
 .custom-menu-wrapper {
   display: flex !important;
   justify-content: center !important;
@@ -18,7 +13,6 @@
 }
   .variant-picker,
 .product__info-container .product-form__input {
-  display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
 }
@@ -27,13 +21,12 @@ input[type="email"],
 input[type="text"],
 input[type="password"],
 textarea,
-select,
-button {
+select {
   font-size: 16px !important;
   font-family: inherit;
   line-height: 1.4;
   background-color: #000;
-  color: #faf9f6;
+  color: var(--ss-bg);
   padding: 0.5rem;
   border: none;
   width: 100%;
@@ -44,53 +37,6 @@ button {
   max-width: 100%;
   font-size: 16px !important;
 }
-
-  .product__info-container .price__container {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    font-size: 8.8px !important;
-  }
-
-  .product__info-container .price-item,
-  .product__container .badge {
-    text-align: left !important;
-    display: block !important;
-    width: 100% !important;
-    font-size: 8.8px !important;
-  }
-}
-.cart-item__name.h4.break, 
-.cart-item__name.h4.break * {
-  font-family: 'Source Code Pro', monospace !important;
-}
-/* === FORCE GLOBAL MENU CONSISTENCY === */
-.custom-menu-wrapper {
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  gap: 2rem;
-  padding-top: 1rem;
-  flex-wrap: wrap;
-}
-
-.custom-menu-item {
-  font-size: 10.4px !important;
-  font-family: 'Source Code Pro', monospace !important;
-  letter-spacing: 0em !important;
-  text-transform: uppercase !important;
-  text-decoration: none !important;
-  color: #000 !important;
-  background: transparent !important;
-  padding: 0.2rem 0 !important;
-}
-
-/* yellow highlight around "bag" to make it stand out, same idea as the
-   continue-shopping button */
-.custom-menu-item.custom-menu-item--bag {
-  background-color: #EEA620 !important;
-  color: #000 !important;
-  padding: 0.1rem 0.5rem !important;
 }
 
 /* mobile override - keep menu layout consistent */
@@ -99,11 +45,6 @@ button {
     padding-top: calc(env(safe-area-inset-top) + 16px) !important;
   }
 
-  .custom-menu-wrapper {
-    justify-content: center !important;
-    flex-wrap: wrap !important;
-    gap: 1.5rem !important;
-  }
 html, body {
   max-width: 100vw;
   overflow-x: hidden;
@@ -113,13 +54,7 @@ html, body {
 .product .grid__item {
   width: 100% !important;
   margin: 0 auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
 }
-
-  .custom-menu-item {
-    font-size: 10.4px !important;
-  }
 
   /* lookboard slideshows: go true edge-to-edge on mobile instead of the
      inset/cropped look caused by the section's own side padding */
@@ -156,59 +91,7 @@ html, body {
   font-style: normal;
   font-display: swap;
 }
-/* current prices: black by default; orange is reserved for cart line totals
-   and SOLD OUT (see stww-refine.css) */
-.price-item,
-.price-item--regular,
-.price--end,
-[class*="price"]:not(s):not(.cart-item__old-price) {
-  color: #000 !important;
-  font-family: 'Source Code Pro', monospace !important;
-  font-size: 8px !important;
-  font-weight: 400 !important;
-  letter-spacing: 0em !important;
-}
-
-/* variant details (size/color) are plain black metadata */
-.product-option {
-  color: #000 !important;
-  font-family: 'Source Code Pro', monospace !important;
-  font-size: 8px !important;
-  font-weight: 400 !important;
-  letter-spacing: 0em !important;
-}
-
-/* discounted prices (struck-through) */
-.cart-item__old-price,
-s,
-s.price-item {
-  color: #8f8d8d !important; /* soft ash gray */
-  font-family: 'Source Code Pro', monospace !important;
-  font-size: 8px !important;
-  font-weight: 400 !important;
-  letter-spacing: 0.01em !important;
-  text-decoration: line-through !important;
-}
-
-
-html, body,
-h1, h2, h3, h4, h5, h6,
-p, span, a, li, div, button, input, select, textarea,
-footer, header, nav, section, article, aside,
-.shopify-policy__body,
-.collection__title,
-.product__description,
-.footer__copyright,
-.collection .card__heading a,
-.password-header, .custom-menu,
-.store-credit, .footer__list-social,
-.main-menu a, .customer-account-main-menu, .cart,
-.cart__footer, .header, .footer a {
-  font-family: 'Source Code Pro', monospace !important;
-  font-size: 8.8px !important;
-  letter-spacing: calc(-0.24px + 0.03em) !important; /* tight spacing */
-  font-weight: 400 !important;
-}
+/* Type, colour and spacing roles are defined once in staysolid-system.css. */
 
 .recently-viewed-card a {
   background-color: transparent;
@@ -236,7 +119,7 @@ footer, header, nav, section, article, aside,
 /* ONLY text reacts to hover */
 .recently-viewed-card .product-title:hover,
 .recently-viewed-card .product-price:hover {
-  color: #faf9f6;
+  color: var(--ss-bg);
   background-color: #181818;
   padding: 0.2rem 0.3rem;
   border-radius: 4px;
@@ -246,14 +129,14 @@ footer, header, nav, section, article, aside,
 
 .recently-viewed-card .product-title:hover,
 .recently-viewed-card .product-price:hover {
-  color: #faf9f6;
+  color: var(--ss-bg);
   background-color: transparent;
   border-bottom: 1px solid #181818;
 }
 
 /* 1. FIX BACKGROUND COLOR GLOBALLY */
 html, body, main, section, .shopify-section, .page-width, .content-for-layout {
-  background-color: #faf9f6 !important;
+  background-color: var(--ss-bg) !important;
 }
 
 /* exception: banner/slideshow text overlays must stay transparent so the
@@ -270,12 +153,6 @@ a, a:hover, a:focus, a:active {
 }
 
 
-/* 4. DEFAULT HOVER STYLE - BLACK BG WITH YELLOW TEXT */
-a:hover {
-  background-color: #000 !important;
-  color: #EEA620 !important;
-  transition: all 0.2s ease-in-out;
-}
 
 /* 5. RESET TEXT DECORATION ON OTHER COMMON LINK CLASSES */
 .link,
@@ -303,7 +180,7 @@ a:hover {
 .footer,
 .header-wrapper,
 #MainContent {
-  background-color: #faf9f6 !important;
+  background-color: var(--ss-bg) !important;
 }
 
 /* 8. REMOVE DUPLICATE BACKGROUND STYLES */
@@ -2335,31 +2212,6 @@ input[type='checkbox'] {
   z-index: -1;
 }
 
-/* controls fill the height of their quantity box (set in stww-refine.css) */
-.quantity.cart-quantity,
-.quantity__input,
-.quantity__button {
-  font-size: 8px !important;
-  padding: 0 6px !important;
-  line-height: 1 !important;
-}
-
-.quantity__input,
-.quantity__button {
-  max-height: none !important;
-  height: 100% !important;
-  min-height: 0 !important;
-}
-
-.quantity__input {
-  width: 40px !important;
-  text-align: center !important;
-}
-
-.quantity__button svg {
-  width: 10px !important;
-  height: 10px !important;
-}
 
 
 .quantity__button {
@@ -3358,12 +3210,6 @@ details-disclosure > details {
   background: none !important;
   box-shadow: none !important;
 }
-.price, .price-item--sale, .price-item--last, .price-item, .price-item--regular,
-.price--end,
-.price--center {
-  text-align: center !important;
-  justify-content: center !important;
-}
 footer {
   padding-top: 8px !important;
 }
@@ -3376,13 +3222,13 @@ footer {
 }
 /* Force links inside the warning box */
 .cart__warnings a {
-  color: #FAF9F6 !important;
+  color: var(--ss-bg) !important;
   text-decoration: none !important;
 }
 
 /* Force hover effect on those links */
 .cart__warnings a:hover {
-  color: #FAF9F6 !important;
+  color: var(--ss-bg) !important;
   text-decoration: none !important;
 }
 a.link.underlined-link {
@@ -3392,22 +3238,7 @@ a.link.underlined-link {
   transition: all 0.3s ease;
 }
 
-a.link.underlined-link:hover {
-  color: #EEA620 !important;
-  background-color: #000000 !important;
-  text-decoration: none !important;
-}
 
-a.custom-menu-item {
-  text-decoration: none !important;
-  transition: background 0.2s ease, color 0.2s ease !important;
-  display: inline-block !important;
-}
-
-a.custom-menu-item:hover:not(.custom-menu-item--bag) {
-  background-color: #000 !important;
-  color: #EEA620 !important;
-}
 
 .product,
 .product__media-wrapper,
@@ -3452,11 +3283,6 @@ input[type="email"],
 input[type="password"],
 textarea {
   cursor: text !important;
-}
-.custom-menu-item {
-  font-size: 10.4px;
-  line-height: 1;
-  vertical-align: middle;
 }
 
 .cart-count {
@@ -3507,15 +3333,6 @@ textarea {
   margin-bottom: 0.75rem;
 }
 
-/* highlight hover for text links only - exclude header & footer completely */
-main a:not(:has(img)):not(:has(svg)):hover,
-main .link:not(:has(img)):not(:has(svg)):hover,
-main .underlined-link:hover,
-main .password-link.link:hover {
-  background-color: #000 !important;
-  color: #EEA620 !important;
-  transition: all 0.2s ease-in-out;
-}
 
 /* make sure images and icons are never affected */
 main a:has(img),
@@ -3533,12 +3350,6 @@ main a.card__media-link:active {
   background: none !important;
   color: inherit !important;
   transition: none;
-}
-/* copyright link hover - subtle black bg with light text */
-footer small.copyright__content a:hover {
-  background-color: #000 !important;
-  color: #EEA620 !important;
-  transition: all 0.2s ease-in-out;
 }
 /* force default cursor sitewide */
 * {
@@ -3689,7 +3500,7 @@ input, textarea {
 
 /* --- Ensure Store Credit & Cart Text Matches Mode --- */
 .store-credit {
-  background: #FAF9F6 !important;
+  background: var(--ss-bg) !important;
   color: #000 !important;
 }
 
@@ -3790,20 +3601,6 @@ main,
 }
 
 
-/* Links inside custom menu */
-.custom-menu-item {
-  text-decoration: none !important;
-  color: #000 !important;
-  padding: 2px 4px !important;
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-/* Highlight ONLY on hover for 'bag' and 'user' */
-.custom-menu-item[href="/cart"]:hover,
-.custom-menu-item[href*="customer_authentication"]:hover {
-  background-color: #000 !important;
-  color: #EEA620 !important;
-}
 
 /* Remove highlight from other links inside .cart-icon or wrappers */
 .cart-icon a {
@@ -3891,35 +3688,6 @@ main,
   border-radius: 1px;
   overflow: hidden;
 }
-/* === PRODUCT TITLE === */
-.card__heading a {
-  font-size: 10.4px;
-  text-transform: uppercase;
-  line-height: 1.6;
-  color: #000;
-  transition: color 0.25s ease;
-}
-
-/* === PRODUCT PRICE === */
-.price {
-  font-size: 10.4px;
-  color: #000;
-  margin-top: 1px;
-  letter-spacing: calc(0.08px + 0.03em);
-}
-
-/* === MOBILE RESPONSIVENESS === */
-@media screen and (max-width: 768px) {
-  .card__heading a,
-  .price {
-    font-size: 9.6px;
-  }
-
-  .collection .product-grid {
-    /* keep column gap equal to the theme grid spacing so 2 columns fit per row */
-    gap: 16px var(--grid-mobile-horizontal-spacing) !important;
-  }
-}
 
 /* === SOCIAL ICONS WRAPPER === */
 .footer-block--newsletter {
@@ -3978,14 +3746,6 @@ main,
   padding-bottom: 10px;
 }
 
-/* === COPYRIGHT TEXT ABOVE LINKS === */
-.footer__copyright .copyright__content {
-  display: block;
-  font-size: 8.8px;
-  color: #000 !important;
-  margin-bottom: 6px;
-  text-align: center;
-}
 
 /* === POLICIES STACKED, TIGHT GAP === */
 .footer__content-bottom-wrapper .policies {
@@ -4013,99 +3773,12 @@ main,
   list-style-type: none !important;
 }
 
-.footer__content-bottom-wrapper .policies li a {
-  font-size: 8.8px;
-  color: #000 !important;
-  text-decoration: none !important;
-  padding: 1px 4px;
-  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-}
-
 /* === RESPONSIVE === */
 @media screen and (max-width: 768px) {
-  .footer__copyright .copyright__content {
-    font-size: 8.8px;
-  }
-
-  .footer__content-bottom-wrapper .policies li a {
-    font-size: 8.8px;
-  }
-
   /* stack policy links centered, one per line, no dot separators */
   .footer__content-bottom-wrapper .policies li::before {
     content: none !important;
   }
-}
-@media screen and (max-width: 768px) {
-  .koin-promotion-widget {
-    display: flex;
-    align-items: center;
-    padding: 2px 12px;
-    background-color: transparent;
-    border-radius: 0 !important;
-  }
-
-  .koin-promotion-widget .icon-image {
-    width: 10px;
-    height: auto;
-    flex-shrink: 0;
-  }
-
-  .koin-promotion-widget__description {
-    font-size: 8.8px;
-    color: #faf9f6;
-    line-height: 1.4;
-  }
-}
-
-/* desktop styles - placed outside of mobile styles */
-@media screen and (min-width: 990px) {
-  .koin-promotion-widget {
-    border-radius: 0 !important;
-    max-width: 400px !important;
-    width: 100% !important;
-  }
-}
-
-
-.product-form__submit.button {
-  background-color: #000 !important;
-  color: #faf9f6 !important;
-  font-family: inherit;
-  font-size: 9.6px; /* adjust font size */
-  padding: 14px 28px; /* adjust padding */
-  width: auto; /* change to fixed px or % as needed */
-  min-width: 200px; /* optional */
-  text-align: center;
-  text-transform: uppercase;
-  border: none;
-  border-radius: 0; /* you can round it if you prefer */
-  transition: all 0.3s ease-in-out;
-  display: inline-block;
-}
-
-.product-form__submit.button:hover {
-  background-color: #1a1a1a;
-  color: #faf9f6;
-}
-
-.product-form__submit.button span {
-  letter-spacing: 0.13em;
-}
-
-/* optional: center within its container */
-.product-form {
-  display: flex;
-  justify-content: center; /* center horizontally */
-}
-.product__description {
-  max-width: 440px;
-  width: 100%;
-  margin: 0 auto;
-  text-align: left; /* change to center if needed */
-  font-size: 10.4px;
-  line-height: 1.6;
-  color: inherit; /* inherits your site’s color scheme */
 }
 .select {
   width: 200px !important;
@@ -4116,36 +3789,6 @@ main,
   width: 100%;
   font-size: 10.4px;
   background: transparent;
-}
-quantity-input.quantity {
-  width: 110px !important;
-  max-width: 100%;
-  display: flex;
-  justify-content: space-between;
-  border: 1px solid #000;
-  background: transparent;
-  box-sizing: border-box;
-}
-
-.quantity__button {
-  width: 32px;
-  height: 32px;
-  border: none;
-  background: none;
-  display: flex;
-
-}
-
-.quantity__input {
-  width: 50px;
-  border: none;
-  background: transparent;
-  font-size: 10.4px;
-}
-.product__description {
-  margin-top: 24px;
-  padding-top: 10px;
-  line-height: 1.7;
 }
 #main-cart-footer {
   display: flex;
@@ -4162,12 +3805,12 @@ cart-items.page-width {
   max-width: 800px;
   margin: 0 auto;
 }
-/* tighten cart container width */
+/* one content width and one gutter for every page */
 .page-width {
   max-width: 800px !important;
   margin: 0 auto !important;
-  padding-left: 5px !important;
-  padding-right: 5px !important;
+  padding-left: var(--ss-gutter) !important;
+  padding-right: var(--ss-gutter) !important;
 }
 
 /* reduce space between cart items and footer */
@@ -4197,50 +3840,14 @@ cart-items.page-width {
   .footer__content-bottom-wrapper {
     width: 100% !important;
     max-width: 100% !important;
-    padding: 0 12px !important;
+    padding: 0 var(--ss-gutter) !important;
     margin: 0 auto !important;
   }
-  /* cart item image */
-  .cart-item__image-container img {
-    max-width: 90px !important;
-    height: auto !important;
-  }
 
-  /* buttons full width */
-  .button,
-  .product-form__submit.button,
   .password-button.button {
     width: 100% !important;
     display: block !important;
-    font-size: 10.4px !important;
-    padding: 12px 16px !important;
     box-sizing: border-box !important;
-  }
-
-  /* quantity block */
-  quantity-input.quantity {
-    width: 100% !important;
-    display: flex !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-    padding: 6px 10px;
-    border: 1px solid #000 !important;
-    box-sizing: border-box !important;
-  }
-
-  .quantity__input {
-    width: 40px !important;
-    text-align: center;
-    font-size: 10.4px;
-    background: transparent;
-    border: none;
-  }
-
-  .quantity__button {
-    width: 28px;
-    height: 28px;
-    background: none;
-    border: none;
   }
 
   /* password page alignment */
@@ -4257,14 +3864,6 @@ cart-items.page-width {
     margin: 0 auto 12px auto;
   }
 
-  /* time text styling */
-  #shopdatetime {
-    font-size: 9.6px !important;
-    margin-top: 10px !important;
-    color: #faf9f6 !important;
-    text-align: center !important;
-    width: 100% !important;
-  }
 
   /* cart spacing fix */
   .cart__footer-wrapper {
@@ -4295,14 +3894,6 @@ cart-items.page-width {
     margin-top: 10px;
   }
 
-  .footer__content-bottom-wrapper .policies li a {
-    font-size: 9.6px !important;
-  }
-
-  .footer__copyright .copyright__content {
-    font-size: 9.6px !important;
-    text-align: center !important;
-  }
 }
 /* --- GLOBAL MOBILE FIXES --- */
 @media only screen and (max-width: 767px) {
@@ -4319,11 +3910,12 @@ cart-items.page-width {
     padding: 10px 15px;
   }
 
+  /* sections stack vertically; the horizontal gutter lives on .page-width */
   section,
   .section,
   .content-section,
   .main-content {
-    padding: 20px 16px !important;
+    padding: 20px 0 !important;
     margin: 0 auto;
     width: 100% !important;
     box-sizing: border-box;
@@ -4331,7 +3923,6 @@ cart-items.page-width {
 
   .container,
   .wrapper,
-  .grid,
   .columns {
     width: 100% !important;
     max-width: 100% !important;
@@ -4345,19 +3936,6 @@ cart-items.page-width {
     height: auto;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    font-size: 90%;
-    text-align: center;
-    margin-bottom: 1rem;
-  }
-
-  .button,
-  a.button,
-  input[type="submit"] {
-    width: 100%;
-    font-size: 11.2px;
-    padding: 12px;
-  }
 
   nav,
   header,
@@ -4458,7 +4036,7 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
-  background-color: #faf9f6; /* or your desired background */
+  background-color: var(--ss-bg); /* or your desired background */
   color: #000; /* optional: your text color */
 }
 
@@ -4467,7 +4045,7 @@ body {
   padding-left: env(safe-area-inset-left);
   padding-right: env(safe-area-inset-right);
   padding-bottom: env(safe-area-inset-bottom);
-  background-color: #faf9f6; /* match your theme’s background */
+  background-color: var(--ss-bg); /* match your theme’s background */
 }
 html,
 body {
@@ -4475,7 +4053,7 @@ body {
   padding: 0;
   width: 100vw;
   height: 100%;
-  background-color: #faf9f6; /* adjust to match your site's top background */
+  background-color: var(--ss-bg); /* adjust to match your site's top background */
 }
 body {
   padding-left: env(safe-area-inset-left);
@@ -4489,23 +4067,23 @@ body {
   right: 0;
   padding-top: env(safe-area-inset-top);
   z-index: 1000;
-  background-color: #faf9f6; /* or use your header's gradient color */
+  background-color: var(--ss-bg); /* or use your header's gradient color */
   width: 100%;
 }
 .custom-menu {
   padding-top: env(safe-area-inset-top); /* avoid overlap with notch */
-  background-color: #faf9f6; /* make sure this blends in with top area */
+  background-color: var(--ss-bg); /* make sure this blends in with top area */
   position: relative;
   z-index: 999;
 }
 .header-wrapper {
   padding-top: env(safe-area-inset-top);
-  background-color: #faf9f6; /* match your site background */
+  background-color: var(--ss-bg); /* match your site background */
 }
 body {
   margin: 0;
   padding: 0;
-  background: #faf9f6;
+  background: var(--ss-bg);
 }
 body {
   overflow-x: hidden;
@@ -4519,16 +4097,4 @@ main, .main-content, .shopify-section, .template-index, .page-width {
 
 footer {
   margin-bottom: 0 !important;
-}
-/* === FORCE GLOBAL FONT STYLES ON HEADINGS === */
-h1, h2, h3, h4, h5, h6,
-.title, .title--primary,
-.totals__subtotal, .h3,
-.cart-item__name, .cart__empty-text {
-  font-family: 'Source Code Pro', monospace !important;
-  font-size: 8px !important;
-  font-weight: 400 !important;
-  letter-spacing: 0em !important;
-  text-transform: uppercase !important;
-  color: #000 !important;
 }

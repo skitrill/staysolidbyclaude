@@ -4,7 +4,7 @@
 }
 
 .quick-add-modal__content {
-  background-color: #faf9f6;
+  background-color: var(--ss-bg, #f4f3ef);
   border-radius: 12px;
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
   padding: 2rem;
@@ -18,7 +18,7 @@
 }
 
 .quick-add-modal__toggle {
-  background-color: #faf9f6;
+  background-color: var(--ss-bg, #f4f3ef);
   border-color: rgba(0, 0, 0, 0.1);
 }
 .quick-add {

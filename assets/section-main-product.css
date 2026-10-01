@@ -351,11 +351,7 @@ a.product__text {
   margin-bottom: 0.8rem;
 }
 
-.product__title h1,
-.product__title .h1 {
-  font-size: 11.2px !important;
-  font-weight: 700 !important;
-}
+/* product title size and weight come from staysolid-system.css */
 
 .product__title > * {
   margin: 0;
@@ -1470,10 +1466,5 @@ a.product__text {
   .product-media-container .product__modal-opener:not(.product__modal-opener--image) {
     display: none;
   }
-}
-.product__info-container .product__description {
-    margin-top: -1.5rem !important; /* Moves it up */
-    font-size: 0.96rem !important; /* Makes it slightly smaller */
-    color: rgba(var(--color-foreground), 0.8);
 }
 

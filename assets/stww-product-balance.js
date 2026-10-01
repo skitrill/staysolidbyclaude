@@ -6,7 +6,7 @@
   measures the visible subject of each grid image and sets --stww-fit (scale)
   and --stww-dx / --stww-dy (re-centering) so every subject fills about the
   same share of its square. Images are never stretched or cropped; the CSS in
-  stww-refine.css applies the values with object-fit: contain.
+  staysolid-system.css applies the values with object-fit: contain.
 
   Works for any product: nothing here refers to specific products. If an image
   cannot be read, it is left exactly as the CSS renders it.
@@ -17,7 +17,8 @@
   var MAX_FIT = 1.12;
   var MAX_SHIFT = 0.06; // never re-center by more than 6% of the box
   var SAMPLE = 160; // analysis resolution; small is plenty for a bounding box
-  var SELECTOR = '.product-grid .card__media img';
+  // every product image box on the site: grid cards and the product page stage
+  var SELECTOR = '.product-grid .card__media img, .product__media-list .product__media img';
 
   var canvas = document.createElement('canvas');
   canvas.width = SAMPLE;

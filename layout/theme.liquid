@@ -3,19 +3,19 @@
   <head>
 {% include 'booster-seo' %}
 <!-- force status bar color across all platforms -->
-    <meta name="theme-color" content="#faf9f6">
+    <meta name="theme-color" content="#f4f3ef">
 
 <!-- iOS Safari -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
 <!-- Windows Phone -->
-    <meta name="msapplication-navbutton-color" content="#faf9f6">
+    <meta name="msapplication-navbutton-color" content="#f4f3ef">
 
 <!-- Android Chrome + Samsung Internet -->
     <meta name="application-name" content="stww.ws">
-    <meta name="msapplication-TileColor" content="#faf9f6">
-    <meta name="msapplication-TileColor" content="#faf9f6">
+    <meta name="msapplication-TileColor" content="#f4f3ef">
+    <meta name="msapplication-TileColor" content="#f4f3ef">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -27,7 +27,6 @@
 <style>
   .variant-picker,
 .product__info-container .product-form__input {
-  display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
 }
@@ -47,35 +46,6 @@
   background: transparent;
 }
 
-/* Fix quantity container alignment */
-.quantity {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 140px;
-  border: 1px solid #000;
-  padding: 4px 6px;
-  background: transparent;
-}
-
-.quantity__button {
-  width: 20px;
-  height: 20px;
-  border: none;
-  background: none;
-  font-size: 14.4px;
-  line-height: 1;
-  padding: 0;
-}
-
-}
-quantity-input,
-.quantity,
-.cart-quantity {
-  max-height: 28px !important;
-  font-size: 8.8px !important;
-}
-
 /* Ensure padding is consistent on product sections */
 .section-template--17254420938946__main-padding {
   padding: 20px 15px !important;
@@ -86,7 +56,7 @@ quantity-input,
   .product {
     grid-template-columns: 1fr !important;
   }
-  .select, .quantity {
+  .select {
     width: 100% !important;
   }
 }
@@ -98,30 +68,6 @@ button, input, select, option, strong,
 .list-menu__item, .menu-link,
 .footer__copyright, .link {
   text-transform: uppercase !important;
-}
-/* current prices */
-.price-item,
-.price-item--regular,
-.price--end,
-.product-option,
-[class*="price"]:not(s):not(.cart-item__old-price) {
-  color: #b8860b !important; /* dark yellow */
-  font-family: 'Source Code Pro', monospace !important;
-  font-size: 8px !important;
-  font-weight: 600 !important;
-  letter-spacing: 0em !important;
-}
-
-/* discounted prices (struck-through) */
-.cart-item__old-price,
-s,
-s.price-item {
-  color: #8f8d8d !important; /* soft ash gray */
-  font-family: 'Source Code Pro', monospace !important;
-  font-size: 8px !important;
-  font-weight: 400 !important;
-  letter-spacing: 0.01em !important;
-  text-decoration: line-through !important;
 }
 </style>
 
@@ -378,7 +324,7 @@ html, body{
 }
 {% else %}
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, a.menu-link, .running-text-content, .list-menu__item, .button, button, .collections_link a, .enter-button a, .two_bg_enter_button a, .enter-skip-button{
-  font-family: var(--font-heading-family) !important;
+  font-family: var(--font-heading-family);
 }
 html, body{
   font-family: var(--font-body-family) !important;
@@ -423,10 +369,6 @@ html, body{
     background: black !important;
     color: white !important;
   }
-  .product-form__submit {
-      background: {{ settings.custom_add_to_cart_bg }} !important;
-      color: {{ settings.custom_add_to_cart_color }} !important;
-  }
   .cart-count-bubble {
       background: {{ settings.custom_add_to_cart_bg }} !important;
       color: {{ settings.custom_add_to_cart_color }} !important;
@@ -446,7 +388,7 @@ html, body{
        viewport (this was causing a stray horizontal line near the bottom
        of short pages) */
     body.gradient {
-      background-color: #faf9f6 !important;
+      background-color: var(--ss-bg, #f4f3ef) !important;
     }
 
     @media screen and (max-width: 500px){
@@ -494,20 +436,11 @@ html, body{
       color: {{ settings.header_menu_mobile_text_color }} !important;
     }
 
-    .badge{
-      color: {{ settings.badge_text_color }} !important;
-      background: {{ settings.badge_bg_color }};
-    }
-
-
-    a, .a, p, .p, h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, h7, .h7, s, span, li, label, small, .product__tax, .product__description, tr{
-      color: {{ settings.site_text_color }} !important;
-    }
     .field__input{
       color: {{ settings.site_text_color }};
       border: 1px solid {{ settings.site_text_color }};
     }
-    input{
+    input:not(.quantity__input){
       color: {{ settings.site_text_color }};
       border: 1px solid {{ settings.site_text_color }} !important;
     }
@@ -515,31 +448,19 @@ html, body{
       color: {{ settings.site_text_color }} !important;
     }
 
-    .product-form__input .select, fieldset.product-form__input label {
+    .product-form__input .select {
       color: {{ settings.site_text_color }};
       border: 1px solid {{ settings.site_text_color }} !important;
     }
 
-    .quantity{
-            color: {{ settings.site_text_color }};
-      border: 1px solid {{ settings.site_text_color }} !important;
-    }
-
-      .quantity__input{
-        border: none !important;
-      }
-
-      .form__label, .facet-filters__sort, .icon-caret{
+      .facet-filters__sort, .icon-caret{
         color: {{ settings.site_text_color }};
       }
 
-    .button, .customer button{
+    .customer button{
       color: {{ settings.site_button_color }};
       border: 2px solid {{ settings.site_button_color }};
       background: {{ settings.site_button_bg_color }};
-    }
-    .button span, .customer button{
-      color: {{ settings.site_button_color }} !important;
     }
 
     .next-prev-icon {
@@ -561,10 +482,6 @@ html, body{
     }
     }
 
-      .product-form__input input[type=radio]:checked + label{
-        background: {{ settings.product_checked_pills }} !important;
-        color: {{ settings.product_checked_pills_text }} !important;
-      }
       small.copyright__content.fkxcopysite{
         color: {{ settings.fkxcopy_color }} !important;
       }
@@ -725,56 +642,8 @@ main {
   width: fit-content;
 }
 </style>
-   <style>
-/* snappy, immediate feel site-wide */
-* {
-  transition: all 0.12s cubic-bezier(0.2, 0, 0.2, 1) !important;
-  backface-visibility: hidden;
-  transform-style: preserve-3d;
-}
 
-/* page load animation */
-body {
-  animation: pageZoom 0.4s ease-out forwards;
-  opacity: 0;
-}
-
-/* waving flag entry */
-@keyframes pageZoom {
-  0% {
-    transform: scale(0.98) rotateX(5deg) rotateY(-5deg);
-    opacity: 0;
-  }
-  100% {
-    transform: scale(1) rotateX(0) rotateY(0);
-    opacity: 1;
-  }
-}
-
-/* zoom-in menu or modal effect */
-.zoom-animate {
-  animation: zoomIn 0.3s ease-in-out forwards;
-}
-@keyframes zoomIn {
-  0% {
-    transform: scale(0.9);
-    opacity: 0;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-/* smooth fade on nav/menu popups */
-.fade-in {
-  animation: fadeIn 0.25s ease forwards;
-}
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-</style>
-    {{ 'stww-refine.css' | asset_url | stylesheet_tag }}
+    {{ 'staysolid-system.css' | asset_url | stylesheet_tag }}
     <script src="{{ 'stww-product-balance.js' | asset_url }}" defer="defer"></script>
   </head>
   {% if template == 'index' %}

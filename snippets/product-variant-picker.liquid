@@ -22,7 +22,22 @@
       {{ block.shopify_attributes }}
     >
       {%- for option in product.options_with_values -%}
-        <fieldset class="js product-form__input">
+        {%- liquid
+          # short values (S / M / L / XL) sit as compact chips; colours and longer
+          # values (MULTICOLOR, GRAY) always use an equal-width two-column grid
+          assign ss_longest_value = 0
+          assign ss_option_name = option.name | downcase
+          for value in option.values
+            assign ss_value_length = value | size
+            if ss_value_length > ss_longest_value
+              assign ss_longest_value = ss_value_length
+            endif
+          endfor
+        -%}
+        <fieldset
+          class="js product-form__input ss-options {% if ss_longest_value > 4 or ss_option_name contains 'colo' %}ss-options--grid{% else %}ss-options--compact{% endif %}"
+          data-ss-option="{{ option.name | handleize }}"
+        >
           <legend class="form__label">{{ option.name }}</legend>
           {% render 'product-variant-options', product: product, option: option, block: block %}
         </fieldset>

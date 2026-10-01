@@ -137,15 +137,13 @@
     {%- endif -%}
   {%- endif -%}
 <!-- CUSTOM INLINE MENU (ALL ITEMS TOGETHER INLINE) -->
-<div class="custom-menu-wrapper">
-  <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="custom-menu-item">user</a>
-  <a href="/" class="custom-menu-item">rack</a>
-  <a href="/pages/categories" class="custom-menu-item">categories</a>
-  <a href="/pages/lookboard" class="custom-menu-item">lookboard</a>
-  <a href="{{ routes.cart_url }}" class="custom-menu-item{% if cart.item_count > 0 %} custom-menu-item--bag{% endif %}" id="CustomMenuBagLink">
-    bag<span id="CartBubble" data-cart-count="{{ cart.item_count }}" style="margin-left: 0.1rem;">
-      {{ cart.item_count }}
-    </span>
+<div class="custom-menu-wrapper" role="navigation" aria-label="{{ 'sections.header.menu' | t }}">
+  <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="custom-menu-item"{% if request.page_type contains 'customers/' %} aria-current="page"{% endif %}>user</a>
+  <a href="/" class="custom-menu-item"{% if request.page_type == 'index' %} aria-current="page"{% endif %}>rack</a>
+  <a href="/pages/categories" class="custom-menu-item"{% if request.path == '/pages/categories' %} aria-current="page"{% endif %}>categories</a>
+  <a href="/pages/lookboard" class="custom-menu-item"{% if request.path == '/pages/lookboard' %} aria-current="page"{% endif %}>lookboard</a>
+  <a href="{{ routes.cart_url }}" class="custom-menu-item{% if cart.item_count > 0 %} custom-menu-item--bag{% endif %}" id="CustomMenuBagLink"{% if request.page_type == 'cart' %} aria-current="page"{% endif %}>
+    <span class="custom-menu-item__label">bag</span><span id="CartBubble" class="custom-menu-count" data-cart-count="{{ cart.item_count }}">{{ cart.item_count }}</span>
   </a>
 </div>
 

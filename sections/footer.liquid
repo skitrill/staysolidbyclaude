@@ -236,15 +236,28 @@
   <div class="footer__content-bottom">
   <div class="footer__content-bottom-wrapper page-width{% if section.settings.enable_country_selector == false and section.settings.enable_language_selector == false %} footer__content-bottom-wrapper--center{% endif %}">
     <div class="footer__copyright caption">
-      <small style="color: {{ settings.copy_color }}" class="copyright__content">&copy; {{ 'now' | date: "%Y" }}, {{ shop.name | link_to: routes.root_url }}</small>
-      
+      <small class="copyright__content">&copy; {{ 'now' | date: "%Y" }} {{ shop.name | link_to: routes.root_url }}</small>
+
       {%- if section.settings.show_policy -%}
-        <ul class="policies list-unstyled" style="display: flex; flex-direction: column; gap: 5px;">
+        <ul class="policies list-unstyled">
           {%- for policy in shop.policies -%}
             {%- if policy != blank -%}
-              <li style="margin-bottom: 5px;">
+              {%- liquid
+                # short system labels; anything unrecognised keeps its own title
+                assign policy_label = policy.title
+                if policy.url contains 'privacy'
+                  assign policy_label = 'Privacy'
+                elsif policy.url contains 'refund'
+                  assign policy_label = 'Refunds'
+                elsif policy.url contains 'terms'
+                  assign policy_label = 'Terms'
+                elsif policy.url contains 'shipping'
+                  assign policy_label = 'Shipping'
+                endif
+              -%}
+              <li>
                 <small class="copyright__content">
-                  <a href="{{ policy.url }}" style="text-decoration: none; color: inherit;">{{ policy.title }}</a>
+                  <a href="{{ policy.url }}">{{ policy_label }}</a>
                 </small>
               </li>
             {%- endif -%}

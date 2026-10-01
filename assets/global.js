@@ -176,7 +176,13 @@ class QuantityInput extends HTMLElement {
     const previousValue = this.input.value;
 
     event.target.name === 'plus' ? this.input.stepUp() : this.input.stepDown();
-    if (previousValue !== this.input.value) this.input.dispatchEvent(this.changeEvent);
+    if (previousValue !== this.input.value) {
+      this.input.dispatchEvent(this.changeEvent);
+      // quick acknowledgement on the number only (see .is-changing in staysolid-system.css)
+      this.input.classList.remove('is-changing');
+      void this.input.offsetWidth;
+      this.input.classList.add('is-changing');
+    }
   }
 
   validateQtyRules() {
@@ -604,8 +610,20 @@ class SliderComponent extends HTMLElement {
     this.currentPage = Math.round(this.slider.scrollLeft / this.sliderItemOffset) + 1;
 
     if (this.currentPageElement && this.pageTotalElement) {
-      this.currentPageElement.textContent = this.currentPage;
-      this.pageTotalElement.textContent = this.totalPages;
+      // system counter format: 01 / 06
+      this.currentPageElement.textContent = String(this.currentPage).padStart(2, '0');
+      this.pageTotalElement.textContent = String(this.totalPages).padStart(2, '0');
+    }
+
+    if (this.stepFade && this.currentPage != previousPage) {
+      // arrow navigation in galleries swaps instantly and fades the new image in
+      this.stepFade = false;
+      const steppedTo = this.sliderItemsToShow[this.currentPage - 1];
+      if (steppedTo) {
+        steppedTo.classList.remove('is-stepping');
+        void steppedTo.offsetWidth;
+        steppedTo.classList.add('is-stepping');
+      }
     }
 
     if (this.currentPage != previousPage) {
@@ -639,6 +657,16 @@ class SliderComponent extends HTMLElement {
     event.preventDefault();
     const step = event.currentTarget.dataset.step || 1;
     this.slideScrollPosition = event.currentTarget.name === 'next' ? this.slider.scrollLeft + (step * this.sliderItemOffset) : this.slider.scrollLeft - (step * this.sliderItemOffset);
+
+    if (this.hasAttribute('data-fade-on-step')) {
+      // no sliding a large product image across the screen: jump, then fade
+      this.stepFade = true;
+      this.slider.style.scrollBehavior = 'auto';
+      this.slider.scrollTo({ left: this.slideScrollPosition, behavior: 'auto' });
+      requestAnimationFrame(() => { this.slider.style.scrollBehavior = ''; });
+      return;
+    }
+
     this.slider.scrollTo({
       left: this.slideScrollPosition
     });

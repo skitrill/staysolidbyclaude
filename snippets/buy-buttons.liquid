@@ -57,6 +57,7 @@
             type="submit"
             name="add"
             class="product-form__submit button button--full-width {% if block.settings.show_dynamic_checkout %}button--secondary{% else %}button--primary{% endif %}"
+            data-added-label="{{ 'products.product.added_to_cart' | t }}"
             {% if product.selected_or_first_available_variant.available == false or quantity_rule_soldout %}
               disabled
             {% endif %}

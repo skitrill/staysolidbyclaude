@@ -1,285 +1,69 @@
-<style>
-.product-title,
-.product-price {
-  margin: 1px 0; /* tighter spacing between title and price */
-  font-size: 9.6px;
-}
-  * {
-    box-sizing: border-box;
-  }
+{%- comment -%}
+  CATEGORIES — a numbered category index.
+  Each row opens its collection in place; the products inside use the same
+  product card as every other grid on the site (card-product snippet), so
+  image boxes, titles and prices follow one system.
+  Styles live in staysolid-system.css (section 9, "Category index").
+{%- endcomment -%}
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
 
-  body {
-    margin: 0;
-    padding: 0;
-    background-color: #faf9f6;
-    font-family: inherit;
-    font-size: 9.6px;
-    color: #000;
-  }
-  @media (max-width: 768px) {
-  .product-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between; /* better spacing control */
-    padding: 0 0.3rem;
-  }
-
-  .product {
-    width: 49%; /* 2 columns, with slight breathing space */
-    margin-bottom: 0.6rem;
-    box-sizing: border-box;
-    padding: 0 2px;
-  }
-
-  .product-image {
-    height: auto;
-    aspect-ratio: 1 / 1;
-  }
-}
-.product-image img {
-  object-fit: contain;
-}
-
-
-  .lockscreen-container {
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
-    background-color: #faf9f6;
-  }
-
-  .collection-header-wrapper {
-  display: flex;
-  justify-content: center;
-}
-
-.collection-header {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  user-select: none;
-  margin-top: 0.6rem 0;
-  background-color: transparent;
-  flex-direction: row;
-  width: auto;
-  justify-content: center;
-}
-
-  .dropdown-icon {
-    font-size: 9.6px;
-    transition: transform 0.3s ease;
-  }
-
-  .collection-header.open .dropdown-icon {
-    transform: rotate(135deg);
-  }
-
-  .collection-title {
-    position: relative;
-    display: inline-block;
-    text-transform: uppercase;
-    font-size: 9.6px;
-    transition: color 0.2s ease;
-  }
-
-  .collection-title:hover {
-    background-color: #000;
-    color: #EEA620;
-    padding: 0 6px;
-  }
-
-  .accordion-content {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.5s ease;
-    display: flex;
-    justify-content: left;
-  }
-
-  .accordion-content.open {
-    max-height: 1500px;
-  }
-
-  .product-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 2px;
-    margin-top: 0.5rem;
-    width: 100%;
-    max-width: 1000px;
-  }
-
-  .product {
-    width: 176.8px;
-    background-color: #faf9f6;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    text-align: center;
-    padding: 0 6px;
-  }
-
-  .product-image {
-    position: relative;
-    width: 100%;
-    height: 176.8px;
-    background-color: #faf9f6;
-    overflow: hidden;
-  }
-
-  .product-sold-out-badge {
-    position: absolute;
-    bottom: 8px;
-    right: 8px;
-    background-color: #fff;
-    color: #000;
-    border: 1px solid #000;
-    font-size: 8px;
-    text-transform: uppercase;
-    padding: 2px 6px;
-    z-index: 1;
-  }
-
-  .product-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    pointer-events: none;
-    display: block;
-  }
-
-  .product-card {
-  text-align: center;
-}
-
-.product-title {
-  margin-bottom: 0.3rem; /* space between title and price */
-}
-
-.product-price {
-  display: block;
-  font-size: 0.8rem;
-  color: #EEA620;
-}
-
-
-  .product-title a {
-    color: inherit;
-    text-decoration: none;
-    transition: color 0.2s ease, background-color 0.2s ease;
-    padding: 2px 4px;
-    display: inline-block;
-  }
-
-  .product-title a:hover {
-    background-color: #000;
-    color: #EEA620;
-  }
-
-  @media (max-width: 768px) {
-    .product {
-      width: 48%;
-    }
-
-    .product-image {
-      height: auto;
-      aspect-ratio: 1 / 1;
-    }
-  }
-  @media (max-width: 768px) {
-  .product-grid {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    justify-content: space-between !important;
-    padding: 0 0.3rem !important;
-  }
-
-  .product {
-    width: 48% !important;
-    margin-bottom: 0.6rem !important;
-    box-sizing: border-box !important;
-    padding: 0 2px !important;
-    display: flex !important;
-    flex-direction: column !important;
-  }
-
-  .product-image {
-    width: 100% !important;
-    aspect-ratio: 1 / 1 !important;
-    height: auto !important;
-  }
-
-  .product-image img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: contain !important;
-    display: block !important;
-  }
-
-  .product-title,
-  .product-price {
-    text-align: left !important;
-    width: 100% !important;
-    font-size: 8.8px !important;
-    padding-left: 2px !important;
-  }
-}
-.product-title,
-.product-price {
-  text-align: center !important;
-  width: 100% !important;
-  padding-left: 0 !important;
-  font-size: 8.8px !important;
-}
-
-</style>
-
-<div class="lockscreen-container">
-  {% for collection in collections %}
-    <div class="collection-header-wrapper">
-      <div class="collection-header" onclick="toggleDropdown(this)">
-        <span class="dropdown-icon"><b> +  </b></span>
-        <div class="collection-title">{{ collection.title }}</div>
-      </div>
-    </div>
-    <div class="accordion-content">
-      <div class="product-grid">
-        {% for product in collection.products limit: 6 %}
-          <div class="product">
-            <div class="product-image">
-              <img src="{{ product.featured_image | image_url: width: 300 }}" alt="{{ product.title }}">
-              {%- unless product.available -%}
-                <div class="product-sold-out-badge">{{ 'products.product.sold_out' | t }}</div>
-              {%- endunless -%}
-            </div>
-            <div class="product-title">
-              <a href="{{ product.url }}">{{ product.title }}</a>
-            </div>
-            <div class="product-price">
-              {{ product.price | money }}
-            </div>
-          </div>
-        {% endfor %}
-      </div>
-    </div>
-  {% endfor %}
+<div class="ss-index page-width">
+  <ol class="ss-index__list" role="list">
+    {%- for collection in collections -%}
+      <li class="ss-index__item">
+        <button
+          type="button"
+          class="ss-index__row"
+          aria-expanded="false"
+          aria-controls="SsIndexPanel-{{ section.id }}-{{ forloop.index }}"
+        >
+          <span class="ss-index__num">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+          <span class="ss-index__name">{{ collection.title | escape }}</span>
+          <span class="ss-index__arrow" aria-hidden="true">&rarr;</span>
+        </button>
+        {%- assign ss_card_scope = section.id | append: '-' | append: forloop.index -%}
+        <div class="ss-index__panel" id="SsIndexPanel-{{ section.id }}-{{ forloop.index }}" hidden>
+          <ul class="grid product-grid grid--2-col-tablet-down grid--4-col-desktop" role="list">
+            {%- for product in collection.products limit: 6 -%}
+              <li class="grid__item">
+                {% render 'card-product',
+                  card_product: product,
+                  media_aspect_ratio: 'square',
+                  show_secondary_image: true,
+                  show_vendor: false,
+                  show_rating: false,
+                  show_quick_add: false,
+                  section_id: ss_card_scope
+                %}
+              </li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      </li>
+    {%- endfor -%}
+  </ol>
 </div>
 
 <script>
-  function toggleDropdown(header) {
-    const content = header.parentElement.nextElementSibling;
-    const isAlreadyOpen = header.classList.contains('open');
+  (function () {
+    var index = document.currentScript.previousElementSibling;
+    if (!index) return;
+    index.addEventListener('click', function (event) {
+      var row = event.target.closest('.ss-index__row');
+      if (!row) return;
+      var wasOpen = row.getAttribute('aria-expanded') === 'true';
 
-    // close all
-    document.querySelectorAll('.collection-header').forEach(h => h.classList.remove('open'));
-    document.querySelectorAll('.accordion-content').forEach(c => c.classList.remove('open'));
+      // one category open at a time
+      index.querySelectorAll('.ss-index__row[aria-expanded="true"]').forEach(function (openRow) {
+        openRow.setAttribute('aria-expanded', 'false');
+        document.getElementById(openRow.getAttribute('aria-controls')).hidden = true;
+      });
 
-    // toggle
-    if (!isAlreadyOpen) {
-      header.classList.add('open');
-      content.classList.add('open');
-    }
-  }
+      if (!wasOpen) {
+        row.setAttribute('aria-expanded', 'true');
+        document.getElementById(row.getAttribute('aria-controls')).hidden = false;
+      }
+    });
+  })();
 </script>

@@ -17,27 +17,6 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
-
-  .continue-shopping-btn {
-    display: inline-block;
-    background-color: #000;
-    color: #fff !important;
-    padding: 0.3rem 0.6rem;
-    line-height: 1;
-    text-decoration: none !important;
-    border-radius: 0;
-  }
-
-  .continue-shopping-btn:hover {
-    background-color: #333;
-  }
-
-  .bag-title-highlight {
-    display: inline-block;
-    background-color: #EEA620;
-    color: #000;
-    padding: 0.1rem 0.5rem;
-  }
 {%- endstyle -%}
 
 {%- unless settings.cart_type == 'drawer' -%}
@@ -46,8 +25,8 @@
 
 <cart-items class="page-width{% if cart == empty %} is-empty{% else %} section-{{ section.id }}-padding{% endif %}">
   <div class="title-wrapper-with-link">
-    <h1 class="title title--primary{% if cart.item_count > 0 %} bag-title-highlight{% endif %}">{{ 'sections.cart.title' | t }}</h1>
-    <a href="{{ routes.root_url }}" class="continue-shopping-btn">{{ 'general.continue_shopping' | t }}</a>
+    <h1 class="title title--primary">{{ 'sections.cart.title' | t }}</h1>
+    <a href="{{ routes.root_url }}" class="continue-shopping-btn ss-link-arrow">{{ 'general.continue_shopping' | t }}<span class="ss-link-arrow__icon" aria-hidden="true">&rarr;</span></a>
   </div>
 
   <div class="cart__warnings">

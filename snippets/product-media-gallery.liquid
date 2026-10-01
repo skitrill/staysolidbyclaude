@@ -53,7 +53,7 @@
   data-desktop-layout="{{ section.settings.gallery_layout }}"
 >
   <div id="GalleryStatus-{{ section.id }}" class="visually-hidden" role="status"></div>
-  <slider-component id="GalleryViewer-{{ section.id }}{{ id_append }}" class="slider-mobile-gutter">
+  <slider-component id="GalleryViewer-{{ section.id }}{{ id_append }}" class="slider-mobile-gutter" data-fade-on-step>
     {%- unless is_duplicate -%}
       <a class="skip-to-content-link button visually-hidden quick-add-hidden" href="#ProductInfo-{{ section.id }}">
         {{ 'accessibility.skip_to_product_info' | t }}
@@ -131,10 +131,10 @@
           {% render 'icon-caret' %}
         </button>
         <div class="slider-counter caption">
-          <span class="slider-counter--current">1</span>
+          <span class="slider-counter--current">01</span>
           <span aria-hidden="true"> / </span>
           <span class="visually-hidden">{{ 'general.slider.of' | t }}</span>
-          <span class="slider-counter--total">{{ media_count }}</span>
+          <span class="slider-counter--total">{{ media_count | prepend: '0' | slice: -2, 2 }}</span>
         </div>
         <button
           type="button"

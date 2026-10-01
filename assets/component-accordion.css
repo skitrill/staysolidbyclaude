@@ -3,7 +3,7 @@
   margin-bottom: 0;
   border-top: 1px solid #000;
   border-bottom: 1px solid #000;
-  background-color: #faf9f6;
+  background-color: var(--ss-bg, #f4f3ef);
   transition: all 0.3s ease-in-out;
 }
 
@@ -80,7 +80,7 @@
 /* Black hover accent for entire accordion when open */
 .accordion details[open] {
   background-color: #000;
-  color: #faf9f6;
+  color: var(--ss-bg, #f4f3ef);
 }
 
 @keyframes fadeIn {
