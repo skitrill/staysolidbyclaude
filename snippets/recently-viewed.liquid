@@ -38,7 +38,7 @@
             <div class="grid__item recently-viewed-card">
               <a href="${product.url}" class="card-wrapper">
                 <img src="${product.featured_image}" alt="${product.title}" style="width:100%; height:auto;">
-                <div class="product-title">${product.title.toLowerCase()}</div>
+                <div class="product-title">${product.title}</div>
                 <div class="product-price">${(product.price / 100).toFixed(2)} ${Shopify.currency.active}</div>
               </a>
             </div>`;

@@ -1,5 +1,5 @@
 * {
-  text-transform: lowercase !important;
+  text-transform: uppercase !important;
 }
 .customer:not(.account):not(.order) {
   margin: 0 auto;

@@ -425,7 +425,7 @@ p, a, span, li, button,
 input, textarea, label, 
 th, td, div, strong, 
 em, blockquote, figcaption {
-  text-transform: lowercase !important;
+  text-transform: uppercase !important;
 }
 /* recently viewed */
 #recently-viewed-wrapper {
@@ -437,7 +437,7 @@ em, blockquote, figcaption {
 .recently-viewed-card .product-title {
   font-family: serif;
   font-size: 1.1rem;
-  text-transform: lowercase;
+  text-transform: uppercase;
   margin-top: 0.5rem;
 }
 
