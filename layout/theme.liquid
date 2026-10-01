@@ -41,7 +41,7 @@
 }
 .select__select {
   width: 100%;
-  font-size: 14px;
+  font-size: 11.2px;
   padding: 6px 10px;
   border: 1px solid #000;
   background: transparent;
@@ -63,7 +63,7 @@
   height: 20px;
   border: none;
   background: none;
-  font-size: 18px;
+  font-size: 14.4px;
   line-height: 1;
   padding: 0;
 }
@@ -73,7 +73,7 @@ quantity-input,
 .quantity,
 .cart-quantity {
   max-height: 28px !important;
-  font-size: 11px !important;
+  font-size: 8.8px !important;
 }
 
 /* Ensure padding is consistent on product sections */
@@ -107,9 +107,9 @@ button, input, select, option, strong,
 [class*="price"]:not(s):not(.cart-item__old-price) {
   color: #b8860b !important; /* dark yellow */
   font-family: 'Source Code Pro', monospace !important;
-  font-size: 10px !important;
+  font-size: 8px !important;
   font-weight: 600 !important;
-  letter-spacing: -0.03em !important;
+  letter-spacing: 0em !important;
 }
 
 /* discounted prices (struck-through) */
@@ -118,9 +118,9 @@ s,
 s.price-item {
   color: #8f8d8d !important; /* soft ash gray */
   font-family: 'Source Code Pro', monospace !important;
-  font-size: 10px !important;
+  font-size: 8px !important;
   font-weight: 400 !important;
-  letter-spacing: -0.02em !important;
+  letter-spacing: 0.01em !important;
   text-decoration: line-through !important;
 }
 </style>
@@ -328,8 +328,8 @@ s.price-item {
         grid-template-columns: 100%;
         align-content: start;
         margin: 0;
-        font-size: 1.5rem;
-        letter-spacing: 0.06rem;
+        font-size: 1.2rem;
+        letter-spacing: calc(0.048rem + 0.03em);
         line-height: calc(1 + 0.8 / var(--font-body-scale));
         font-family: var(--font-body-family);
         font-style: var(--font-body-style);
@@ -338,7 +338,7 @@ s.price-item {
 
       @media screen and (min-width: 750px) {
         body {
-          font-size: 1.6rem;
+          font-size: 1.28rem;
         }
       }
     {% endstyle %}
@@ -412,10 +412,10 @@ html, body{
 {% endif %}
 
 .card-information>.price{
-  font-size: {{ settings.card_price_text_size }}px !important;
+  font-size: {{ settings.card_price_text_size | times: 0.8 }}px !important;
 }
 .card__heading{
-  font-size: {{ settings.card_name_text_size }}px !important;
+  font-size: {{ settings.card_name_text_size | times: 0.8 }}px !important;
 }
   #menu-drawer, #CartDrawer, .search-modal__content{
     background-color: {{ settings.custom_menu_drawer_bg }} !important;
@@ -635,7 +635,7 @@ main {
   flex-direction: column;
   margin-top: 2rem;
   text-transform: uppercase;
-  font-size: 12px;
+  font-size: 9.6px;
 }
 
 /* center text and dropdown */
@@ -688,7 +688,7 @@ main {
 .footer__column.footer__localization *,
 .footer__column.footer__localization select,
 .footer__column.footer__localization button {
-  font-size: 13px !important;
+  font-size: 10.4px !important;
   text-transform: uppercase !important;
 }
       /* dropdown list items */

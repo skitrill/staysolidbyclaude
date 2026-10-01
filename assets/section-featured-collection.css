@@ -3,7 +3,7 @@ h1, h2, h3, h4, h5, h6,
 p, span, a, li, label, button,
 input, textarea, select,
 .product-card-wrapper, .collection__title, .rte {
-  font-size: 12px !important;
+  font-size: 9.6px !important;
   text-align: center !important;
   justify-content: center !important;
   align-items: center !important;
@@ -20,7 +20,7 @@ input, textarea, select,
 /* === cart section font and alignment fix === */
 #shopify-section-template--17254420447426__cart-items,
 #shopify-section-template--17254420447426__cart-items * {
-  font-size: 12px !important;
+  font-size: 9.6px !important;
   text-align: center !important;
   line-height: 1.4 !important;
 }

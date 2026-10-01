@@ -10,6 +10,12 @@
    Progression: GRID spacious -> PRODUCT moderately dense -> BAG compact.
    ========================================================================== */
 
+/* Root size stays 11px: every rem value (spacing and type) is based on it.
+   Type is scaled per declaration instead (see the sitewide -20% type change). */
+html:root {
+  font-size: 11px !important;
+}
+
 :root {
   --stww-orange: #EEA620;
   --stww-black: #000;
@@ -56,7 +62,7 @@ html body .custom-menu-item--bag {
   }
 
   html body .custom-menu-item {
-    font-size: clamp(11px, 3.5vw, 13px) !important;
+    font-size: clamp(8.8px, 2.8vw, 10.4px) !important;
     white-space: nowrap;
   }
 }
@@ -97,7 +103,7 @@ html body .collection {
 
 /* SOLD OUT stamp on the product image: still clear, no longer dominant */
 html body .product-grid .card__badge .badge {
-  font-size: 11px !important;
+  font-size: 8.8px !important;
   line-height: 1;
   padding: 4px 10px 5px;
 }
@@ -148,8 +154,8 @@ html body .product__info-container .price .price__badge-sold-out {
   padding: 0;
   border: 0;
   background: transparent;
-  font-size: 11px !important;
-  letter-spacing: -0.03em;
+  font-size: 8.8px !important;
+  letter-spacing: 0em;
 }
 
 /* desktop info column is left-aligned like its title; phones stay centered */
@@ -167,7 +173,7 @@ html body .product__info-container .price:not(.price--on-sale) .price__badge-sal
 /* COLOR / SIZE / QUANTITY: one label style and one spacing rhythm */
 html body .product-form__input .form__label,
 html body .quantity__label {
-  font-size: 14.3px;
+  font-size: 11.44px;
   line-height: 1.5;
   margin: 0 0 6px;
 }
@@ -175,7 +181,7 @@ html body .quantity__label {
 /* option selectors: shorter, still square and raw */
 html body .product-form__input input[type='radio'] + label {
   margin: 0 5.5px 0 0;
-  padding: 8px 20px;
+  padding: 9.5px 20px; /* keeps the 33px control height at the smaller type size */
 }
 
 html body .product-form__input--pill {
@@ -276,7 +282,7 @@ html body .cart-item__details > * + * {
 }
 
 html body .cart-item__details .cart-item__name {
-  font-size: 12px !important;
+  font-size: 9.6px !important;
   line-height: 1.25;
 }
 
@@ -325,8 +331,8 @@ html body cart-remove-button .button {
   border: 0;
   box-shadow: none;
   color: var(--stww-black) !important;
-  font-size: 12px !important;
-  letter-spacing: -0.03em;
+  font-size: 9.6px !important;
+  letter-spacing: 0em;
 }
 
 html body cart-remove-button .cart-item__remove-label {

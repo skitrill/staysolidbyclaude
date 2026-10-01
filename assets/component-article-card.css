@@ -61,8 +61,8 @@
 }
 
 .article-card__footer {
-  letter-spacing: 0.1rem;
-  font-size: 1.4rem;
+  letter-spacing: calc(0.08rem + 0.03em);
+  font-size: 1.12rem;
 }
 
 .article-card__footer:not(:last-child) {

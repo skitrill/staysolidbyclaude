@@ -44,7 +44,7 @@
 }
 
 .cart-item__details {
-  font-size: 1.6rem;
+  font-size: 1.28rem;
   line-height: calc(1 + 0.4 / var(--font-body-scale));
 }
 
@@ -94,7 +94,7 @@
 }
 
 .cart-item__discounted-prices .cart-item__old-price {
-  font-size: 1.4rem;
+  font-size: 1.12rem;
 }
 
 .cart-item__old-price {
@@ -106,7 +106,7 @@
 }
 
 .product-option {
-  font-size: 1.4rem;
+  font-size: 1.12rem;
   word-break: break-all;
   line-height: calc(1 + 0.5 / var(--font-body-scale));
 }
@@ -178,7 +178,7 @@ cart-remove-button .icon-remove {
 }
 
 .cart-item__error-text {
-  font-size: 1.2rem;
+  font-size: 0.96rem;
   order: 1;
 }
 

@@ -30,8 +30,8 @@ html {
 body {
   background-color: rgb(var(--color-base-background-1));
   color: rgb(var(--color-base-text));
-  font-size: 1.5rem;
-  letter-spacing: 0.07rem;
+  font-size: 1.2rem;
+  letter-spacing: calc(0.056rem + 0.03em);
   line-height: calc(1 + 0.8 / var(--font-body-scale));
   max-width: var(--page-width);
   margin: 0 auto;
@@ -44,7 +44,7 @@ body {
 
 @media only screen and (min-width: 750px) {
   body {
-    font-size: 1.6rem;
+    font-size: 1.28rem;
     line-height: calc(1 + 0.8 / var(--font-body-scale));
     padding: 0 5rem;
   }
@@ -61,31 +61,31 @@ h2,
   font-family: var(--font-heading-family);
   font-style: var(--font-heading-style);
   font-weight: var(--font-heading-weight);
-  letter-spacing: calc(var(--font-heading-scale) * 0.06rem);
+  letter-spacing: calc(var(--font-heading-scale) * 0.048rem + 0.03em);
   line-height: calc(1 + 0.3 / max(1, var(--font-heading-scale)));
 }
 
 h1,
 .h1 {
-  font-size: calc(var(--font-heading-scale) * 3rem);
+  font-size: calc(var(--font-heading-scale) * 2.4rem);
 }
 
 @media only screen and (min-width: 750px) {
   h1,
   .h1 {
-    font-size: calc(var(--font-heading-scale) * 4rem);
+    font-size: calc(var(--font-heading-scale) * 3.2rem);
   }
 }
 
 h2,
 .h2 {
-  font-size: calc(var(--font-heading-scale) * 2rem);
+  font-size: calc(var(--font-heading-scale) * 1.6rem);
 }
 
 @media only screen and (min-width: 750px) {
   h2,
   .h2 {
-    font-size: calc(var(--font-heading-scale) * 2.4rem);
+    font-size: calc(var(--font-heading-scale) * 1.92rem);
   }
 }
 
@@ -105,7 +105,7 @@ h2,
   box-shadow: none;
   background-color: transparent;
   padding: 0.4rem;
-  font-size: 1.6rem;
+  font-size: 1.28rem;
   line-height: 1;
   text-decoration: underline;
   color: rgb(var(--color-base-outline-button-labels));
@@ -129,8 +129,8 @@ h2,
   color: rgb(var(--color-base-solid-button-labels));
   min-width: 12rem;
   height: auto;
-  font-size: 1.5rem;
-  letter-spacing: 0.1rem;
+  font-size: 1.2rem;
+  letter-spacing: calc(0.08rem + 0.03em);
   line-height: calc(1 + 0.2 / var(--font-body-scale));
 }
 
@@ -210,9 +210,9 @@ h2,
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.6rem;
+  font-size: 1.28rem;
   font-weight: 400;
-  letter-spacing: 1px;
+  letter-spacing: calc(0.8px + 0.03em);
   line-height: calc(1 + 0.5 / var(--font-body-scale));
   opacity: 0.85;
 }
@@ -223,7 +223,7 @@ h2,
 
 @media only screen and (min-width: 750px) {
   .gift-card__price {
-    font-size: 2rem;
+    font-size: 1.6rem;
   }
 }
 
@@ -236,7 +236,7 @@ h2,
   background-color: transparent;
   border: none;
   color: rgb(var(--color-base-text));
-  font-size: 1.8rem;
+  font-size: 1.44rem;
   font-weight: 400;
   line-height: calc(1 + 0.6 / var(--font-body-scale));
   text-align: center;
@@ -246,7 +246,7 @@ h2,
 
 @media only screen and (min-width: 750px) {
   .gift-card__number {
-    font-size: 1.8rem;
+    font-size: 1.44rem;
   }
 }
 
@@ -261,8 +261,8 @@ h2,
 }
 
 .gift-card__label {
-  font-size: 1.3rem;
-  letter-spacing: 0.05rem;
+  font-size: 1.04rem;
+  letter-spacing: calc(0.04rem + 0.03em);
   font-weight: 500;
   display: inline;
   margin-left: 1rem;
@@ -273,8 +273,8 @@ h2,
   margin: 1.7rem 0 1rem 1rem;
   border-radius: 4rem;
   display: inline-block;
-  font-size: 1.2rem;
-  letter-spacing: 0.1rem;
+  font-size: 0.96rem;
+  letter-spacing: calc(0.08rem + 0.03em);
   line-height: 1;
   padding: 0.6rem 1.3rem;
   text-align: center;
@@ -290,9 +290,9 @@ h2,
 }
 
 .caption-large {
-  font-size: 1.3rem;
+  font-size: 1.04rem;
   line-height: calc(1 + 0.5 / var(--font-body-scale));
-  letter-spacing: 0.04rem;
+  letter-spacing: calc(0.032rem + 0.03em);
 }
 
 .gift-card__copy-code {
@@ -390,7 +390,7 @@ h2,
 .form__message {
   align-items: center;
   display: flex;
-  font-size: 1.2rem;
+  font-size: 0.96rem;
   line-height: 1;
   margin-top: 1rem;
   justify-content: center;

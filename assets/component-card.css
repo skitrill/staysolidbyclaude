@@ -236,7 +236,7 @@ a:hover, a:focus {
 .card--horizontal .card__heading,
 .card--horizontal .price__container .price-item,
 .card--horizontal__quick-add {
-  font-size: calc(var(--font-heading-scale) * 1.2rem);
+  font-size: calc(var(--font-heading-scale) * 0.96rem);
 }
 
 .card--horizontal .card-information > *:not(.visually-hidden:first-child) + *:not(.rating) {
@@ -251,7 +251,7 @@ a:hover, a:focus {
   .card--horizontal .card__heading,
   .card--horizontal .price__container .price-item,
   .card--horizontal__quick-add {
-    font-size: calc(var(--font-heading-scale) * 1.3rem);
+    font-size: calc(var(--font-heading-scale) * 1.04rem);
   }
 }
 
@@ -412,7 +412,7 @@ a:hover, a:focus {
 }
 
 .card-information .caption {
-  letter-spacing: 0.07rem;
+  letter-spacing: calc(0.056rem + 0.03em);
 }
 
 .card-article-info {
@@ -436,12 +436,12 @@ em, blockquote, figcaption {
 
 .recently-viewed-card .product-title {
   font-family: serif;
-  font-size: 1.1rem;
+  font-size: 0.88rem;
   text-transform: uppercase;
   margin-top: 0.5rem;
 }
 
 .recently-viewed-card .product-price {
-  font-size: 1rem;
+  font-size: 0.8rem;
   color: #181818;
 }

@@ -26,7 +26,7 @@ pickup-availability[available] {
 .pickup-availability-button {
   background-color: transparent;
   color: rgba(var(--color-foreground), 0.75);
-  letter-spacing: 0.06rem;
+  letter-spacing: calc(0.048rem + 0.03em);
   padding: 0 0 0.2rem;
   text-align: left;
   text-decoration: underline;
@@ -114,7 +114,7 @@ pickup-availability-drawer[open] {
 }
 
 .pickup-availability-variant {
-  font-size: 1.3rem;
+  font-size: 1.04rem;
   line-height: calc(1 + 0.2 / var(--font-body-scale));
   margin: 0 0 1.2rem;
   text-transform: capitalize;
@@ -143,7 +143,7 @@ pickup-availability-drawer[open] {
 
 .pickup-availability-address {
   font-style: normal;
-  font-size: 1.2rem;
+  font-size: 0.96rem;
   line-height: calc(1 + 0.5 / var(--font-body-scale));
 }
 

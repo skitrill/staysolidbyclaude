@@ -17,7 +17,7 @@
   font-weight: 600;
   font-family: inherit;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -47,7 +47,7 @@
   min-height: 1.6rem;
   margin: 0;
   word-break: break-word;
-  font-size: 1rem;
+  font-size: 0.8rem;
   color: inherit;
 }
 
@@ -63,7 +63,7 @@
   padding: 1rem 0;
   margin-bottom: 1.5rem;
   color: #000;
-  font-size: 0.95rem;
+  font-size: 0.76rem;
   line-height: 1.6;
   font-family: inherit;
   border-top: 1px solid #e0e0e0;
