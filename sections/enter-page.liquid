@@ -1,0 +1,847 @@
+{% if section.settings.show_enter_page %}
+  <style>
+    .scale-in-center{-webkit-animation:scale-in-center 1s cubic-bezier(.25,.46,.45,.94) both;animation:scale-in-center 1s cubic-bezier(.25,.46,.45,.94) both}
+    @-webkit-keyframes scale-in-center{0%{-webkit-transform:scale(0);transform:scale(0);opacity:1}100%{-webkit-transform:scale(1);transform:scale(1);opacity:1}}@keyframes scale-in-center{0%{-webkit-transform:scale(0);transform:scale(0);opacity:1}100%{-webkit-transform:scale(1);transform:scale(1);opacity:1}}
+
+    .fade-in{-webkit-animation:fade-in 4s cubic-bezier(.39,.575,.565,1.000) both;animation:fade-in 4s cubic-bezier(.39,.575,.565,1.000) both}
+    @-webkit-keyframes fade-in{0%{opacity:0}100%{opacity:1}}@keyframes fade-in{0%{opacity:0}100%{opacity:1}}
+    svg{
+  color: {{ section.settings.icons_color }};
+    }
+    .enterfooter{
+  color: {{ section.settings.copy_text_color }};
+    }
+  #shopify-section-running-text{
+  display: none;
+  }
+  .bgimg{
+  display: none;
+  background: none !important;
+  }
+    .header{
+      display: none;
+    }
+    .footer{
+      display: none;
+    }
+    #MainContent{
+      display:none;
+    }
+  .list-social {
+    position: absolute;
+    bottom: 16%;
+    }
+    body, html{
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    padding: 0 !important;
+    margin: 0 !important;
+    }
+    .wrapper {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      min-height: 100vh;
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center center;
+      {% if section.settings.enter_background_image %}
+        background-image: url({{ section.settings.enter_background_image | img_url: 'master' }});
+      {% endif %}
+    }
+{% if section.settings.enter_background_image_mobile %}
+    @media screen and (max-width: 500px){
+      .wrapper{
+      
+        background-image: url({{ section.settings.enter_background_image_mobile | img_url: 'master' }});
+      
+      }
+    }
+{% endif %}
+    {% if section.settings.show_solid_color_enter %}
+      .wrapper{
+      background: {{ section.settings.solid_color_enter }};
+      background: {{ section.settings.enter_gradient_color }};
+      }
+    {% endif %}
+  
+    .logo-container{
+      margin-bottom: 30px;
+      position: absolute;
+      top: {{ section.settings.logo_container_top }}vh;
+    }
+
+    @media screen and (max-width: 450px){
+      .logo-container{
+      top: {{ section.settings.logo_container_top_mobile }}vh;
+    }
+    
+    .logo_enter{
+    width: {{ section.settings.logoenter_size_mobile }}px !important;
+    }
+    .menu-list {
+      width: 250px !important;
+    }
+    }
+      
+    .enter-button {
+      text-align: center;
+    }
+  
+    .button-text {
+      font-size: 22px;
+      color: black;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    
+    .menu-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      z-index: 0;
+    }
+
+    .menu-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      text-align: center;
+      width: 250px;
+    }
+
+    .menu-item {
+      margin-bottom: {{ section.settings.enter_menu_space }}px;
+      text-align: {{ section.settings.menu_list_alignment }};
+    }
+
+    .menu-link {
+      display: inline-block;
+      margin: {{ section.settings.enter_menu_space }}px;
+      font-size: {{ section.settings.menu_font_size }}px;
+      font-weight: bold;
+      color: {{ section.settings.menu_text_color }};
+      text-decoration: none;
+      padding-left: 3px;
+      padding-right: 3px;
+      line-height: 3rem;
+      text-transform: {{ section.settings.menu_text_transform }};
+      {% if section.settings.show_text_glow %}
+        -webkit-animation:pulse 1.5s ease-in-out infinite alternate;
+        -webkit-backface-visibility: hidden;
+      {% endif %}
+    }
+
+    a.menu-link {
+  color: {{ section.settings.menu_text_color }} !important;
+    }
+  {% if section.settings.enable_menu_highlight %}
+    .menu-link:hover {
+    background: {{ section.settings.menu_highlight_color }};
+    }
+  {% endif %}
+    .enter-button a {
+      display: inline-block;
+      padding: 10px;
+      font-size: {{ section.settings.menu_font_size }}px;
+      font-weight: bold;
+      color: {{ section.settings.menu_text_color }} !important;
+      text-decoration: none;
+      text-transform: {{ section.settings.menu_text_transform }};
+      {% if section.settings.show_text_glow %}
+        -webkit-animation:pulse 1.5s ease-in-out infinite alternate;
+        -webkit-backface-visibility: hidden;
+      {% endif %}
+    }
+
+    @-webkit-keyframes pulse {
+  from {
+    text-shadow: 0 0 0px {{section.settings.menu_text_glow_color}},
+               0 0 0px {{section.settings.menu_text_glow_color}},
+               0 0 0px {{section.settings.menu_text_glow_color}},
+               0 0 0px {{section.settings.menu_text_glow_color}},
+  }
+  to {
+    text-shadow: 0 0px {{section.settings.menu_text_glow_color}},
+               0 0 10px {{section.settings.menu_text_glow_color}},
+               0 0 15px {{section.settings.menu_text_glow_color}},
+               0 0 35px {{section.settings.menu_text_glow_color}};
+  }
+}
+  @media screen and (max-width: 450px){
+    @-webkit-keyframes pulse {
+  from {
+    text-shadow: 0 0 0px {{section.settings.menu_text_glow_color}},
+               0 0 0px {{section.settings.menu_text_glow_color}},
+               0 0 0px {{section.settings.menu_text_glow_color}},
+               0 0 0px {{section.settings.menu_text_glow_color}},
+  }
+  to {
+    text-shadow: 0 0px {{section.settings.menu_text_glow_color}},
+               0 0 5px {{section.settings.menu_text_glow_color}},
+               0 0 8px {{section.settings.menu_text_glow_color}},
+               0 0 20px {{section.settings.menu_text_glow_color}};
+  }
+}
+  }
+
+  #bg-video_mobile{
+  display: none;
+  }
+{% if section.settings.show_video_bg %}
+  .wrapper{
+/*   background-image: none; */
+  background-color: none;
+  }
+  #bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    overflow: hidden;
+    z-index: -20;
+  }
+  
+  {% endif %}
+{% if section.settings.background_video_url_mobile %}
+  @media screen and (max-width: 500px){
+  .wrapper{
+
+    background-color: none;
+  }
+  
+  #bg-video {
+    display: none;
+  }
+    #bg-video_mobile {
+  display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    overflow: hidden;
+    z-index: -20;
+  }
+  }
+  {% endif %}
+{% if section.settings.show_two_bg %}
+  .wrapper{
+    background-image: url({{ section.settings.two_bg_first | img_url: 'master'}});
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+  #bg-video{
+    display: none;
+  }
+  #bg-video_mobile{
+    display: none;
+  }
+  .two_bg_enter_button a{
+    display: inline-block;
+    padding: 10px;
+    font-size: {{ section.settings.menu_font_size }}px;
+    font-weight: bold;
+    color: {{ section.settings.menu_text_color }} !important;
+    text-decoration: none;
+    text-transform: {{ section.settings.menu_text_transform }};
+    {% if section.settings.show_text_glow %}
+      -webkit-animation:pulse 1.5s ease-in-out infinite alternate;
+      -webkit-backface-visibility: hidden;
+    {% endif %}
+    cursor: pointer;
+  }
+  a.two_bg_enter_button{
+    color: {{ section.settings.menu_text_color }} !important;
+  }
+  .enter-button{
+    display: none;
+  }
+  .menu-list{
+  display: none;
+  }
+{% endif %}
+  .enter-skip-button{
+    text-decoration: none;
+    color: {{ section.settings.enter_skip_button_color }};
+    font-size: {{ section.settings.enter_skip_button_size }}px;
+  }
+  a.enter-skip-button{
+
+    color: {{ section.settings.enter_skip_button_color }} !important;
+
+  }
+
+.logo_enter{
+  width: {{ section.settings.logoenter_size }}px;
+}
+  #datetime{
+    width: 100%;
+    text-align: center;
+    font-size: {{ section.settings.date_time_size }}px;
+    margin: 0 !important;
+  }
+  p#datetime{
+    color: {{ section.settings.date_time_color }} !important;
+    font-size: {{ section.settings.date_time_size }}px;
+  }
+
+  small.copyright__content, small.copyright__content a{
+    color: {{ section.settings.copy_text_color }} !important;
+  }
+
+  .enterfooter{
+      opacity: 0;
+  pointer-events: none;
+  }
+
+    {% if section.settings.show_enterfooter %}
+      .enterfooter{
+        opacity: 1 !important;
+      pointer-events: inherit !important;
+      }
+    {% endif %}
+  </style>
+  <div class="wrapper">
+    <div class="logo-container {% if section.settings.logo_animation != 'none' %}{{ section.settings.logo_animation }}{% endif %}">
+  {% if section.settings.logo_image %}
+    <img class="logo_enter" src="{{ section.settings.logo_image | img_url: 'master' }}" alt="Logo" >
+  {% endif %}
+  {% if section.settings.add_date_time %}
+    <p id="datetime"></p>
+  {% endif %}
+  </div>
+
+  {% if section.settings.show_video_bg %}
+<video autoplay loop muted playsinline id="bg-video">
+  <source src="{{ section.settings.background_video_url }}" type="video/mp4">
+</video>
+<video autoplay loop muted playsinline id="bg-video_mobile">
+  <source src="{{ section.settings.background_video_url_mobile }}" type="video/mp4">
+</video>
+  {% endif %}
+  <div>
+  </div>
+<div class="menu-container">
+  {% if section.settings.show_enter_button %}
+    <div class="enter-button">
+      <a href="collections/all">{{ section.settings.enter_button_text }}</a>
+    </div>
+    <ul class="menu-list" style="display:none;">
+  {% else %}
+    <ul class="menu-list">
+      <div class="enter-button" style="display:none;">
+        <a>ENTER</a>
+      </div>
+  {% endif %}
+  {% assign menu_handle = section.settings.home_nav %}
+    {% for link in linklists[menu_handle].links %}
+      <li class="menu-item"><a class="menu-link" href="{{ link.url }}">{{ link.title }}</a></li>
+    {% endfor %}
+  </ul>
+  {% if section.settings.show_two_bg %}
+    <div class="two_bg_enter_button">
+      <a>{{ section.settings.two_bg_enter_button_text }}</a>
+    </div>
+  {% endif %}
+</div>
+
+  {% if section.settings.show_enter_skip_button %}
+    <div style="position: absolute; right: 2%; border: 30%; bottom: 12%;">
+      <a class="enter-skip-button" href="/collections/all"> SKIP INTRO </a>
+    </div>
+  {% endif %}
+
+  <div class="enterfooter" style="width: 100vw;
+    text-align: center;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;">
+    <ul class="footer__list-social list-unstyled list-social">
+  {%- if settings.social_facebook_link != blank -%}
+    <li class="list-social__item">
+      <a href="{{ settings.social_facebook_link }}" class="link list-social__link" >
+        {%- render 'icon-facebook' -%}
+        <span class="visually-hidden">{{ 'general.social.links.facebook' | t }}</span>
+      </a>
+    </li>
+  {%- endif -%}
+  {%- if settings.social_instagram_link != blank -%}
+    <li class="list-social__item">
+      <a href="{{ settings.social_instagram_link }}" class="link list-social__link" >
+        {%- render 'icon-instagram' -%}
+        <span class="visually-hidden">{{ 'general.social.links.instagram' | t }}</span>
+      </a>
+    </li>
+  {%- endif -%}
+  {%- if settings.social_youtube_link != blank -%}
+    <li class="list-social__item">
+      <a href="{{ settings.social_youtube_link }}" class="link list-social__link" >
+        {%- render 'icon-youtube' -%}
+        <span class="visually-hidden">{{ 'general.social.links.youtube' | t }}</span>
+      </a>
+    </li>
+  {%- endif -%}
+  {%- if settings.social_tiktok_link != blank -%}
+    <li class="list-social__item">
+      <a href="{{ settings.social_tiktok_link }}" class="link list-social__link" >
+        {%- render 'icon-tiktok' -%}
+        <span class="visually-hidden">{{ 'general.social.links.tiktok' | t }}</span>
+      </a>
+    </li>
+  {%- endif -%}
+  {%- if settings.social_twitter_link != blank -%}
+    <li class="list-social__item">
+      <a href="{{ settings.social_twitter_link }}" class="link list-social__link" >
+        {%- render 'icon-twitter' -%}
+        <span class="visually-hidden">{{ 'general.social.links.twitter' | t }}</span>
+      </a>
+    </li>
+  {%- endif -%}
+  {%- if settings.social_pinterest_link != blank -%}
+    <li class="list-social__item">
+      <a href="{{ settings.social_pinterest_link }}" class="link list-social__link" >
+        {%- render 'icon-pinterest' -%}
+        <span class="visually-hidden">{{ 'general.social.links.pinterest' | t }}</span>
+      </a>
+    </li>
+  {%- endif -%}
+  {%- if settings.social_snapchat_link != blank -%}
+    <li class="list-social__item">
+      <a href="{{ settings.social_snapchat_link }}" class="link list-social__link" >
+        {%- render 'icon-snapchat' -%}
+        <span class="visually-hidden">{{ 'general.social.links.snapchat' | t }}</span>
+      </a>
+    </li>
+  {%- endif -%}
+  {%- if settings.social_tumblr_link != blank -%}
+    <li class="list-social__item">
+      <a href="{{ settings.social_tumblr_link }}" class="link list-social__link" >
+        {%- render 'icon-tumblr' -%}
+        <span class="visually-hidden">{{ 'general.social.links.tumblr' | t }}</span>
+      </a>
+    </li>
+  {%- endif -%}
+  {%- if settings.social_vimeo_link != blank -%}
+    <li class="list-social__item">
+      <a href="{{ settings.social_vimeo_link }}" class="link list-social__link" >
+        {%- render 'icon-vimeo' -%}
+        <span class="visually-hidden">{{ 'general.social.links.vimeo' | t }}</span>
+      </a>
+    </li>
+  {%- endif -%}
+</ul>
+    
+    <div class="enter-copy" style="  display: flex;  position: absolute;
+    bottom: 10%; flex-direction: column; text-align: center;">
+      <small class="copyright__content">&copy; {{ 'now' | date: "%Y" }}, {{ shop.name | link_to: routes.root_url }}</small>
+      <small class="copyright__content">WEBSITE BY FKXMEDIA</small>
+    </div>
+  </div>
+  </div>
+
+
+{% endif %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var wrapper = document.querySelector('.wrapper');
+  var enterButton = document.querySelector('.two_bg_enter_button');
+  var logoContainer = document.querySelector('.logo-container');
+  var menuContainer = document.querySelector('.menu-container');
+  var enterFooter = document.querySelector('.enterfooter');
+  var footerSocial = document.querySelector('.footer__list-social');
+  var enterCopy = document.querySelector('.enter-copy');
+  
+  if ({{ section.settings.show_two_bg }}) {
+    enterButton.addEventListener('click', function() {
+      wrapper.style.backgroundImage = 'url(' + '{{ section.settings.two_bg_second | img_url: 'master' }}' + ')';
+      logoContainer.style.display = 'none';
+      menuContainer.style.display = 'none';
+      enterFooter.style.display = 'none';
+      footerSocial.style.display = 'none';
+      enterCopy.style.display = 'none';
+      setTimeout(function() {
+        window.location.href = '/collections/all';
+      }, {{ section.settings.two_bg_seconds }} * 1000);
+    });
+  }
+});
+</script>
+<script>
+  function updateTime() {
+    var today = new Date();
+    var date = today.toLocaleDateString().replace(/\./g, '/');
+    var hours = today.getHours();
+    var suffix = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12 || 12;
+    var minutes = today.getMinutes();
+    var time = hours + ':' + (minutes < 10 ? '0' : '') + minutes + ' ' + suffix;
+    var datetime = date + ' ' + time;
+    document.getElementById("datetime").innerHTML = datetime;
+  }
+
+  setInterval(updateTime, 1000);
+</script>
+
+{% schema %}
+{
+  "name": "ENTER PAGE",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_enter_page",
+      "info": "Enter page will replace the home page. If you want disable Enter page and Home Page, go to Theme Settings > Hide Home Page",
+      "label": "Show Enter Page",
+      "default": true
+    },
+    {
+    "type": "header",
+    "content": "Background Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "enter_background_image",
+      "label": "Background Image/Gif"
+    },
+    {
+      "type": "image_picker",
+      "id": "enter_background_image_mobile",
+      "label": "Mobile Background Image/Gif"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_solid_color_enter",
+      "info": "Background will be replaced with color",
+      "label": "Change Background With Color",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "solid_color_enter",
+      "label": "Background color",
+      "default": "#000000"
+    },
+    {
+      "type": "color_background",
+      "id": "enter_gradient_color",
+      "label": "Background gradient"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_video_bg",
+      "info": "Background will be replaced with Video",
+      "label": "Change Background With Video",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "background_video_url",
+      "label": "Video Url",
+      "info": "Upload your video to Files and then paste the link here"
+    },
+    {
+      "type": "text",
+      "id": "background_video_url_mobile",
+      "label": "Mobile Video Url"
+    },
+    {
+    "type": "header",
+    "content": "Logo Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_image",
+      "label": "Logo Image/Gif",
+      "info": "Note that this logo will only be displayed on the Enter Page, to select the logo for the actual website go to Theme Settings > Logo"
+    },
+    {
+      "type": "range",
+      "id": "logoenter_size",
+      "label": "PC Logo Size",
+      "default": 100,
+      "min": 100,
+      "max": 500,
+      "step": 10
+    },
+    {
+      "type": "range",
+      "id": "logoenter_size_mobile",
+      "label": "Mobile Logo Size",
+      "default": 100,
+      "min": 100,
+      "max": 500,
+      "step": 10
+    },
+    {
+      "type": "range",
+      "id": "logo_container_top",
+      "label": "PC Logo Position (indent from top)",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "%",
+      "default": 5
+    },
+    {
+      "type": "range",
+      "id": "logo_container_top_mobile",
+      "label": "Mobile Logo Position (indent from top)",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "%",
+      "default": 5
+    },
+    {
+      "type": "radio",
+      "id": "logo_animation",
+      "label": "Logo Animation",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "fade-in",
+          "label": "Fade in"
+        },
+        {
+          "value": "scale-in-center",
+          "label": "Scale in"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "checkbox",
+      "id": "add_date_time",
+      "label": "Add Date and Time",
+      "info": "The date and time will appear below the logo. If the new block has gone far from the logo down, crop the empty space of your Logo through the photo editor, or if you have a 3D logo, then through the Ezgif => Crop service",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "date_time_color",
+      "label": "Date&Time Color",
+      "default": "#D4D4D4"
+    },
+    {
+      "type": "range",
+      "id": "date_time_size",
+      "label": "Date&Time Font Size",
+      "default": 13,
+      "min": 5,
+      "max": 33,
+      "step": 1
+    },
+    {
+    "type": "header",
+    "content": "Menu Settings"
+    },
+    {
+      "type": "link_list",
+      "id": "home_nav",
+      "label": "Select Navigation"
+    },
+    {
+      "type": "range",
+      "id": "menu_font_size",
+      "label": "Menu Font Size",
+      "default": 16,
+      "min": 12,
+      "max": 33,
+      "step": 1
+    },
+    {
+      "type": "range",
+      "id": "enter_menu_space",
+      "label": "Menu Spacing",
+      "default": 14,
+      "min": 0,
+      "max": 50,
+      "step": 1
+    },
+    {
+      "type": "color",
+      "id": "menu_text_color",
+      "label": "Menu Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "select",
+      "id": "menu_text_transform",
+      "label": "Menu Text Transform",
+      "default": "capitalize",
+      "options": [
+        {
+          "value": "uppercase",
+          "label": "Uppercase"
+        },
+        {
+          "value": "lowercase",
+          "label": "Lowercase"
+        },
+        {
+          "value": "capitalize",
+          "label": "Capitalize"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "menu_list_alignment",
+      "label": "Menu Text Alignment",
+      "default": "center",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "show_text_glow",
+      "label": "Enable Text Glow",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "menu_text_glow_color",
+      "label": "Glow Color",
+      "default": "#D4D4D4"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_menu_highlight",
+      "label": "Enable Menu Highlight",
+      "info": "If you select a menu instead of enter button, links will have a background highlight on hover",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "menu_highlight_color",
+      "label": "Highlight color",
+      "default": "#D4D4D4"
+    },
+   {
+      "type": "checkbox",
+      "id": "show_enter_button",
+      "label": "Change menu to custom button",
+       "info": "The menu will be replaced with button with custom text",
+      "default": false
+    },
+     {
+      "type": "text",
+      "id": "enter_button_text",
+      "label": "Button text",
+      "default": "Enter"
+    },
+    {
+    "type": "header",
+    "content": "Footer Settings"
+    },
+    {
+    "type": "checkbox",
+    "id": "show_enterfooter",
+    "info": "To add social links please go to Theme Settings at the bottom of this settings",
+    "label": "Show Social icons",
+    "default": true
+    },
+    {
+      "type": "color",
+      "id": "icons_color",
+      "label": "Social icons color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "copy_text_color",
+      "label": "Copyright Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_enter_skip_button",
+      "label": "Show Skip Animation Button",
+      "info": "A button will appear in the lower right corner, when you click on it, you will automatically redirected to the catalog page",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "enter_skip_button_color",
+      "label": "Skip button color",
+      "default": "#D4D4D4"
+    },
+    {
+      "type": "range",
+      "id": "enter_skip_button_size",
+      "label": "Skip button size",
+      "default": 16,
+      "min": 10,
+      "max": 35,
+      "step": 1
+    },
+    {
+    "type": "header",
+    "content": "Click to Activate Background",
+    "info": "Here you can select two backgrounds (Gif/Image), the second one will appear and replace the first one when you click on button"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_two_bg",
+      "label": "Enable Click to Activate Background",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "two_bg_first",
+      "label": "First Background Image/Gif"
+    },
+    {
+      "type": "image_picker",
+      "id": "two_bg_second",
+      "label": "Second Background Image/Gif"
+    },
+    {
+      "type": "text",
+      "id": "two_bg_enter_button_text",
+      "label": "Button text",
+      "default": "Enter"
+    },
+    {
+      "type": "text",
+      "id": "two_bg_seconds",
+      "label": "Time to redirect",
+      "default": "5",
+      "info": "After clicking on the button, a new background appears. Specify the desired time to display the second background, before the redirect to the catalog link"
+    }
+  ]
+}
+  
+{% endschema %}

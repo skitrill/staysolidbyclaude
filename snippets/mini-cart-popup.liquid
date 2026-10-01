@@ -1,0 +1,109 @@
+<div id="MiniCartPopup" class="mini-cart-popup">
+  <div class="mini-cart-content">
+    <p>item added to your bag.</p>
+    <div class="mini-cart-actions">
+      <a href="/cart" class="checkout-btn">checkout</a>
+      <button class="keep-shopping-btn" onclick="closeMiniCart()">keep shopping</button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .mini-cart-popup {
+    position: fixed;
+    top: 2rem;
+    left: -100%;
+    width: 280px;
+    background-color: #faf9f6;
+    color: #181818;
+    padding: 1.4rem;
+    border-radius: 0 10px 10px 0;
+    box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.08);
+    z-index: 9999;
+    transition: left 0.35s ease-in-out;
+    font-family: 'Source Code Pro', monospace;
+  }
+
+  .mini-cart-popup.show {
+    left: 0;
+  }
+
+  .mini-cart-content p {
+    font-size: 1rem;
+    margin-bottom: 1.2rem;
+    text-transform: lowercase;
+  }
+
+  .mini-cart-actions {
+    display: flex;
+    gap: 0.8rem;
+  }
+
+  .checkout-btn,
+  .keep-shopping-btn {
+    font-size: 0.9rem;
+    padding: 0.5rem 1.1rem;
+    text-transform: lowercase;
+    font-family: 'Source Code Pro', monospace;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+  }
+
+  .checkout-btn {
+    background-color: #181818;
+    color: #faf9f6;
+    text-decoration: none;
+  }
+
+  .checkout-btn:hover {
+    background-color: #faf9f6;
+    color: #181818;
+    border: 1px solid #181818;
+  }
+
+  .keep-shopping-btn {
+    background-color: #181818;
+    border: 1px solid #181818;
+    color: #faf9f6;
+  }
+
+  .keep-shopping-btn:hover {
+    background-color: #faf9f6;
+    color: #181818;
+  }
+</style>
+
+<script>
+  function showMiniCartPopup() {
+    const popup = document.getElementById('MiniCartPopup');
+    if (!popup) return;
+    popup.classList.add('show');
+    setTimeout(() => popup.classList.remove('show'), 5000);
+  }
+
+  function closeMiniCart() {
+    const popup = document.getElementById('MiniCartPopup');
+    popup.classList.remove('show');
+  }
+
+  // hook into cart drawer opening (works with Dawn and similar themes)
+  document.addEventListener('cart:updated', function () {
+    showMiniCartPopup();
+  });
+
+  // fallback: monitor DOM changes if event isn't emitted
+  const cartDrawer = document.querySelector('cart-drawer');
+  if (cartDrawer) {
+    const observer = new MutationObserver((mutations) => {
+      for (const m of mutations) {
+        if (m.type === 'childList' && m.addedNodes.length > 0) {
+          showMiniCartPopup();
+        }
+      }
+    });
+
+    observer.observe(cartDrawer, { childList: true, subtree: true });
+  }
+</script>

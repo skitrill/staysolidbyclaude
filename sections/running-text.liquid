@@ -1,0 +1,113 @@
+{% if section.settings.running_text != blank and section.settings.show_runningtext %}
+  <section class="running-text" style="background-color: {{ section.settings.background_color }}; color: {{ section.settings.text_color }}">
+    <div class="running-text-container">
+      <span class="running-text-content">{{ section.settings.running_text }}</span>
+    </div>
+  </section>
+{% endif %}
+
+<style>
+
+  .running-text {
+    padding: 5px;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  
+  .running-text-container {
+    animation: marquee 20s linear infinite;
+    display: inline-block;
+    padding-left: 100%;
+  }
+  
+  .running-text-content {
+    display: inline-block;
+    padding-right: 100%;
+    text-transform: {{section.settings.runningfont_transform}};
+    font-size: {{section.settings.runningfont_size}}px;
+    font-family: var(--font-heading-family);
+    font-weight: bold;
+  }
+  span.running-text-content {
+    color: {{ section.settings.text_color }} !important;
+  }
+  
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+</style>
+
+{% schema %}
+  {
+    "name": "Running Text",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_runningtext",
+        "label": "Show Running Text",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "running_text",
+        "label": "Running Text",
+        "default": "Welcome to our website"
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text Color",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "background_color",
+        "label": "Background Color",
+        "default": "#000000"
+      },
+      {
+      "type": "range",
+      "id": "runningfont_size",
+      "label": "Text Size",
+      "default": 12,
+      "min": 7,
+      "max": 30,
+      "step": 1
+    },
+    {
+      "type": "select",
+      "id": "runningfont_transform",
+      "label": "Text Transform",
+      "default": "uppercase",
+      "options": [
+        {
+          "value": "uppercase",
+          "label": "Uppercase"
+        },
+        {
+          "value": "lowercase",
+          "label": "Lowercase"
+        },
+        {
+          "value": "capitalize",
+          "label": "Capitalize"
+        }
+      ]
+    }
+
+    
+
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

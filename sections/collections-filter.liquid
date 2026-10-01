@@ -1,0 +1,130 @@
+<style>
+  .collections_block{
+  display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.collections_link {
+    list-style-type: none;
+    color: {{ settings.collections_link_color }};
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0px 16% 30px;
+    align-items: center;
+    justify-content: center;
+    gap: 15px 30px;
+}
+
+.collections_link a{
+  color: {{ section.settings.collections_link_color }} !important;
+  font-size: {{ section.settings.collections_link_size }}px !important;
+}
+
+.collections_items a {
+  color: #fff;
+  text-decoration: none;
+  font-family: var(--font-heading-family);
+  font-weight: var(--font-heading-weight);
+  transition: 0.3s;
+  font-family: var(--font-heading-family);
+  text-transform: uppercase;
+
+  
+}
+
+@media screen and (max-width: 450px){
+.collections_block {
+    display: block;
+    align-items: center;
+    overflow-x: scroll;
+    border-top: 1px solid {{ section.settings.collections_border_color }};
+    border-bottom: 1px solid {{ section.settings.collections_border_color }};
+}
+
+
+
+.collections_link {
+list-style-type: none;
+    display: flex;
+    flex-wrap: nowrap;
+    padding: 8px 20% 8px;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 15px 30px;
+    white-space: nowrap;
+
+/*   padding-left: 800px; */
+}
+
+.collections_link a {
+  color: #fff;
+  text-decoration: none;
+  font-family: var(--font-heading-family);
+  font-weight: var(--font-heading-weight);
+  transition: 0.3s;
+  font-family: var(--font-heading-family);
+  text-transform: uppercase;
+}
+
+.collections_link a:hover {
+  color: #ccc;
+  transition: 0.3s;
+}
+}
+
+</style>
+
+
+{% if section.settings.enable_collection_filter %}
+  <div class='collections_block' id="anchor">
+    <div class='collections_link'>
+      {% for collection in collections %}
+        {% if collection.products != 0 %}
+          <li class='collections_items'>{{ collection.title | link_to: collection.url }}</li>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}
+
+
+
+{% schema %}
+  {
+    "name": "Collection Filter",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "enable_collection_filter",
+        "label": "Enable Collection Filter",
+        "info": "This filter displays all the collections you have. To add them go to settings Shopify > Products > Collections",
+        "default": false
+      },
+      {
+        "type": "range",
+        "id": "collections_link_size",
+        "min": 5,
+        "max": 35,
+        "step": 1,
+        "unit": "px",
+        "label": "Text Size",
+        "default": 16
+      },
+      {
+        "type": "color",
+        "id": "collections_link_color",
+        "label": "Text Color",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "collections_border_color",
+        "label": "Border Lines Color",
+        "info": "Lines are displayed on mobile devices",
+        "default": "#FFFFFF"
+      }
+    ]
+  }
+{% endschema %}
+

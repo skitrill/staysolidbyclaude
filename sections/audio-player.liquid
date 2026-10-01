@@ -1,0 +1,112 @@
+{% if section.settings.enable_audio_player %}
+  <div id="music-icon" style="position: fixed; left: 10px; bottom: 10px; z-index: 9999;">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="40"
+      height="40"
+      viewBox="0 0 24 24"
+      fill="{{ section.settings.audio_player_color }}"
+    >
+      {% if audioPlayer.paused == false %}
+        <path d="M0 0h24v24H0z" fill="none"/><path d="M9 6h2v12h-2zm4 0h2v12h-2z"/>
+      {% else %}
+         <path d="M8 5v14l11-7z"/>
+      {% endif %}
+    </svg>
+  </div>
+  {% assign audio_file_url = settings.audio_file_url %}
+
+  {% if audio_file_url %}
+    <audio id="audio-player" src="{{ section.settings.audio_file_url }}" type="audio/mp3" playsinline loop preload="metadata"></audio>
+  {% endif %}
+
+  <script>
+      const musicIcon = document.getElementById("music-icon");
+      const audioPlayer = document.getElementById("audio-player");
+      const playButton =
+        '<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="{{ section.settings.audio_player_color }}"><path d="M8 5v14l11-7z"/></svg>';
+      const pauseButton =
+        '<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="{{ section.settings.audio_player_color }}"><path d="M0 0h24v24H0z" fill="none"/><path d="M9 6h2v12h-2zm4 0h2v12h-2z"/></svg>';
+      const isAudioPlaying = "isAudioPlaying";
+      const currentAudioTime = "currentAudioTime";
+
+      const checkMusic = () => {
+        if (audioPlayer.paused) {
+          musicIcon.innerHTML = playButton;
+        } else {
+          musicIcon.innerHTML = pauseButton;
+        }
+      };
+
+      musicIcon.addEventListener("click", () => {
+        if (audioPlayer.paused) {
+          audioPlayer.play();
+          audioPlayer.currentTime = localStorage.getItem(currentAudioTime);
+          localStorage.setItem(isAudioPlaying, "true");
+        } else {
+          audioPlayer.pause();
+          localStorage.setItem(isAudioPlaying, "false");
+        }
+        checkMusic();
+      });
+
+      const startPlayerIfAudioIsPlaying = () => {
+        if (localStorage.getItem(isAudioPlaying) == "true") {
+          audioPlayer.play();
+          checkMusic();
+        }
+      };
+
+      window.addEventListener("click", startPlayerIfAudioIsPlaying);
+      window.addEventListener("touchstart", startPlayerIfAudioIsPlaying);
+
+      window.addEventListener("DOMContentLoaded", () => {
+        if (!localStorage.getItem(isAudioPlaying)) {
+          localStorage.setItem(isAudioPlaying, "true");
+        }
+        if (localStorage.getItem(isAudioPlaying) === "true") {
+          audioPlayer.play();
+          audioPlayer.currentTime = localStorage.getItem(currentAudioTime);
+        }
+        checkMusic();
+      });
+
+      setInterval(() => {
+        if (audioPlayer.currentTime !== 0) {
+        localStorage.setItem(currentAudioTime, audioPlayer.currentTime);
+      }
+      }, 500);
+
+      window.addEventListener("beforeunload", () => {
+        if (audioPlayer.currentTime !== 0) {
+        localStorage.setItem(currentAudioTime, audioPlayer.currentTime);
+        }
+      });
+  </script>
+{% endif %}
+
+{% schema %}
+{
+"name": "Music Player",
+"settings": [
+{
+"type": "checkbox",
+"id": "enable_audio_player",
+"label": "Enable Music Player",
+"default": false
+},
+{
+"type": "text",
+"id": "audio_file_url",
+"label": "Music File URL"
+},
+{
+"type": "color",
+"id": "audio_player_color",
+"label": "Player Button Color",
+"default": "#ffffff"
+}
+]
+}
+{% endschema %}
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>

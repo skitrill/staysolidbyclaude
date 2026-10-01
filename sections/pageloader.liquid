@@ -1,0 +1,178 @@
+{% if section.settings.enable_page_loader %}
+<style>
+  .pageloader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background-color: {{ section.settings.page_loader_color }};
+    opacity: 1;
+    transition: opacity 1s ease-in-out;
+  }
+
+
+
+  .pageloader-logo {
+    opacity: 1;
+    transition: opacity 1s ease-in-out;
+  }
+
+  .pageloader-logo img {
+    max-width: {{ section.settings.page_loader_logo_size }}px;
+    max-height: {{ section.settings.page_loader_logo_size }}px;
+  }
+  
+  {% if section.settings.enable_page_loader_animation %}
+    .pageloader-logo {
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out !important;
+    -webkit-animation: pulsate-bck 0.8s ease-in-out infinite both;
+    animation: pulsate-bck 0.8s ease-in-out infinite both;
+  }
+  @-webkit-keyframes pulsate-bck {
+    0% {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+    }
+    50% {
+      -webkit-transform: scale(0.9);
+              transform: scale(0.9);
+    }
+    100% {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+    }
+  }
+  @keyframes pulsate-bck {
+    0% {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+    }
+    50% {
+      -webkit-transform: scale(0.9);
+              transform: scale(0.9);
+    }
+    100% {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+    }
+  }
+
+    .pageloader{
+    -webkit-animation: scale-out-ver-top 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) 1s both;
+    animation: scale-out-ver-top 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) 1s both;
+    }
+    @-webkit-keyframes scale-out-ver-top {
+    0% {
+      -webkit-transform: scaleY(1);
+              transform: scaleY(1);
+      -webkit-transform-origin: 100% 0%;
+              transform-origin: 100% 0%;
+      opacity: 1;
+    }
+    100% {
+      -webkit-transform: scaleY(0);
+              transform: scaleY(0);
+      -webkit-transform-origin: 100% 0%;
+              transform-origin: 100% 0%;
+      opacity: 1;
+    }
+  }
+  @keyframes scale-out-ver-top {
+    0% {
+      -webkit-transform: scaleY(1);
+              transform: scaleY(1);
+      -webkit-transform-origin: 100% 0%;
+              transform-origin: 100% 0%;
+      opacity: 1;
+    }
+    100% {
+      -webkit-transform: scaleY(0);
+              transform: scaleY(0);
+      -webkit-transform-origin: 100% 0%;
+              transform-origin: 100% 0%;
+      opacity: 1;
+    }
+  }
+  {% endif %}
+</style>
+
+<div class="pageloader">
+  <div class="pageloader-logo">
+    <img src="{{ section.settings.page_loader_img | img_url: 'master' }}">
+  </div>
+</div>
+<script>
+  (function() {
+    var pageloader = document.querySelector('.pageloader');
+    var logo = document.querySelector('.pageloader-logo');
+    var animationDuration = 1000; // in milliseconds
+    var hideDelay = 1000; // in milliseconds
+
+    window.addEventListener('load', function() {
+      pageloader.style.opacity = '0';
+      logo.style.opacity = '0';
+      setTimeout(function() {
+        pageloader.style.display = 'none';
+      }, hideDelay + animationDuration);
+    });
+
+    if (document.readyState === 'complete') {
+      pageloader.style.opacity = '0';
+      logo.style.opacity = '0';
+      setTimeout(function() {
+        pageloader.style.display = 'none';
+      }, hideDelay);
+    }
+  })();
+</script>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Page Loader",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "enable_page_loader",
+        "label": "Enable Page Loader",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "page_loader_img",
+        "label": "Select Logo"
+      },
+      {
+        "type": "range",
+        "id": "page_loader_logo_size",
+        "min": 50,
+        "max": 500,
+        "step": 10,
+        "default": 150,
+        "unit": "px",
+        "label": "Logo Size"
+      },
+      {
+        "type": "color",
+        "id": "page_loader_color",
+        "label": "Select Background Color",
+        "default": "#000000"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_page_loader_animation",
+        "label": "Enable Page Loader Animation",
+        "info": "This will add a pulsating logo animation as well as a pageloader disappearing animation",
+        "default": true
+      }
+    ]
+  }
+{% endschema %}
+
+

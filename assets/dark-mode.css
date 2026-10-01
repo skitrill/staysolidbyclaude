@@ -1,0 +1,100 @@
+/* === Automatic dark mode, follows device/OS setting === */
+@media (prefers-color-scheme: dark) {
+  html,
+  body,
+  .gradient,
+  .color-background-1,
+  .color-background-2,
+  main,
+  .shopify-section,
+  .header-wrapper,
+  .custom-menu,
+  .footer,
+  .footer__content-bottom-wrapper,
+  .menu-drawer,
+  .cart-drawer,
+  .quick-add-modal__content,
+  .search-modal__content {
+    background-color: #0d0d0d !important;
+    color: #f5f5f0 !important;
+  }
+
+  h1, h2, h3, h4, h5, h6,
+  p, span, a, li, label, strong, em,
+  .footer__copyright, .copyright__content,
+  .card__heading, .card-information,
+  .product__title, .product__description {
+    color: #f5f5f0 !important;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  textarea,
+  select,
+  .select__select {
+    background-color: #1a1a1a !important;
+    color: #f5f5f0 !important;
+    border-color: #444 !important;
+  }
+
+  .product-form__input input[type='radio'] + label {
+    background-color: #1a1a1a !important;
+    color: #f5f5f0 !important;
+    border-color: #444 !important;
+  }
+
+  .product-form__input input[type='radio']:checked + label {
+    background-color: #f5f5f0 !important;
+    color: #0d0d0d !important;
+  }
+
+  .button.button,
+  .product-form__submit.product-form__submit,
+  .quick-add__submit.quick-add__submit,
+  .customer button[type="submit"] {
+    background-color: #f5f5f0 !important;
+    color: #0d0d0d !important;
+  }
+
+  .button.button span,
+  .product-form__submit.product-form__submit span,
+  .quick-add__submit.quick-add__submit span {
+    color: #0d0d0d !important;
+  }
+
+  .button--secondary.button--secondary {
+    background-color: transparent !important;
+    color: #f5f5f0 !important;
+    border-color: #444 !important;
+  }
+
+  ::selection {
+    background: #f5f5f0 !important;
+    color: #0d0d0d !important;
+  }
+
+  .header__heading-logo {
+    filter: brightness(0) invert(1) !important;
+  }
+
+  /* hover, click and selection states invert to white bg / black text,
+     everywhere (nav, footer, buttons, list items) */
+  a:hover,
+  a:active,
+  button:hover,
+  button:active,
+  .button:hover,
+  .button:active,
+  label:hover,
+  li:hover > a,
+  .custom-menu-item:hover,
+  .custom-menu-item:active,
+  .list-menu__item:hover,
+  .list-menu__item--link:hover,
+  .policies li a:hover {
+    background-color: #f5f5f0 !important;
+    color: #0d0d0d !important;
+  }
+
+}

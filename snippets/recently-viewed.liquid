@@ -1,0 +1,49 @@
+<style>
+  #recently-viewed-products {
+    grid-template-columns: repeat(4, 1fr) !important;
+    }
+
+  @media screen and (max-width: 768px) {
+    #recently-viewed-products {
+      grid-template-columns: repeat(2, 1fr) !important;
+    }
+  }
+
+  .recently-viewed-card {
+    text-align: center !important;
+  }
+
+  .recently-viewed-card .product-title,
+  .recently-viewed-card .product-price {
+    font-size: 11px !important;
+    color: #000 !important;
+  }
+</style>
+<div id="recently-viewed-wrapper" class="page-width">
+  <h2 class="h3" style="margin-bottom: 2rem;">recently viewed items</h2>
+  <div id="recently-viewed-products" class="grid grid--2-col-tablet-down grid--4-col-desktop"></div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const container = document.getElementById('recently-viewed-products');
+    const recentHandles = JSON.parse(localStorage.getItem('recentlyViewed')) || [];
+
+    if (!recentHandles.length) return;
+
+    recentHandles.forEach(handle => {
+      fetch(`/products/${handle}.js`)
+        .then(res => res.json())
+        .then(product => {
+          const productHTML = `
+            <div class="grid__item recently-viewed-card">
+              <a href="${product.url}" class="card-wrapper">
+                <img src="${product.featured_image}" alt="${product.title}" style="width:100%; height:auto;">
+                <div class="product-title">${product.title.toLowerCase()}</div>
+                <div class="product-price">${(product.price / 100).toFixed(2)} ${Shopify.currency.active}</div>
+              </a>
+            </div>`;
+          container.insertAdjacentHTML('beforeend', productHTML);
+        });
+    });
+  });
+</script>

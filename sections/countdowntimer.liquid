@@ -1,0 +1,142 @@
+{% if section.settings.enable_timer %}
+<style>
+.countdown-timer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.timer-item {
+  text-align: center;
+  margin: 0 10px;
+}
+
+.timer-item span {
+  display: block;
+  font-size: {{ section.settings.timer_number_size }}px;
+  font-weight: bold;
+  color: {{ section.settings.timer_number_color }} !important;
+}
+
+.timer-item p {
+  font-size: {{ section.settings.timer_text_size }}px;
+  color: {{section.settings.timer_text_color}} !important;
+  text-transform: uppercase;
+  margin-top: 5px;
+}
+
+  @media screen and (min-width: 750px){
+.banner--medium:not(.banner--adapt) {
+    min-height: auto !important;
+}
+    .banner__content {
+    padding: 0rem !important;
+}
+}
+  @media screen and (max-width: 749px){
+.banner--medium:not(.banner--mobile-bottom):not(.banner--adapt) .banner__content {
+    min-height: auto !important;
+}
+  }
+</style>
+
+
+<div class="countdown-timer">
+  <div class="timer-item">
+    <span class="days"></span>
+    <p>Days</p>
+  </div>
+  <div class="timer-item">
+    <span class="hours"></span>
+    <p>Hours</p>
+  </div>
+  <div class="timer-item">
+    <span class="minutes"></span>
+    <p>Minutes</p>
+  </div>
+  <div class="timer-item">
+    <span class="seconds"></span>
+    <p>Seconds</p>
+  </div>
+</div>
+
+<script>
+function countdownTimer(endTime) {
+  var timerInterval = setInterval(function() {
+    var totalSeconds = Math.floor((endTime - new Date()) / 1000);
+
+    if (totalSeconds <= 0) {
+      clearInterval(timerInterval);
+      totalSeconds = 0;
+    }
+
+    var days = Math.floor(totalSeconds / (60 * 60 * 24));
+    var hours = Math.floor((totalSeconds / (60 * 60)) % 24);
+    var minutes = Math.floor((totalSeconds / 60) % 60);
+    var seconds = Math.floor(totalSeconds % 60);
+
+    document.querySelector('.countdown-timer .days').innerHTML = days;
+    document.querySelector('.countdown-timer .hours').innerHTML = hours;
+    document.querySelector('.countdown-timer .minutes').innerHTML = minutes;
+    document.querySelector('.countdown-timer .seconds').innerHTML = seconds;
+  }, 1000);
+}
+
+var timerDate = '{{ section.settings.timer_date }}';
+var endTime = new Date(timerDate.replace(/-/g, '/'));
+countdownTimer(endTime);
+</script>
+{% endif %}
+{% schema %}
+{
+  "name": "Countdown Timer",
+  "settings": [
+    {
+        "type": "checkbox",
+        "id": "enable_timer",
+        "label": "Enable Timer",
+      "info": "Don't forget to turn off the password page when the timer ends",
+        "default": false
+    },
+    {
+      "type": "text",
+      "id": "timer_date",
+      "label": "Select the timer end date (yyyy-mm-dd hh:mm:ss)",
+      "info": "For example: 2023-03-27 00:00:00"
+    },
+    {
+      "type": "color",
+      "id": "timer_number_color",
+      "label": "Select Color of Numbers",
+      "default": "#ffffff"
+    },
+    {
+        "type": "range",
+        "id": "timer_number_size",
+        "label": "Number Text Size",
+        "min": 7,
+        "max": 70,
+        "step": 1,
+        "unit": "px",
+        "default": 40
+    },
+    {
+      "type": "color",
+      "id": "timer_text_color",
+      "label": "Select Color of Text",
+      "default": "#ffffff"
+    },
+    {
+        "type": "range",
+        "id": "timer_text_size",
+        "label": "Description Text Size",
+        "min": 7,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "default": 14
+    }
+  ]
+}
+{% endschema %}

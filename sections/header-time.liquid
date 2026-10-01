@@ -1,0 +1,108 @@
+
+<style>
+    #shopdatetime{
+    width: 100%;
+    text-align: center;
+    font-size: {{ section.settings.shop_date_time_size }}px;
+    display: none;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+
+{% if section.settings.pc_date_time %}
+  @media screen and (min-width: 451px){
+    #shopdatetime{
+      display: block;
+    }
+    .header{
+    padding-bottom: 0 !important;
+  }
+  }
+{% endif %}
+
+{% if section.settings.mobile_date_time %}
+  @media screen and (max-width: 451px){
+    #shopdatetime{
+      display: block;
+    }
+  }
+{% endif %}
+
+
+</style>
+<p style="color: {{ section.settings.shop_date_time_color }} !important;" id="shopdatetime"></p>
+
+<script>
+  function updateTime() {
+    var today = new Date();
+    var date = today.toLocaleDateString().replace(/\./g, '/');
+    var hours = today.getHours();
+    var suffix = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12 || 12;
+    var minutes = today.getMinutes();
+    var seconds = today.getSeconds();
+
+    // format time with leading zero if needed
+    var time = 
+      hours + ':' + 
+      (minutes < 10 ? '0' : '') + minutes + ':' + 
+      (seconds < 10 ? '0' : '') + seconds + ' ' + suffix;
+
+    var datetime = date + ' ' + time;
+    var el = document.getElementById("shopdatetime");
+    if (!el) return;
+    el.innerHTML = datetime;
+  }
+
+  setInterval(updateTime, 1000);
+  updateTime(); // initial run
+</script>
+
+{% schema %}
+  {
+    "name": "Shop time and date",
+    "settings": [
+      {
+      "type": "header",
+      "content": "DATE AND TIME",
+      "info": "This setting for store pages. if you want to set up 'Date and time' on the Home page, go to its setting"
+    },
+    {
+      "type": "checkbox",
+      "id": "pc_date_time",
+      "label": "Enable on PC",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_date_time",
+      "label": "Enable on Mobile",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "shop_date_time_color",
+      "label": "Date and time color",
+      "default": "#D4D4D4"
+    },
+    {
+      "type": "range",
+      "id": "shop_date_time_size",
+      "label": "Date and time text size",
+      "default": 13,
+      "min": 5,
+      "max": 33,
+      "step": 1
+    }
+    ],
+      "presets": [
+      {
+      "name": "Shop time and date",
+      "settings": {
+        
+      }
+    }
+  ]
+  }
+{% endschema %}

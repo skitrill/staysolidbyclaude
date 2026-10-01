@@ -1,0 +1,143 @@
+<style>
+  .bgimg{
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    z-index: -10;
+    height: 100vh;
+    width: 100vw;  
+    display: block !important;
+    {% if section.settings.bg_image %}
+    background-image: url('{{ section.settings.bg_image | img_url: 'master' }}');
+    {% endif %}
+  }
+
+  #bg-video_website_mobile {
+    display: none;
+  }
+
+  @media screen and (max-width: 500px){
+    .bgimg{
+{% if section.settings.bg_image_mobile %}
+      background-image: url('{{ section.settings.bg_image_mobile | img_url: 'master' }}');
+{% endif %}
+    }
+  }
+  {% if section.settings.show_website_bg_color %}
+    .bgimg{
+      background: {{ section.settings.website_bg_solid_color }};
+      background: {{ section.settings.website_gradient_color }};
+    }
+  {% endif %}
+  {% if section.settings.show_video_bg_website %}
+    .bgimg{
+      background-color: none !important;
+    }
+    #bg-video_website {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      overflow: hidden;
+      z-index: -9;
+    }
+  {% endif %}
+  
+  {% if section.settings.background_video_url_website_mobile %}
+    @media screen and (max-width: 500px){
+    .bgimg{
+      background-color: none !important;
+    }
+    
+    #bg-video_website {
+      display: none;
+    }
+    #bg-video_website_mobile {
+      display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      overflow: hidden;
+      z-index: -9;
+    }
+    }
+  {% endif %}
+
+
+</style>
+
+<div class="bgimg"></div>
+{% if section.settings.show_video_bg_website %}
+  <video autoplay loop muted playsinline id="bg-video_website">
+    <source src="{{ section.settings.background_video_url_website }}" type="video/mp4">
+  </video>
+  <video autoplay loop muted playsinline id="bg-video_website_mobile">
+    <source src="{{ section.settings.background_video_url_website_mobile }}" type="video/mp4">
+  </video>
+{% endif %}
+
+
+{% schema %}
+  {
+    "name": "Website Background",
+    "settings": [
+      {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background Image/Gif",
+      "info": "Keep in mind, that here you choose the background for the website. If you want to choose a background for the Enter Page, then you need to go to the <ENTER PAGE> settings"
+      },
+      {
+      "type": "image_picker",
+      "id": "bg_image_mobile",
+      "label": "Mobile Background Image/Gif"
+      },
+      {
+      "type": "checkbox",
+      "id": "show_website_bg_color",
+      "info": "Background will be replaced with solid color",
+      "label": "Change Background With Color",
+      "default": false
+      },
+      {
+        "type": "color",
+        "id": "website_bg_solid_color",
+        "label": "Background Color",
+        "default": "#000000"
+      },
+      {
+        "type": "color_background",
+        "id": "website_gradient_color",
+        "label": "Background gradient"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_video_bg_website",
+        "info": "Background will be replaced with Video",
+        "label": "Change Background With Video",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "background_video_url_website",
+        "label": "Video Url",
+        "info": "Upload your video to Files and then paste the link here"
+      },
+      {
+        "type": "text",
+        "id": "background_video_url_website_mobile",
+        "label": "Mobile Video Url",
+        "info": "If you want use the same video as for PC, just paste the same link"
+      }
+    ]
+  }
+{% endschema %}
+
