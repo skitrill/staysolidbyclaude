@@ -775,6 +775,8 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 </style>
+    {{ 'stww-refine.css' | asset_url | stylesheet_tag }}
+    <script src="{{ 'stww-product-balance.js' | asset_url }}" defer="defer"></script>
   </head>
   {% if template == 'index' %}
     {% section 'enter-page' %}

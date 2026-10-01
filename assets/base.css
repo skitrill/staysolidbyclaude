@@ -156,22 +156,22 @@ html, body {
   font-style: normal;
   font-display: swap;
 }
-/* current prices */
+/* current prices: black by default; orange is reserved for cart line totals
+   and SOLD OUT (see stww-refine.css) */
 .price-item,
 .price-item--regular,
 .price--end,
 [class*="price"]:not(s):not(.cart-item__old-price) {
-  color: #EEA620 !important; /* brand amber */
+  color: #000 !important;
   font-family: 'Source Code Pro', monospace !important;
   font-size: 10px !important;
   font-weight: 400 !important;
   letter-spacing: -0.03em !important;
 }
 
-/* variant details (size/color) recede as neutral metadata, letting the
-   price be the only accent-colored element for clear hierarchy */
+/* variant details (size/color) are plain black metadata */
 .product-option {
-  color: rgba(var(--color-foreground), 0.65) !important;
+  color: #000 !important;
   font-family: 'Source Code Pro', monospace !important;
   font-size: 10px !important;
   font-weight: 400 !important;
@@ -2335,15 +2335,20 @@ input[type='checkbox'] {
   z-index: -1;
 }
 
+/* controls fill the height of their quantity box (set in stww-refine.css) */
 .quantity.cart-quantity,
 .quantity__input,
 .quantity__button {
-  max-height: 28px !important;
-  height: 28px !important;
-  min-height: 28px !important;
   font-size: 10px !important;
   padding: 0 6px !important;
   line-height: 1 !important;
+}
+
+.quantity__input,
+.quantity__button {
+  max-height: none !important;
+  height: 100% !important;
+  min-height: 0 !important;
 }
 
 .quantity__input {
