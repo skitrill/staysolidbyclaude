@@ -360,6 +360,15 @@ html body footer .policies li {
   padding: 0;
 }
 
+html body footer .policies {
+  gap: 0;
+  row-gap: 0;
+}
+
+html body footer .policies a {
+  padding: 1px 4px;
+}
+
 html body footer .policies .copyright__content {
   margin: 0;
 }
