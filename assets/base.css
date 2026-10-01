@@ -3902,7 +3902,8 @@ main,
   }
 
   .collection .product-grid {
-    gap: 16px !important;
+    /* keep column gap equal to the theme grid spacing so 2 columns fit per row */
+    gap: 16px var(--grid-mobile-horizontal-spacing) !important;
   }
 }
 
