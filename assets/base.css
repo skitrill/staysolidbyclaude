@@ -4290,7 +4290,7 @@ cart-items.page-width {
   .footer__content-bottom-wrapper .policies {
     flex-direction: column !important;
     align-items: center !important;
-    gap: 2px !important;
+    gap: 0 !important;
     padding: 0 !important;
     margin-top: 10px;
   }
