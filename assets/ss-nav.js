@@ -93,15 +93,27 @@
     });
   });
 
-  function replace() {
-    if (current) place(current, true);
-  }
-  window.addEventListener('resize', replace);
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(replace);
-
   /* ---------- 4. RETURN tab ---------- */
   var ret = bar.querySelector('[data-ss-return]');
   var ghost = bar.querySelector('[data-ss-return-ghost]');
+
+  // the tab's arrow starts exactly under USER, wherever the line sits
+  function alignReturn() {
+    var first = items[0] && (items[0].querySelector('.ss-nav__word') || items[0]);
+    if (!first) return;
+    var offset = first.getBoundingClientRect().left - bar.getBoundingClientRect().left - 1;
+    [ret, ghost].forEach(function (tab) {
+      if (tab) tab.style.paddingLeft = Math.max(0, offset) + 'px';
+    });
+  }
+
+  function replace() {
+    if (current) place(current, true);
+    alignReturn();
+  }
+  alignReturn();
+  window.addEventListener('resize', replace);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(replace);
   var wasShown = recall(RETURN_KEY) === '1';
 
   function nextFrame(fn) {
