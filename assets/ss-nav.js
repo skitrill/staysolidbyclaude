@@ -114,7 +114,6 @@
   alignReturn();
   window.addEventListener('resize', replace);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(replace);
-  var wasShown = recall(RETURN_KEY) === '1';
 
   function nextFrame(fn) {
     requestAnimationFrame(function () {
@@ -122,20 +121,47 @@
     });
   }
 
-  if (ret) {
-    if (wasShown) {
-      // already out on the previous screen: it simply stays
-      ret.classList.add('is-instant', 'is-shown');
-      nextFrame(function () {
-        ret.classList.remove('is-instant');
-      });
-    } else {
-      nextFrame(function () {
-        ret.classList.add('is-shown');
-      });
+  // RETURN out (or already out) on a deeper screen; retracting on the rack.
+  // `wasShown` is whether the previous screen showed it.
+  function settleTabs(wasShown) {
+    if (ret) {
+      if (wasShown) {
+        // already out on the previous screen: it simply stays
+        ret.classList.add('is-instant', 'is-shown');
+        nextFrame(function () {
+          ret.classList.remove('is-instant');
+        });
+      } else {
+        ret.classList.remove('is-shown');
+        nextFrame(function () {
+          ret.classList.add('is-shown');
+        });
+      }
+      store(RETURN_KEY, '1');
     }
-    store(RETURN_KEY, '1');
+    if (ghost) {
+      if (wasShown) {
+        // arriving at the rack from a deeper screen: retract under the bar
+        ghost.classList.add('is-instant', 'is-shown');
+        nextFrame(function () {
+          ghost.classList.remove('is-instant');
+          ghost.classList.remove('is-shown');
+        });
+      } else {
+        ghost.classList.remove('is-shown');
+      }
+      store(RETURN_KEY, '0');
+    }
+  }
 
+  settleTabs(recall(RETURN_KEY) === '1');
+
+  // pages restored from the back/forward cache don't rerun this script
+  window.addEventListener('pageshow', function (event) {
+    if (event.persisted) settleTabs(recall(RETURN_KEY) === '1');
+  });
+
+  if (ret) {
     ret.addEventListener('click', function (event) {
       var sameSite = false;
       try {
@@ -147,31 +173,6 @@
       }
     });
   }
-
-  if (ghost) {
-    if (wasShown) {
-      // arriving at the rack from a deeper screen: retract under the bar
-      ghost.classList.add('is-instant', 'is-shown');
-      nextFrame(function () {
-        ghost.classList.remove('is-instant');
-        ghost.classList.remove('is-shown');
-      });
-    }
-    store(RETURN_KEY, '0');
-  }
-
-  // a page restored from the back/forward cache keeps its old state
-  window.addEventListener('pageshow', function (event) {
-    if (!event.persisted) return;
-    if (ret) {
-      ret.classList.add('is-instant', 'is-shown');
-      store(RETURN_KEY, '1');
-    }
-    if (ghost) {
-      ghost.classList.remove('is-shown');
-      store(RETURN_KEY, '0');
-    }
-  });
 
   /* ---------- 2 + 3. scroll state ---------- */
   var readable = items.slice();
