@@ -485,7 +485,9 @@ html body .product-grid .card-information :is(.price, .price__container) {
   text-align: center;
 }
 
-html body .product-grid .card-information .price {
+/* mirrors Dawn's `.card-information > :not(.visually-hidden:first-child) +
+   :not(.rating) { margin-top: .7rem }` so the title → price gap is ours */
+html body .product-grid .card-information > :not(.visually-hidden:first-child) + .price {
   margin: var(--ss-v-xs) 0 0;
 }
 
@@ -493,6 +495,7 @@ html body .product-grid .price .price-item {
   font-family: var(--ss-font);
   font-size: var(--ss-text-sm);
   letter-spacing: 0.008em;
+  line-height: var(--ss-lh-tight);
   color: var(--ss-black);
 }
 
