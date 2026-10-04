@@ -68,13 +68,6 @@ html {
   margin-top: 1rem;
 }
 
-@font-face {
-  font-family: 'Source Code Pro';
-  src: url('SourceCodePro-VariableFont_wght.woff') format('woff');
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-}
 /* Type, colour and spacing roles are defined once in staysolid-system.css. */
 
 .recently-viewed-card a {
@@ -97,7 +90,6 @@ html {
 .recently-viewed-card a:hover {
   background-color: transparent;
   color: inherit;
-  font-family: 'Source Code Pro';
 }
 
 /* ONLY text reacts to hover */

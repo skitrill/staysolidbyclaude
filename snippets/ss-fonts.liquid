@@ -1,0 +1,60 @@
+{%- comment -%}
+  STAYSOLID type: two IBM Plex faces, only the cuts the site uses.
+    IBM Plex Sans Condensed 500  navigation, CTAs, links, category names
+    IBM Plex Sans Condensed 600  product titles
+    IBM Plex Mono 400 (+ italic) timestamp, prices, labels, metadata, body
+  Latin-1 subsets (~18–22KB each) from IBM's official npm packages, pinned.
+  The upright faces are preloaded so first paint already uses them; the
+  fallbacks are metric-matched (mono at 0.6em advance, the condensed face
+  via size-adjust) so a late swap barely moves anything.
+  Roles and sizes: staysolid-system.css §0.
+{%- endcomment -%}
+{%- liquid
+  assign plex_mono = 'https://cdn.jsdelivr.net/npm/@ibm/plex-mono@2.5.0/fonts/split/woff2/IBMPlexMono-'
+  assign plex_cond = 'https://cdn.jsdelivr.net/npm/@ibm/plex-sans-condensed@2.0.0/fonts/split/woff2/IBMPlexSansCondensed-'
+  assign latin1 = 'U+0020-007E, U+00A0-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2013-2014, U+2018-201A, U+201C-201E, U+2020-2022, U+2026, U+2030, U+2039-203A, U+2044, U+20AC, U+2122, U+2212, U+FB01-FB02'
+-%}
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="{{ plex_cond }}Medium-Latin1.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="{{ plex_mono }}Regular-Latin1.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="{{ plex_cond }}SemiBold-Latin1.woff2" crossorigin>
+<style>
+  @font-face {
+    font-family: "IBM Plex Sans Condensed";
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url("{{ plex_cond }}Medium-Latin1.woff2") format("woff2");
+    unicode-range: {{ latin1 }};
+  }
+  @font-face {
+    font-family: "IBM Plex Sans Condensed";
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url("{{ plex_cond }}SemiBold-Latin1.woff2") format("woff2");
+    unicode-range: {{ latin1 }};
+  }
+  @font-face {
+    font-family: "IBM Plex Mono";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("{{ plex_mono }}Regular-Latin1.woff2") format("woff2");
+    unicode-range: {{ latin1 }};
+  }
+  @font-face {
+    font-family: "IBM Plex Mono";
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+    src: url("{{ plex_mono }}Italic-Latin1.woff2") format("woff2");
+    unicode-range: {{ latin1 }};
+  }
+  /* a regular sans narrowed to the condensed face's width until it arrives */
+  @font-face {
+    font-family: "Plex Condensed Fallback";
+    src: local("Arial"), local("Helvetica Neue"), local("Helvetica");
+    size-adjust: 86%;
+  }
+</style>

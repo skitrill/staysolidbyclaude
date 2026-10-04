@@ -26,8 +26,14 @@
   --ss-on-black: #f4f3ef;
   --ss-hover-wash: rgba(17, 17, 17, 0.05);
 
-  /* type: one face (the site's Source Code Pro), one weight */
-  --ss-font: "Source Code Pro", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  /* type: two IBM Plex faces (loaded in snippets/ss-fonts.liquid).
+     --ss-font    IBM Plex Mono 400: timestamp, prices, labels, metadata,
+                  quantities, body copy — the site's system voice (default)
+     --ss-display IBM Plex Sans Condensed: 500 for navigation, CTAs, links
+                  and category names; 600 for product titles only.
+     Contrast comes from the pairing, not from making things heavier. */
+  --ss-font: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --ss-display: "IBM Plex Sans Condensed", "Plex Condensed Fallback", "Arial Narrow", sans-serif;
   --ss-text-2xs: 10.45px; /* table heads, stamps */
   --ss-text-xs: 11.4px;   /* metadata, footer, utility actions */
   --ss-text-sm: 12.35px;  /* labels, prices, selectors, card titles */
@@ -36,7 +42,13 @@
   --ss-track: 0.024em;    /* uppercase labels */
   --ss-track-wide: 0.04em;/* buttons, tiny caps */
   --ss-weight: 400;
-  --ss-weight-title: 500; /* product title only */
+  --ss-weight-display: 500; /* condensed: nav, CTAs, links, categories */
+  --ss-weight-title: 600;   /* condensed: product titles */
+  --ss-text-nav: clamp(12.5px, 3.6vw, 14px);
+  --ss-text-title: 16.5px;  /* product page title */
+  --ss-text-card: 14px;     /* product titles in grids and the bag */
+  --ss-text-cta: 14px;
+  --ss-track-display: 0.03em;
 
   /* space: 4 / 6 / 8 / 12 / 16 / 20 / 24 / 32 / 40 / 48 */
   --ss-1: 4px;
@@ -64,8 +76,8 @@
   /* floating navigation */
   --ss-nav-top: calc(env(safe-area-inset-top, 0px) + 10px);
   --ss-nav-inset: 14px;
-  --ss-nav-h: 48px;
-  --ss-nav-h-compact: 44px;
+  --ss-nav-h: 42px;
+  --ss-nav-h-compact: 38px;
   --ss-nav-max: 620px;
   --ss-nav-clearance: calc(var(--ss-nav-top) + var(--ss-nav-h)); /* first content starts below this */
 
@@ -254,8 +266,8 @@ html body .ss-nav__list {
   justify-content: space-between;
   width: 100%;
   height: 100%;
-  /* the five items always fit one line: ~21.7em of monospace + padding */
-  font-size: clamp(10px, calc((100vw - 85px) / 21.7), 14px);
+  /* condensed sans fits the five items on one line down to 320px */
+  font-size: var(--ss-text-nav);
 }
 
 html body .ss-nav__item {
@@ -264,10 +276,10 @@ html body .ss-nav__item {
   align-items: center;
   height: 100%;
   padding: 0;
-  font-family: var(--ss-font);
+  font-family: var(--ss-display);
   font-size: 1em;
-  font-weight: var(--ss-weight);
-  letter-spacing: 0.05em;
+  font-weight: var(--ss-weight-display);
+  letter-spacing: var(--ss-track-display);
   line-height: 1;
   color: inherit;
   white-space: nowrap;
@@ -292,7 +304,9 @@ html body .ss-nav__count {
   height: 22px;
   margin-left: 6px;
   padding: 0 5px;
+  font-family: var(--ss-font);
   font-size: 0.86em;
+  font-weight: var(--ss-weight);
   line-height: 1;
   letter-spacing: 0;
   color: inherit;
@@ -440,9 +454,10 @@ html body .product-grid .card-wrapper > .card > .card__content .card__informatio
 
 html body .product-grid :is(.card__heading, .card__heading a) {
   margin: 0;
-  font-family: var(--ss-font);
-  font-size: var(--ss-text-sm);
-  letter-spacing: 0.02em;
+  font-family: var(--ss-display);
+  font-size: var(--ss-text-card);
+  font-weight: var(--ss-weight-title);
+  letter-spacing: 0.01em;
   line-height: 1.24;
   color: var(--ss-black);
   text-align: center;
@@ -609,11 +624,11 @@ html body .product__info-container > .product__title {
 
 html body .product__title :is(h1, .h1) {
   margin: 0;
-  font-family: var(--ss-font);
-  font-size: var(--ss-text-lg);
+  font-family: var(--ss-display);
+  font-size: var(--ss-text-title);
   font-weight: var(--ss-weight-title);
-  letter-spacing: 0.016em;
-  line-height: 1.2;
+  letter-spacing: 0.01em;
+  line-height: 1.15;
   color: var(--ss-black);
   text-align: left;
 }
@@ -949,8 +964,9 @@ html body :is(.button, .shopify-challenge__button) {
   background-color: var(--ss-black);
   box-shadow: none;
   color: var(--ss-on-black);
-  font-family: var(--ss-font);
-  font-size: var(--ss-text-md);
+  font-family: var(--ss-display);
+  font-size: var(--ss-text-cta);
+  font-weight: var(--ss-weight-display);
   letter-spacing: var(--ss-track-wide);
   line-height: 1;
   text-decoration: none;
@@ -1079,9 +1095,10 @@ html body .ss-index__num {
 }
 
 html body .ss-index__name {
-  font-family: var(--ss-font);
-  font-size: var(--ss-text-md);
-  letter-spacing: var(--ss-track);
+  font-family: var(--ss-display);
+  font-size: var(--ss-text-cta);
+  font-weight: var(--ss-weight-display);
+  letter-spacing: var(--ss-track-display);
   line-height: 1.16;
 }
 
@@ -1135,10 +1152,10 @@ html body cart-items .title-wrapper-with-link {
 
 html body cart-items .title--primary {
   margin: 0;
-  font-family: var(--ss-font);
-  font-size: var(--ss-text-lg);
+  font-family: var(--ss-display);
+  font-size: var(--ss-text-title);
   font-weight: var(--ss-weight-title);
-  letter-spacing: var(--ss-track);
+  letter-spacing: 0.01em;
   color: var(--ss-black);
 }
 
@@ -1150,9 +1167,10 @@ html body .ss-link-arrow {
   padding: var(--ss-2) 0;
   background-color: transparent;
   color: var(--ss-charcoal);
-  font-family: var(--ss-font);
-  font-size: var(--ss-text-xs);
-  letter-spacing: var(--ss-track-wide);
+  font-family: var(--ss-display);
+  font-size: 12.5px;
+  font-weight: var(--ss-weight-display);
+  letter-spacing: var(--ss-track-display);
   line-height: 1;
   text-decoration: none;
 }
@@ -1193,9 +1211,10 @@ html body .cart-item__details > * + * {
 html body .cart-item__name {
   display: block;
   margin: 0 0 var(--ss-1);
-  font-family: var(--ss-font);
-  font-size: var(--ss-text-sm);
-  letter-spacing: 0.016em;
+  font-family: var(--ss-display);
+  font-size: var(--ss-text-card);
+  font-weight: var(--ss-weight-title);
+  letter-spacing: 0.01em;
   line-height: 1.24;
   color: var(--ss-black);
   text-decoration: none;
@@ -1252,9 +1271,10 @@ html body cart-remove-button .button {
   border: 0;
   background-color: transparent;
   color: var(--ss-black);
-  font-family: var(--ss-font);
-  font-size: var(--ss-text-xs);
-  letter-spacing: var(--ss-track-wide);
+  font-family: var(--ss-display);
+  font-size: 12.5px;
+  font-weight: var(--ss-weight-display);
+  letter-spacing: var(--ss-track-display);
   background-position: 0 calc(50% + 0.75em);
 }
 
