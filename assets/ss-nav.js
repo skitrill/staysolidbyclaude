@@ -1,16 +1,19 @@
 /*
   STAYSOLID floating navigation (snippets/ss-nav.liquid).
 
-  1. Active indicator: one 2px orange line that slides between items, about
-     two-thirds of the word wide and centred under it. On page load it starts
-     under the previously active item and glides to the current one; on tap it
-     glides to the tapped item before the page changes.
-  2. Compaction: the bar gets a little thinner once the page is scrolled.
-  3. Legibility: content scrolls behind colourless glass, so each word (and
-     the RETURN tab) flips to off-white only when what is directly underneath
-     it is dark (sampled pixels of product images, or opaque backgrounds),
-     with hysteresis so it never flickers.
-  4. RETURN: a tab hanging under the bar on every screen but the rack. It
+  1. BAG count: shown only when the bag holds something. It follows the
+     real cart (data-cart-count, written by cart.js / product-form.js):
+     0 -> n animates it in, n -> 0 animates it out and removes it, and any
+     other change only refreshes the digits.
+  2. Filled BAG: on the cart page, while the bag holds something, the page
+     changes material to smoked graphite (html.ss-dark, staysolid-system.css
+     §16). Data-driven, so removing the last item dissolves it back to light.
+  3. Compaction: the bar gets a little thinner once the page is scrolled.
+  4. Legibility: content scrolls behind colourless glass, so each word (and
+     the RETURN tab) reads what is directly underneath it — on the light
+     store it flips to off-white over something dark; in the smoked BAG it
+     flips to charcoal over something bright. Hysteresis keeps it calm.
+  5. RETURN: a tab hanging under the bar on every screen but the rack. It
      slides out from behind the bar after the bar settles, stays put while
      moving between deeper screens, and retracts when the rack is reached.
      It steps back through real history when the previous page was on this
@@ -24,12 +27,9 @@
   var nav = document.querySelector('[data-ss-nav]');
   if (!bar || !nav) return;
 
-  var list = nav.querySelector('.ss-nav__list');
-  var indicator = nav.querySelector('.ss-nav__indicator');
+  var root = document.documentElement;
   var items = Array.prototype.slice.call(nav.querySelectorAll('.ss-nav__item'));
-  var STORE_KEY = 'ss-nav-active';
   var RETURN_KEY = 'ss-return-shown';
-  var UNDERLINE = 0.68; // share of the word the active line spans
 
   function store(key, value) {
     try {
@@ -45,55 +45,75 @@
     }
   }
 
-  /* ---------- 1. sliding indicator ---------- */
-  var current = items.filter(function (item) {
-    return item.getAttribute('aria-current') === 'page';
-  })[0];
-
-  function place(item, instant) {
-    if (!item || !indicator) {
-      nav.classList.remove('has-indicator');
-      return;
-    }
-    var word = item.querySelector('.ss-nav__word') || item;
-    var box = list.getBoundingClientRect();
-    var rect = word.getBoundingClientRect();
-    var width = rect.width * UNDERLINE;
-    if (instant) indicator.style.transition = 'none';
-    indicator.style.width = width + 'px';
-    indicator.style.transform =
-      'translate3d(' + (rect.left - box.left + (rect.width - width) / 2) + 'px, 0, 0)';
-    if (instant) {
-      void indicator.offsetWidth;
-      indicator.style.transition = '';
-    }
-    nav.classList.add('has-indicator');
-  }
-
-  var previous = items[parseInt(recall(STORE_KEY), 10)] || null;
-
-  if (current) {
-    if (previous && previous !== current) {
-      place(previous, true);
-      requestAnimationFrame(function () {
-        requestAnimationFrame(function () {
-          place(current);
-        });
-      });
-    } else {
-      place(current, true);
-    }
-    store(STORE_KEY, String(items.indexOf(current)));
-  }
-
-  items.forEach(function (item) {
-    item.addEventListener('click', function () {
-      place(item);
-      store(STORE_KEY, String(items.indexOf(item)));
+  function nextFrame(fn) {
+    requestAnimationFrame(function () {
+      requestAnimationFrame(fn);
     });
+  }
+
+  /* ---------- 1 + 2. BAG count and the filled-BAG material ---------- */
+  var bubble = document.getElementById('CartBubble');
+  var onCartPage = root.hasAttribute('data-ss-cart-page');
+
+  function readCount() {
+    if (!bubble) return 0;
+    var n = parseInt(bubble.getAttribute('data-cart-count'), 10);
+    if (isNaN(n)) n = parseInt((bubble.textContent || '').replace(/\D/g, ''), 10);
+    return n > 0 ? n : 0;
+  }
+
+  function setBagMaterial(filled) {
+    if (!onCartPage || root.classList.contains('ss-dark') === filled) return;
+    root.classList.toggle('ss-dark', filled);
+    resetLegibility();
+  }
+
+  function animateOnce(el, cls, done) {
+    el.classList.remove(cls);
+    void el.offsetWidth;
+    el.classList.add(cls);
+    el.addEventListener('animationend', function end() {
+      el.removeEventListener('animationend', end);
+      el.classList.remove(cls);
+      if (done) done();
+    });
+  }
+
+  var shownCount = readCount();
+
+  if (bubble) {
+    new MutationObserver(function () {
+      var n = readCount();
+      // one format everywhere (an older inline script writes "(n)")
+      if (bubble.textContent !== String(n)) bubble.textContent = String(n);
+      if (n === shownCount) return;
+      if (shownCount === 0) {
+        bubble.classList.remove('is-empty', 'is-leaving');
+        animateOnce(bubble, 'is-entering');
+      } else if (n === 0) {
+        animateOnce(bubble, 'is-leaving', function () {
+          if (readCount() === 0) bubble.classList.add('is-empty');
+        });
+      } else {
+        animateOnce(bubble, 'is-ticking');
+      }
+      shownCount = n;
+      setBagMaterial(n > 0);
+    }).observe(bubble, {
+      attributes: true,
+      attributeFilter: ['data-cart-count'],
+      childList: true,
+      characterData: true,
+      subtree: true
+    });
+  }
+
+  // a filled bag opens light and glides into graphite, rather than hard-cutting
+  if (onCartPage && shownCount > 0) nextFrame(function () {
+    setBagMaterial(true);
   });
 
-  /* ---------- 4. RETURN tab ---------- */
+  /* ---------- 5. RETURN tab ---------- */
   var ret = bar.querySelector('[data-ss-return]');
   var ghost = bar.querySelector('[data-ss-return-ghost]');
 
@@ -107,19 +127,9 @@
     });
   }
 
-  function replace() {
-    if (current) place(current, true);
-    alignReturn();
-  }
   alignReturn();
-  window.addEventListener('resize', replace);
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(replace);
-
-  function nextFrame(fn) {
-    requestAnimationFrame(function () {
-      requestAnimationFrame(fn);
-    });
-  }
+  window.addEventListener('resize', alignReturn);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(alignReturn);
 
   // RETURN out (or already out) on a deeper screen; retracting on the rack.
   // `wasShown` is whether the previous screen showed it.
@@ -174,7 +184,7 @@
     });
   }
 
-  /* ---------- 2 + 3. scroll state ---------- */
+  /* ---------- 3 + 4. scroll state and legibility ---------- */
   var readable = items.slice();
   if (ret) readable.push(ret);
 
@@ -183,6 +193,15 @@
   canvas.width = 32;
   canvas.height = 32;
   var ctx = canvas.getContext('2d', { willReadFrequently: true });
+
+  function dark() {
+    return root.classList.contains('ss-dark');
+  }
+
+  // what an empty / transparent spot reads as: the page surface
+  function pageLuminance() {
+    return dark() ? 0.07 : 0.95;
+  }
 
   function luminance(r, g, b) {
     return (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
@@ -221,13 +240,13 @@
       width = img.naturalWidth * fit;
       height = img.naturalHeight * fit;
     }
-    if (x < left || x > left + width || y < top || y > top + height) return 0.95;
+    if (x < left || x > left + width || y < top || y > top + height) return pageLuminance();
     var px = Math.min(31, Math.floor(((x - left) / width) * 32));
     var py = Math.min(31, Math.floor(((y - top) / height) * 32));
     var i = (py * 32 + px) * 4;
     var alpha = data[i + 3] / 255;
-    // transparent pixels show the off-white page through them
-    return alpha * luminance(data[i], data[i + 1], data[i + 2]) + (1 - alpha) * 0.95;
+    // transparent pixels show the page surface through them
+    return alpha * luminance(data[i], data[i + 1], data[i + 2]) + (1 - alpha) * pageLuminance();
   }
 
   function backgroundLuminance(el) {
@@ -239,7 +258,7 @@
       }
       el = el.parentElement;
     }
-    return 0.95;
+    return pageLuminance();
   }
 
   function luminanceAt(x, y) {
@@ -256,12 +275,15 @@
       var opaque = bg && (parts.length < 4 || parseFloat(parts[3]) > 0.5);
       if (opaque || i === stack.length - 1) return backgroundLuminance(el);
     }
-    return 0.95;
+    return pageLuminance();
   }
 
   // each word reads what is directly under it, so a garment crossing only
-  // part of the bar flips only the words it sits behind
+  // part of the bar flips only the words it sits behind. Light store: flip
+  // to off-white over something clearly dark. Smoked BAG: flip to charcoal
+  // over something clearly bright. Hysteresis keeps it from flickering.
   function sampleUnderneath() {
+    var smoked = dark();
     readable.forEach(function (item) {
       var rect = item.getBoundingClientRect();
       if (!rect.width) return;
@@ -271,11 +293,24 @@
         luminanceAt(rect.left + rect.width * 0.5, y) +
         luminanceAt(rect.left + rect.width * 0.75, y)
       ) / 3;
-      var dark = item.classList.contains('is-on-dark');
-      // hysteresis: clearly dark to switch, clearly light to switch back
-      if (!dark && avg < 0.38) item.classList.add('is-on-dark');
-      else if (dark && avg > 0.5) item.classList.remove('is-on-dark');
+      var cls = smoked ? 'is-on-light' : 'is-on-dark';
+      var on = item.classList.contains(cls);
+      if (smoked) {
+        if (!on && avg > 0.62) item.classList.add(cls);
+        else if (on && avg < 0.5) item.classList.remove(cls);
+      } else {
+        if (!on && avg < 0.38) item.classList.add(cls);
+        else if (on && avg > 0.5) item.classList.remove(cls);
+      }
     });
+  }
+
+  function resetLegibility() {
+    readable.forEach(function (item) {
+      item.classList.remove('is-on-dark', 'is-on-light');
+    });
+    // sample again once the material has finished changing
+    setTimeout(sampleUnderneath, 320);
   }
 
   var ticking = false;

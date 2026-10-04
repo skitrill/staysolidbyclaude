@@ -30,10 +30,8 @@
   </div>
 
   <div class="cart__warnings">
-    <h1 class="cart__empty-text">{{ 'sections.cart.empty' | t }}</h1>
-    <a href="{{ routes.root_url }}" class="button">
-  {{ 'general.continue_shopping' | t }}
-</a>
+    <p class="cart__empty-text">{{ 'sections.cart.empty' | t }}</p>
+    <a href="{{ routes.root_url }}" class="ss-link-arrow">{{ 'general.continue_shopping' | t }}<span class="ss-link-arrow__icon" aria-hidden="true">&rarr;</span></a>
 
     {%- if shop.customer_accounts_enabled and customer == null -%}
       <h2 class="cart__login-title">{{ 'sections.cart.login.title' | t }}</h2>

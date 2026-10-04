@@ -7,9 +7,9 @@
                 "go back one level"; shown on every screen except the rack
   They are siblings, not parent/child: a backdrop-filter inside another
   backdrop-filter can't see the page, so the tab would lose its glass.
-  Behaviour (sliding indicator, scroll compaction, legibility over dark
-  content, RETURN in/out and history) lives in assets/ss-nav.js; styles in
-  staysolid-system.css §4.
+  Behaviour (scroll compaction, legibility over dark content, the BAG count,
+  the dark filled-BAG mode, RETURN in/out and history) lives in
+  assets/ss-nav.js; styles in staysolid-system.css §4 and §16.
   IDs CustomMenuBagLink / CartBubble are kept: the cart and product form
   scripts update the BAG count through them.
 {%- endcomment -%}
@@ -51,9 +51,8 @@
         class="ss-nav__item{% if cart.item_count > 0 %} custom-menu-item--bag{% endif %}"
         {% if request.page_type == 'cart' %}aria-current="page"{% endif %}
       >
-        <span class="ss-nav__word">bag</span><span id="CartBubble" class="ss-nav__count" data-cart-count="{{ cart.item_count }}">{{ cart.item_count }}</span>
+        <span class="ss-nav__word">bag</span><span id="CartBubble" class="ss-nav__count{% if cart.item_count == 0 %} is-empty{% endif %}" data-cart-count="{{ cart.item_count }}">{{ cart.item_count }}</span>
       </a>
-      <span class="ss-nav__indicator" aria-hidden="true"></span>
     </div>
   </div>
 

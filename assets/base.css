@@ -3204,17 +3204,6 @@ footer {
   text-align: center !important;
   line-height: 1.4 !important;
 }
-/* Force links inside the warning box */
-.cart__warnings a {
-  color: var(--ss-bg) !important;
-  text-decoration: none !important;
-}
-
-/* Force hover effect on those links */
-.cart__warnings a:hover {
-  color: var(--ss-bg) !important;
-  text-decoration: none !important;
-}
 a.link.underlined-link {
   color: #000000 !important;
   text-decoration: none !important;
