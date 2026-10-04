@@ -44,7 +44,7 @@
   --ss-weight: 400;
   --ss-weight-display: 500; /* condensed: nav, CTAs, links, categories */
   --ss-weight-title: 600;   /* condensed: product titles */
-  --ss-text-nav: clamp(12px, 3.6vw, 14px);
+  --ss-text-nav: clamp(12.5px, 3.6vw, 14px);
   --ss-text-title: 16.5px;  /* product page title */
   --ss-text-card: 14px;     /* product titles in grids and the bag */
   --ss-text-cta: 14px;
@@ -76,7 +76,6 @@
   /* floating navigation */
   --ss-nav-top: calc(env(safe-area-inset-top, 0px) + 10px);
   --ss-nav-inset: 14px;
-  --ss-nav-pad: 14px;
   --ss-nav-h: 42px;
   --ss-nav-h-compact: 38px;
   --ss-nav-max: 620px;
@@ -108,14 +107,6 @@
   --color-base-outline-button-labels: 17, 17, 17;
   --color-base-accent-1: 17, 17, 17;
   --color-base-accent-2: 17, 17, 17;
-}
-
-/* smallest phones: a slightly wider bar keeps clear gaps between the words */
-@media screen and (max-width: 359px) {
-  :root {
-    --ss-nav-inset: 10px;
-    --ss-nav-pad: 12px;
-  }
 }
 
 @media screen and (min-width: 750px) {
@@ -230,7 +221,7 @@ html body .ss-nav {
   max-width: var(--ss-nav-max);
   height: var(--ss-nav-h);
   margin: 0 auto;
-  padding: 0 var(--ss-nav-pad);
+  padding: 0 14px;
   display: flex;
   align-items: center;
   border: 1px solid rgba(255, 255, 255, 0.42);
