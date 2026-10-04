@@ -292,7 +292,7 @@ html body .ss-nav {
     width: fit-content;
   }
 
-  html body .ss-nav__list {
+  html body .ss-navbar .ss-nav__list {
     gap: 0.95em;
   }
 }
