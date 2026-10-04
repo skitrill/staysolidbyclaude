@@ -1,26 +1,49 @@
 /*
   STAYSOLID floating navigation (snippets/ss-nav.liquid).
 
-  1. Active indicator: one 2px orange line that slides between items. On page
-     load it starts under the previously active item and glides to the current
-     one; on tap it glides to the tapped item before the page changes.
-  2. Compaction: the panel gets a little thinner once the page is scrolled.
-  3. Legibility: content scrolls behind colourless glass, so each word flips to
-     off-white only when what is directly underneath it is dark (sampled pixels
-     of product images, or opaque backgrounds), with hysteresis so it never
-     flickers.
+  1. Active indicator: one 2px orange line that slides between items, about
+     two-thirds of the word wide and centred under it. On page load it starts
+     under the previously active item and glides to the current one; on tap it
+     glides to the tapped item before the page changes.
+  2. Compaction: the bar gets a little thinner once the page is scrolled.
+  3. Legibility: content scrolls behind colourless glass, so each word (and
+     the RETURN tab) flips to off-white only when what is directly underneath
+     it is dark (sampled pixels of product images, or opaque backgrounds),
+     with hysteresis so it never flickers.
+  4. RETURN: a tab hanging under the bar on every screen but the rack. It
+     slides out from behind the bar after the bar settles, stays put while
+     moving between deeper screens, and retracts when the rack is reached.
+     It steps back through real history when the previous page was on this
+     site, otherwise it follows its href (the logical parent).
 
   Scroll work is passive + requestAnimationFrame and throttled; images are
   read once into a 32x32 cache. No layout writes happen during reads.
 */
 (function () {
+  var bar = document.querySelector('[data-ss-navbar]');
   var nav = document.querySelector('[data-ss-nav]');
-  if (!nav) return;
+  if (!bar || !nav) return;
 
   var list = nav.querySelector('.ss-nav__list');
   var indicator = nav.querySelector('.ss-nav__indicator');
   var items = Array.prototype.slice.call(nav.querySelectorAll('.ss-nav__item'));
   var STORE_KEY = 'ss-nav-active';
+  var RETURN_KEY = 'ss-return-shown';
+  var UNDERLINE = 0.68; // share of the word the active line spans
+
+  function store(key, value) {
+    try {
+      sessionStorage.setItem(key, value);
+    } catch (e) {}
+  }
+
+  function recall(key) {
+    try {
+      return sessionStorage.getItem(key);
+    } catch (e) {
+      return null;
+    }
+  }
 
   /* ---------- 1. sliding indicator ---------- */
   var current = items.filter(function (item) {
@@ -32,11 +55,14 @@
       nav.classList.remove('has-indicator');
       return;
     }
+    var word = item.querySelector('.ss-nav__word') || item;
     var box = list.getBoundingClientRect();
-    var rect = item.getBoundingClientRect();
+    var rect = word.getBoundingClientRect();
+    var width = rect.width * UNDERLINE;
     if (instant) indicator.style.transition = 'none';
-    indicator.style.width = rect.width + 'px';
-    indicator.style.transform = 'translate3d(' + (rect.left - box.left) + 'px, 0, 0)';
+    indicator.style.width = width + 'px';
+    indicator.style.transform =
+      'translate3d(' + (rect.left - box.left + (rect.width - width) / 2) + 'px, 0, 0)';
     if (instant) {
       void indicator.offsetWidth;
       indicator.style.transition = '';
@@ -44,16 +70,7 @@
     nav.classList.add('has-indicator');
   }
 
-  function remember(item) {
-    try {
-      sessionStorage.setItem(STORE_KEY, String(items.indexOf(item)));
-    } catch (e) {}
-  }
-
-  var previous = null;
-  try {
-    previous = items[parseInt(sessionStorage.getItem(STORE_KEY), 10)] || null;
-  } catch (e) {}
+  var previous = items[parseInt(recall(STORE_KEY), 10)] || null;
 
   if (current) {
     if (previous && previous !== current) {
@@ -66,13 +83,13 @@
     } else {
       place(current, true);
     }
-    remember(current);
+    store(STORE_KEY, String(items.indexOf(current)));
   }
 
   items.forEach(function (item) {
     item.addEventListener('click', function () {
       place(item);
-      remember(item);
+      store(STORE_KEY, String(items.indexOf(item)));
     });
   });
 
@@ -82,7 +99,72 @@
   window.addEventListener('resize', replace);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(replace);
 
+  /* ---------- 4. RETURN tab ---------- */
+  var ret = bar.querySelector('[data-ss-return]');
+  var ghost = bar.querySelector('[data-ss-return-ghost]');
+  var wasShown = recall(RETURN_KEY) === '1';
+
+  function nextFrame(fn) {
+    requestAnimationFrame(function () {
+      requestAnimationFrame(fn);
+    });
+  }
+
+  if (ret) {
+    if (wasShown) {
+      // already out on the previous screen: it simply stays
+      ret.classList.add('is-instant', 'is-shown');
+      nextFrame(function () {
+        ret.classList.remove('is-instant');
+      });
+    } else {
+      nextFrame(function () {
+        ret.classList.add('is-shown');
+      });
+    }
+    store(RETURN_KEY, '1');
+
+    ret.addEventListener('click', function (event) {
+      var sameSite = false;
+      try {
+        sameSite = !!document.referrer && new URL(document.referrer).origin === location.origin;
+      } catch (e) {}
+      if (sameSite && history.length > 1) {
+        event.preventDefault();
+        history.back();
+      }
+    });
+  }
+
+  if (ghost) {
+    if (wasShown) {
+      // arriving at the rack from a deeper screen: retract under the bar
+      ghost.classList.add('is-instant', 'is-shown');
+      nextFrame(function () {
+        ghost.classList.remove('is-instant');
+        ghost.classList.remove('is-shown');
+      });
+    }
+    store(RETURN_KEY, '0');
+  }
+
+  // a page restored from the back/forward cache keeps its old state
+  window.addEventListener('pageshow', function (event) {
+    if (!event.persisted) return;
+    if (ret) {
+      ret.classList.add('is-instant', 'is-shown');
+      store(RETURN_KEY, '1');
+    }
+    if (ghost) {
+      ghost.classList.remove('is-shown');
+      store(RETURN_KEY, '0');
+    }
+  });
+
   /* ---------- 2 + 3. scroll state ---------- */
+  var readable = items.slice();
+  if (ret) readable.push(ret);
+
   var pixelCache = new WeakMap();
   var canvas = document.createElement('canvas');
   canvas.width = 32;
@@ -151,7 +233,7 @@
     var stack = document.elementsFromPoint(x, y);
     for (var i = 0; i < stack.length; i++) {
       var el = stack[i];
-      if (nav.contains(el)) continue;
+      if (bar.contains(el)) continue;
       if (el.tagName === 'IMG') {
         var fromImage = imageLuminanceAt(el, x, y);
         if (fromImage !== null) return fromImage;
@@ -167,8 +249,9 @@
   // each word reads what is directly under it, so a garment crossing only
   // part of the bar flips only the words it sits behind
   function sampleUnderneath() {
-    items.forEach(function (item) {
+    readable.forEach(function (item) {
       var rect = item.getBoundingClientRect();
+      if (!rect.width) return;
       var y = rect.top + rect.height / 2;
       var avg = (
         luminanceAt(rect.left + rect.width * 0.25, y) +
