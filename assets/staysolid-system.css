@@ -36,7 +36,7 @@
 @property --ss-hover-wash { syntax: "<color>"; inherits: true; initial-value: rgba(255, 255, 255, 0.05); }
 @property --ss-press { syntax: "<color>"; inherits: true; initial-value: rgba(255, 255, 255, 0.12); }
 @property --ss-glass-tint { syntax: "<color>"; inherits: true; initial-value: rgba(255, 255, 255, 0.03); }
-@property --ss-glass-edge { syntax: "<color>"; inherits: true; initial-value: rgba(255, 255, 255, 0.07); }
+@property --ss-glass-edge { syntax: "<color>"; inherits: true; initial-value: rgba(255, 255, 255, 0.055); }
 @property --ss-glass-light { syntax: "<color>"; inherits: true; initial-value: rgba(255, 255, 255, 0.06); }
 
 :root {
@@ -67,7 +67,7 @@
 
   /* smoked glass */
   --ss-glass-tint: rgba(255, 255, 255, 0.03);
-  --ss-glass-edge: rgba(255, 255, 255, 0.07);
+  --ss-glass-edge: rgba(255, 255, 255, 0.055);
   --ss-glass-light: rgba(255, 255, 255, 0.06);
 
   /* type: one face (the site's Source Code Pro), one weight.
@@ -181,6 +181,13 @@
 /* rem stays 11px: every rem-based spacing value in the theme depends on it */
 html:root {
   font-size: 11px !important;
+}
+
+/* the canvas is graphite to the browser too: system colours (canvastext on
+   Dawn's icons), form controls and scrollbars follow */
+html:root {
+  color-scheme: dark;
+  background-color: var(--ss-bg);
 }
 
 /* 1. BASE ------------------------------------------------------------------ */
