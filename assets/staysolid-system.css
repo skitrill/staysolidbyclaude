@@ -64,8 +64,8 @@
   /* floating navigation */
   --ss-nav-top: calc(env(safe-area-inset-top, 0px) + 10px);
   --ss-nav-inset: 14px;
-  --ss-nav-h: 48px;
-  --ss-nav-h-compact: 44px;
+  --ss-nav-h: 42px;
+  --ss-nav-h-compact: 38px;
   --ss-nav-max: 620px;
   --ss-nav-clearance: calc(var(--ss-nav-top) + var(--ss-nav-h)); /* first content starts below this */
 
