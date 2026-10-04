@@ -291,6 +291,10 @@ html body .ss-nav {
     --ss-nav-pad: 20px;
     width: fit-content;
   }
+
+  html body .ss-nav__list {
+    gap: 0.95em;
+  }
 }
 
 html body .ss-nav.is-compact {
@@ -305,7 +309,7 @@ html body :is(.ss-nav__item, .ss-return).is-on-dark {
 }
 
 /* USER anchors the left, BAG the right; flexible gaps never drop below a
-   word-space, and on wide phones the line stops stretching at 24em */
+   word-space, and on wide phones the line stops stretching at 25em */
 html body .ss-nav__list {
   position: relative;
   display: flex;
@@ -313,7 +317,7 @@ html body .ss-nav__list {
   justify-content: space-between;
   gap: 0.55em;
   width: 100%;
-  max-width: 24em;
+  max-width: 25em;
   height: 100%;
   margin: 0 auto;
   font-size: var(--ss-text-nav);
