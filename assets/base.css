@@ -3863,7 +3863,9 @@ cart-items.page-width {
   .section,
   .content-section,
   .main-content {
-    padding: 20px 0 !important;
+    /* vertical only: the side gutter belongs to .page-width */
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
     margin: 0 auto;
     width: 100% !important;
     box-sizing: border-box;
