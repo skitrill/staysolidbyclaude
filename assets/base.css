@@ -3545,15 +3545,14 @@ main,
 }
 
 /* === LOGO STYLING === */
+/* size and colour live in staysolid-system.css §5 */
 .header__heading-logo {
-  max-width: 100px !important;
   height: auto !important;
   margin: 0 auto !important;
   display: block !important;
   pointer-events: none !important;
   user-select: none !important;
   box-shadow: none !important;
-  filter: none !important;
 }
 
 /* === CUSTOM MENU - GLOBAL, STABLE POSITION === */
