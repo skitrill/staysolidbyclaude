@@ -5,8 +5,8 @@
      PRODUCT   = HERO
      BLACK     = STRUCTURE
      OFF-WHITE = SPACE
-     ORANGE    = SIGNAL   (the logo owns it; elsewhere only the BAG count,
-                           the active-nav line and tap feedback)
+     ORANGE    = SIGNAL   (only the BAG count, the active-nav line and tap
+                           feedback; the logo is gray)
 
    - every value comes from a token in §0
    - one component per job: nav, product card, selector, quantity, button
@@ -357,6 +357,16 @@ html body :is(.header__heading, .header__heading-link) {
 
 html body .header__heading-link {
   padding: 0;
+}
+
+/* logo: 144px wide on every screen (outranks the theme-editor width and the
+   legacy max-width caps), recoloured from the orange artwork to a neutral
+   gray — brightness(0) flattens it to black, invert lifts it to #8a8a8a */
+html body .header__heading-link img.header__heading-logo {
+  width: 144px !important;
+  max-width: none !important;
+  height: auto !important;
+  filter: brightness(0) invert(54%);
 }
 
 html body #shopdatetime {

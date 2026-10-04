@@ -1,8 +1,3 @@
-.header__heading-link img.header__heading-logo {
-  width: 120px !important;
-  height: auto !important;
-  max-width: none !important;
-}
 @media screen and (min-width: 990px) {
   .variant-picker,
 .product__info-container .product-form__input {
