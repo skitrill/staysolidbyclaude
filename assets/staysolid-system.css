@@ -26,19 +26,26 @@
   --ss-on-black: #f4f3ef;
   --ss-hover-wash: rgba(17, 17, 17, 0.05);
 
-  /* type: one face (the site's Source Code Pro), one weight */
+  /* type: one face (the site's Source Code Pro), one weight.
+     Sizes sit one ~5% step under the previous scale; hierarchy unchanged. */
   --ss-font: "Source Code Pro", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
-  --ss-text-2xs: 10.45px; /* table heads, stamps */
-  --ss-text-xs: 11.4px;   /* metadata, footer, utility actions */
-  --ss-text-sm: 12.35px;  /* labels, prices, selectors, card titles */
-  --ss-text-md: 13.3px;   /* body copy, buttons */
-  --ss-text-lg: 16.15px;  /* product and page titles */
-  --ss-track: 0.024em;    /* uppercase labels */
-  --ss-track-wide: 0.04em;/* buttons, tiny caps */
+  --ss-text-2xs: 10px;    /* table heads, stamps */
+  --ss-text-xs: 10.85px;  /* metadata, footer, utility actions */
+  --ss-text-sm: 11.75px;  /* labels, prices, selectors, card titles */
+  --ss-text-md: 12.65px;  /* body copy, buttons */
+  --ss-text-lg: 15.35px;  /* product and page titles */
+  --ss-text-nav-max: 13.3px;
+  --ss-track-tight: 0.012em; /* navigation, titles, metadata */
+  --ss-track: 0.02em;        /* uppercase mono labels */
+  --ss-track-wide: 0.028em;  /* buttons, tiny caps */
+  --ss-lh-tight: 1.15;       /* titles, UI labels */
+  --ss-lh-meta: 1.3;         /* metadata, footer */
+  --ss-lh-body: 1.42;        /* description */
   --ss-weight: 400;
   --ss-weight-title: 500; /* product title only */
 
-  /* space: 4 / 6 / 8 / 12 / 16 / 20 / 24 / 32 / 40 / 48 */
+  /* space: 4 / 6 / 8 / 12 / 16 / 20 / 24 / 32 / 40 / 48 — horizontal and
+     structural; the gutter is untouched by the density pass */
   --ss-1: 4px;
   --ss-1h: 6px;
   --ss-2: 8px;
@@ -51,15 +58,25 @@
   --ss-7: 48px;
   --ss-gutter: 20px;
 
+  /* vertical rhythm: ~15–20% tighter than the scale above — less air
+     between UI, the product imagery keeps its size */
+  --ss-v-xs: 5px;   /* title → price, card title → price */
+  --ss-v-sm: 7px;   /* label → control */
+  --ss-v-md: 9px;   /* stage → gallery control, credit → button */
+  --ss-v-lg: 16px;  /* gallery → title, between option groups → quantity */
+  --ss-v-xl: 18px;  /* quantity → description → credit */
+  --ss-v-2xl: 22px; /* price → first option group */
+  --ss-v-section: 36px; /* last content → footer text */
+
   /* structure */
   --ss-border: 1px solid var(--ss-line);
   --ss-border-strong: 1px solid var(--ss-black);
-  --ss-control-h: 42px;  /* selectors */
-  --ss-qty-w: 132px;
-  --ss-qty-h: 40px;
-  --ss-qty-w-bag: 122px;
-  --ss-qty-h-bag: 38px;
-  --ss-button-h: 50px;
+  --ss-control-h: 39px;  /* size / colour selectors */
+  --ss-qty-w: 126px;     /* three equal 42px cells */
+  --ss-qty-h: 37px;
+  --ss-qty-w-bag: 114px; /* three equal 38px cells */
+  --ss-qty-h-bag: 36px;
+  --ss-button-h: 47px;
 
   /* floating navigation */
   --ss-nav-top: calc(env(safe-area-inset-top, 0px) + 10px);
@@ -116,7 +133,7 @@ html body {
   font-family: var(--ss-font);
   font-size: var(--ss-text-md);
   font-weight: var(--ss-weight);
-  line-height: 1.4;
+  line-height: 1.35;
   letter-spacing: 0;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -126,7 +143,7 @@ html body :is(h1, h2, h3, h4, h5, h6, .h0, .h1, .h2, .h3, .h4, .h5) {
   font-family: var(--ss-font);
   font-weight: var(--ss-weight);
   letter-spacing: var(--ss-track);
-  line-height: 1.2;
+  line-height: var(--ss-lh-tight);
   color: var(--ss-black);
 }
 
@@ -135,7 +152,7 @@ html body :is(h1, .h0, .h1) {
 }
 
 html body :is(h2, .h2) {
-  font-size: 14.25px;
+  font-size: 13.55px;
 }
 
 html body :is(h3, h4, h5, h6, .h3, .h4, .h5) {
@@ -148,7 +165,7 @@ html body :is(b, strong, th, dt, legend, summary) {
 
 html body .ss-meta {
   font-family: var(--ss-font);
-  letter-spacing: 0.016em;
+  letter-spacing: var(--ss-track-tight);
   color: var(--ss-charcoal);
 }
 
@@ -236,6 +253,14 @@ html body .ss-nav {
   }
 }
 
+/* desktop: the bar hugs the navigation sentence instead of a wide slab */
+@media screen and (min-width: 750px) {
+  html body .ss-nav {
+    width: fit-content;
+    padding: 0 22px;
+  }
+}
+
 html body .ss-nav.is-compact {
   height: var(--ss-nav-h-compact);
 }
@@ -251,11 +276,13 @@ html body .ss-nav__list {
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 0.85em;
   width: 100%;
   height: 100%;
-  /* the five items always fit one line: ~21.7em of monospace + padding */
-  font-size: clamp(10px, calc((100vw - 85px) / 21.7), 14px);
+  /* one tightly set line: ~23.4em of monospace, gaps and BAG count; scales
+     down on narrow phones, never wider than --ss-text-nav-max */
+  font-size: clamp(10px, calc((100vw - 62px) / 23.4), var(--ss-text-nav-max));
 }
 
 html body .ss-nav__item {
@@ -267,7 +294,7 @@ html body .ss-nav__item {
   font-family: var(--ss-font);
   font-size: 1em;
   font-weight: var(--ss-weight);
-  letter-spacing: 0.05em;
+  letter-spacing: var(--ss-track-tight);
   line-height: 1;
   color: inherit;
   white-space: nowrap;
@@ -307,7 +334,7 @@ html body .custom-menu-item--bag .ss-nav__count {
 html body .ss-nav__indicator {
   position: absolute;
   left: 0;
-  top: calc(50% + 0.75em);
+  top: calc(50% + 0.62em);
   height: 2px;
   width: 0;
   background-color: var(--ss-orange);
@@ -328,7 +355,7 @@ html body .ss-nav:not(.has-indicator) .ss-nav__item[aria-current="page"]::after 
   position: absolute;
   left: 0;
   right: 0;
-  top: calc(50% + 0.75em);
+  top: calc(50% + 0.62em);
   height: 2px;
   background-color: var(--ss-orange);
 }
@@ -346,7 +373,7 @@ html body .ss-nav:not(.has-indicator) .ss-nav__item[aria-current="page"]::after 
 
 /* 5. HEADER — logo and live timestamp, scrolling behind the glass ---------- */
 html body .section-header .header-wrapper {
-  padding-top: calc(var(--ss-nav-clearance) + 36px) !important;
+  padding-top: calc(var(--ss-nav-clearance) + 30px) !important;
 }
 
 /* the logo image sits on its own line box, without inline-text leading or
@@ -370,25 +397,25 @@ html body .header__heading-link img.header__heading-logo {
 }
 
 html body #shopdatetime {
-  margin: 26px 0 0 !important; /* + 6px header grid = 32px under the logo */
+  margin: 20px 0 0 !important; /* + 6px header grid = 26px under the logo */
   font-family: var(--ss-font);
   font-size: var(--ss-text-sm);
-  letter-spacing: 0.016em;
-  line-height: 1.3;
+  letter-spacing: var(--ss-track-tight);
+  line-height: var(--ss-lh-tight);
   color: var(--ss-charcoal);
 }
 
-/* first content block sits ~36px under the timestamp (grid sliders add 11px) */
+/* first content block sits ~28px under the timestamp (grid sliders add 11px) */
 html body main#MainContent {
-  padding-top: 24px !important;
+  padding-top: 17px !important;
 }
 
 /* 6. PRODUCT CARD (every product grid) -------------------------------------- */
 html body .product-grid {
   --grid-mobile-horizontal-spacing: 12px;
-  --grid-mobile-vertical-spacing: 28px;
+  --grid-mobile-vertical-spacing: 23px;
   --grid-desktop-horizontal-spacing: 16px;
-  --grid-desktop-vertical-spacing: 40px;
+  --grid-desktop-vertical-spacing: 33px;
   margin: 0;
 }
 
@@ -434,7 +461,7 @@ html body .product-grid .card-wrapper > .card > .card__content .card__informatio
   display: flex;
   flex: 1;
   flex-direction: column;
-  padding: 14px 0 0;
+  padding: 11px 0 0;
   text-align: center;
 }
 
@@ -442,8 +469,8 @@ html body .product-grid :is(.card__heading, .card__heading a) {
   margin: 0;
   font-family: var(--ss-font);
   font-size: var(--ss-text-sm);
-  letter-spacing: 0.02em;
-  line-height: 1.24;
+  letter-spacing: var(--ss-track-tight);
+  line-height: var(--ss-lh-tight);
   color: var(--ss-black);
   text-align: center;
   text-decoration: none;
@@ -459,7 +486,7 @@ html body .product-grid .card-information :is(.price, .price__container) {
 }
 
 html body .product-grid .card-information .price {
-  margin: 6px 0 0;
+  margin: var(--ss-v-xs) 0 0;
 }
 
 html body .product-grid .price .price-item {
@@ -488,7 +515,7 @@ html body .product-grid .card__badge .badge {
   backdrop-filter: blur(6px);
   color: var(--ss-black);
   font-family: var(--ss-font);
-  font-size: 11.5px;
+  font-size: 10.9px;
   letter-spacing: var(--ss-track);
   line-height: 1;
 }
@@ -542,22 +569,22 @@ html body .product__media-list .product__media img {
   }
 }
 
-/* gallery position  ‹ 01 / 05 ›  — 140 x 32, centered */
+/* gallery position  ‹ 01 / 05 ›  — 132 x 30, centered */
 html body .product .slider-buttons {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 140px;
-  height: 32px;
-  margin: var(--ss-3) auto 0;
+  width: 132px;
+  height: 30px;
+  margin: var(--ss-v-md) auto 0;
 }
 
 html body .product .slider-button {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
   margin: 0;
   padding: 0;
   border: 0;
@@ -600,11 +627,11 @@ html body .product__info-container > * {
 }
 
 html body .product__info-container > * + * {
-  margin-top: var(--ss-4h);
+  margin-top: var(--ss-v-xl);
 }
 
 html body .product__info-container > .product__title {
-  margin-top: var(--ss-4h);
+  margin-top: var(--ss-v-lg);
 }
 
 html body .product__title :is(h1, .h1) {
@@ -612,15 +639,15 @@ html body .product__title :is(h1, .h1) {
   font-family: var(--ss-font);
   font-size: var(--ss-text-lg);
   font-weight: var(--ss-weight-title);
-  letter-spacing: 0.016em;
-  line-height: 1.2;
+  letter-spacing: 0.015em;
+  line-height: var(--ss-lh-tight);
   color: var(--ss-black);
   text-align: left;
 }
 
 /* title + price/status read as one block */
 html body .product__info-container > [id^="price-"] {
-  margin-top: var(--ss-1h);
+  margin-top: var(--ss-v-xs);
 }
 
 html body .product__info-container .price {
@@ -663,20 +690,20 @@ html body .product__info-container .price.price--sold-out .price__badge-sold-out
 }
 
 html body .product__info-container > :is(variant-radios, variant-selects) {
-  margin-top: var(--ss-5);
+  margin-top: var(--ss-v-2xl);
 }
 
 /* section labels: SIZE / COLOR / QUANTITY (11 IN CART) on one baseline */
 html body :is(.product-form__input .form__label, .product-form__quantity .quantity__label) {
   display: flex;
   align-items: baseline;
-  gap: var(--ss-2);
-  margin: 0 0 var(--ss-2);
+  gap: 0.45em; /* QUANTITY (11 IN CART): one word-space apart */
+  margin: 0 0 var(--ss-v-sm);
   padding: 0;
   font-family: var(--ss-font);
   font-size: var(--ss-text-sm);
   letter-spacing: var(--ss-track);
-  line-height: 1.24;
+  line-height: var(--ss-lh-tight);
   color: var(--ss-charcoal);
 }
 
@@ -690,7 +717,7 @@ html body .quantity__label .quantity__rules-cart {
 html body variant-radios {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: var(--ss-v-lg);
 }
 
 html body .ss-options {
@@ -783,7 +810,7 @@ html body .ss-options input[type="radio"]:focus-visible + label {
 
 /* 9. QUANTITY — one control everywhere  [ − | 1 | + ] ---------------------- */
 html body .product__info-container > .product-form__quantity {
-  margin-top: 18px;
+  margin-top: var(--ss-v-lg);
 }
 
 html body quantity-input.quantity {
@@ -873,7 +900,7 @@ html body quantity-input .quantity__input {
 
 /* 10. DESCRIPTION + STORE CREDIT --------------------------------------------- */
 html body .product__info-container > .product__description {
-  margin-top: var(--ss-4h);
+  margin-top: var(--ss-v-xl);
   margin-bottom: 0; /* its legacy 27.5px collapsed over the 20px gap below */
 }
 
@@ -885,9 +912,9 @@ html body .product__description > :last-child {
    easy line-height; charcoal keeps it below the black UI labels */
 html body :is(.product__description, .product__description *) {
   font-family: var(--ss-font);
-  font-size: 13px;
+  font-size: 12.35px;
   letter-spacing: 0;
-  line-height: 1.5;
+  line-height: var(--ss-lh-body);
   color: var(--ss-charcoal);
   text-transform: uppercase;
 }
@@ -897,20 +924,21 @@ html body .product__description em {
 }
 
 html body .product__info-container > div:has(> product-form) {
-  margin-top: var(--ss-4h);
+  margin-top: var(--ss-v-xl);
 }
 
 html body .koin-promotion-widget-wrapper {
   --koin-background-color: transparent;
   --koin-text-primary: var(--ss-charcoal);
   --koin-border-color: var(--ss-line);
-  margin: 0 0 10px;
+  margin: 0 0 var(--ss-v-md);
 }
 
 html body .koin-promotion-widget {
-  min-height: 56px;
+  min-height: 50px;
+  align-items: center;
   gap: var(--ss-3);
-  padding: 10px var(--ss-4);
+  padding: 7px var(--ss-4);
   border: var(--ss-border);
   border-radius: 0;
   background: transparent;
@@ -927,8 +955,8 @@ html body .koin-promotion-widget .koin-icon-image {
 html body :is(.koin-promotion-widget__description, .koin-promotion-widget__description *) {
   font-family: var(--ss-font);
   font-size: var(--ss-text-xs);
-  letter-spacing: 0.012em;
-  line-height: 1.36;
+  letter-spacing: var(--ss-track-tight);
+  line-height: var(--ss-lh-meta);
   color: var(--ss-charcoal);
 }
 
@@ -1034,7 +1062,7 @@ html body .product-form__submit.is-added {
 /* 12. CATEGORY INDEX  01  FULL RACK  → ------------------------------------- */
 html body .ss-index {
   margin-top: 0 !important;
-  margin-bottom: var(--ss-6) !important;
+  margin-bottom: 26px !important;
 }
 
 html body .ss-index__list {
@@ -1055,7 +1083,7 @@ html body .ss-index__row {
   align-items: center;
   gap: var(--ss-3);
   width: 100%;
-  min-height: 48px;
+  min-height: 41px;
   margin: 0;
   padding: 0 var(--ss-3);
   border: 0;
@@ -1081,13 +1109,13 @@ html body .ss-index__num {
 html body .ss-index__name {
   font-family: var(--ss-font);
   font-size: var(--ss-text-md);
-  letter-spacing: var(--ss-track);
-  line-height: 1.16;
+  letter-spacing: var(--ss-track-tight);
+  line-height: var(--ss-lh-tight);
 }
 
 html body .ss-index__arrow {
   font-family: var(--ss-font);
-  font-size: 15px;
+  font-size: 14.25px;
   line-height: 1;
   transition:
     transform var(--ss-normal) var(--ss-ease),
@@ -1121,7 +1149,7 @@ html body .ss-index__row[aria-expanded="true"] .ss-index__arrow {
 }
 
 html body .ss-index__panel {
-  padding: var(--ss-4h) 0 var(--ss-5);
+  padding: var(--ss-v-lg) 0 20px;
 }
 
 /* 13. BAG — denser than the product page ------------------------------------ */
@@ -1130,7 +1158,7 @@ html body cart-items .title-wrapper-with-link {
   align-items: baseline;
   justify-content: space-between;
   gap: var(--ss-4);
-  margin: 0 0 var(--ss-4);
+  margin: 0 0 13px;
 }
 
 html body cart-items .title--primary {
@@ -1138,7 +1166,7 @@ html body cart-items .title--primary {
   font-family: var(--ss-font);
   font-size: var(--ss-text-lg);
   font-weight: var(--ss-weight-title);
-  letter-spacing: var(--ss-track);
+  letter-spacing: 0.015em;
   color: var(--ss-black);
 }
 
@@ -1147,12 +1175,12 @@ html body .ss-link-arrow {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: var(--ss-2) 0;
+  padding: var(--ss-1h) 0;
   background-color: transparent;
   color: var(--ss-charcoal);
   font-family: var(--ss-font);
   font-size: var(--ss-text-xs);
-  letter-spacing: var(--ss-track-wide);
+  letter-spacing: var(--ss-track);
   line-height: 1;
   text-decoration: none;
 }
@@ -1173,9 +1201,9 @@ html body .ss-link-arrow__icon {
 
 /* ITEM / TOTAL: 12px mono, muted, on a hairline */
 html body .cart-items thead th {
-  padding: 0 0 var(--ss-2);
+  padding: 0 0 var(--ss-1h);
   font-family: var(--ss-font);
-  font-size: 12px;
+  font-size: 11.4px;
   letter-spacing: var(--ss-track-wide);
   color: var(--ss-muted);
   opacity: 1;
@@ -1187,16 +1215,16 @@ html body .cart-items thead tr {
 
 /* line item text */
 html body .cart-item__details > * + * {
-  margin-top: 2px;
+  margin-top: 1px;
 }
 
 html body .cart-item__name {
   display: block;
-  margin: 0 0 var(--ss-1);
+  margin: 0 0 3px;
   font-family: var(--ss-font);
   font-size: var(--ss-text-sm);
-  letter-spacing: 0.016em;
-  line-height: 1.24;
+  letter-spacing: var(--ss-track-tight);
+  line-height: var(--ss-lh-tight);
   color: var(--ss-black);
   text-decoration: none;
 }
@@ -1204,8 +1232,8 @@ html body .cart-item__name {
 html body .cart-item :is(.product-option, .product-option *) {
   font-family: var(--ss-font);
   font-size: var(--ss-text-xs);
-  letter-spacing: 0.016em;
-  line-height: 1.4;
+  letter-spacing: var(--ss-track-tight);
+  line-height: var(--ss-lh-meta);
   color: var(--ss-charcoal);
 }
 
@@ -1231,7 +1259,7 @@ html body .cart-item__quantity-wrapper {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: var(--ss-2) var(--ss-4);
+  gap: var(--ss-1h) var(--ss-3); /* REMOVE sits close beside the control */
 }
 
 html body .cart-item cart-remove-button {
@@ -1254,7 +1282,7 @@ html body cart-remove-button .button {
   color: var(--ss-black);
   font-family: var(--ss-font);
   font-size: var(--ss-text-xs);
-  letter-spacing: var(--ss-track-wide);
+  letter-spacing: var(--ss-track);
   background-position: 0 calc(50% + 0.75em);
 }
 
@@ -1288,14 +1316,14 @@ html body .cart-item__error-text:not(:empty) {
       "media details total"
       "media actions actions";
     align-items: start;
-    gap: 14px var(--ss-3);
+    gap: 10px var(--ss-3);
     margin: 0;
-    padding: var(--ss-4h) 0;
+    padding: var(--ss-v-lg) 0;
     border-bottom: var(--ss-border);
   }
 
   html body .cart-item:first-child {
-    padding-top: var(--ss-4);
+    padding-top: 13px;
   }
 
   html body .cart-item:last-child {
@@ -1338,7 +1366,7 @@ html body .cart-item__error-text:not(:empty) {
 
 /* totals + checkout */
 html body .cart__footer {
-  padding-top: var(--ss-4h);
+  padding-top: var(--ss-v-lg);
   text-align: left;
 }
 
@@ -1360,23 +1388,23 @@ html body .totals__subtotal {
 html body .totals__subtotal-value {
   margin: 0;
   font-family: var(--ss-font);
-  font-size: 14.25px;
+  font-size: 13.55px;
   color: var(--ss-black);
 }
 
 html body .cart__footer .tax-note {
   display: block;
-  margin: var(--ss-1h) 0 var(--ss-4);
+  margin: 5px 0 13px;
   font-family: var(--ss-font);
   font-size: var(--ss-text-2xs);
   letter-spacing: var(--ss-track);
-  line-height: 1.4;
+  line-height: var(--ss-lh-meta);
   color: var(--ss-muted);
   text-align: left;
 }
 
 html body .cart__ctas {
-  margin-top: 10px;
+  margin-top: var(--ss-2);
 }
 
 html body .cart__checkout-button {
@@ -1384,7 +1412,7 @@ html body .cart__checkout-button {
 }
 
 html body .cart__dynamic-checkout-buttons {
-  --shopify-accelerated-checkout-button-block-size: 50px;
+  --shopify-accelerated-checkout-button-block-size: var(--ss-button-h);
   --shopify-accelerated-checkout-button-border-radius: 0px;
   --shopify-accelerated-checkout-row-gap: 8px;
   margin-top: var(--ss-2);
@@ -1392,24 +1420,24 @@ html body .cart__dynamic-checkout-buttons {
 
 /* 14. FOOTER — small, tight, close to the last content ---------------------- */
 html body footer .footer__content-bottom {
-  padding-top: var(--ss-7) !important;
-  padding-bottom: var(--ss-6) !important;
+  padding-top: var(--ss-v-section) !important;
+  padding-bottom: 24px !important;
 }
 
 html body footer .footer__copyright {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: var(--ss-2);
   margin: 0;
 }
 
 html body :is(footer .copyright__content, footer .copyright__content a) {
   margin: 0;
   font-family: var(--ss-font);
-  font-size: 12px;
-  letter-spacing: var(--ss-track-wide);
-  line-height: 1.3;
+  font-size: 11.4px;
+  letter-spacing: var(--ss-track);
+  line-height: 1.2;
   color: var(--ss-muted);
   text-decoration: none;
 }
@@ -1418,7 +1446,7 @@ html body footer .policies {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5px;
+  gap: 3px;
   margin: 0;
   padding: 0;
 }
