@@ -1,0 +1,30 @@
+{%- comment -%}
+  STAYSOLID floating navigation.
+  One fixed glass panel above all page content (rendered directly in <body>,
+  outside any transformed ancestor, so content genuinely scrolls behind it).
+  Behaviour (sliding indicator, scroll compaction, legibility over dark
+  content) lives in assets/ss-nav.js; styles in staysolid-system.css §4.
+  IDs CustomMenuBagLink / CartBubble are kept: the cart and product form
+  scripts update the BAG count through them.
+{%- endcomment -%}
+<div class="ss-nav" role="navigation" aria-label="{{ 'sections.header.menu' | t }}" data-ss-nav>
+  <div class="ss-nav__list">
+    <a
+      href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"
+      class="ss-nav__item"
+      {% if request.page_type contains 'customers/' %}aria-current="page"{% endif %}
+    >user</a>
+    <a href="{{ routes.root_url }}" class="ss-nav__item"{% if request.page_type == 'index' %} aria-current="page"{% endif %}>rack</a>
+    <a href="/pages/categories" class="ss-nav__item"{% if request.path == '/pages/categories' %} aria-current="page"{% endif %}>categories</a>
+    <a href="/pages/lookboard" class="ss-nav__item"{% if request.path == '/pages/lookboard' %} aria-current="page"{% endif %}>lookboard</a>
+    <a
+      href="{{ routes.cart_url }}"
+      id="CustomMenuBagLink"
+      class="ss-nav__item{% if cart.item_count > 0 %} custom-menu-item--bag{% endif %}"
+      {% if request.page_type == 'cart' %}aria-current="page"{% endif %}
+    >
+      <span>bag</span><span id="CartBubble" class="ss-nav__count" data-cart-count="{{ cart.item_count }}">{{ cart.item_count }}</span>
+    </a>
+    <span class="ss-nav__indicator" aria-hidden="true"></span>
+  </div>
+</div>

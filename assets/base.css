@@ -4,13 +4,6 @@
   max-width: none !important;
 }
 @media screen and (min-width: 990px) {
-.custom-menu-wrapper {
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  gap: 2rem !important;
-  margin-top: -3.0rem !important; /* pulls the menu upward */
-}
   .variant-picker,
 .product__info-container .product-form__input {
   visibility: visible !important;
@@ -41,12 +34,8 @@ select {
 
 /* mobile override - keep menu layout consistent */
 @media only screen and (max-width: 749px) {
-  .header-wrapper {
-    padding-top: calc(env(safe-area-inset-top) + 16px) !important;
-  }
 
-html, body {
-  max-width: 100vw;
+html {
   overflow-x: hidden;
 }
 .product,
@@ -3260,12 +3249,8 @@ a.link.underlined-link {
 html {
   scroll-behavior: smooth;
 }
-html, body {
-  scroll-behavior: smooth;
-  will-change: scroll-position;
-  transform: translateZ(0);
-  -webkit-overflow-scrolling: touch;
-}
+/* no transform / will-change on html or body: they would turn body into the
+   scroll container and break the fixed floating navigation */
 
 /* 2. override any Shopify or theme reset cursor */
 html, body, main, section, div, span, a, button, input, select, textarea, nav, header, footer, label {
@@ -3516,10 +3501,9 @@ input, textarea {
   width: 100% !important;
   padding: 0 !important;
   margin: 0 auto !important;
-  min-height: 130px !important; /* locked height to prevent shrink */
   box-sizing: border-box !important;
   position: relative !important;
-  z-index: 1000 !important;
+  z-index: 1 !important; /* below the floating navigation (z 100) */
   background: transparent !important;
 }
 
@@ -3539,8 +3523,7 @@ main,
   justify-content: center !important;
   align-items: center !important;
   margin: 0 auto !important;
-  padding: 10px 0 !important;
-  z-index: 1000 !important;
+  padding: 0 !important;
 }
 
 .header__heading-link {
@@ -3579,18 +3562,6 @@ main,
 }
 
 /* === CUSTOM MENU - GLOBAL, STABLE POSITION === */
-.custom-menu {
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  gap: 12px !important;
-  font-size: 10.64px !important;
-  text-transform: uppercase !important;
-  margin-bottom: 5px !important;
-  margin-top: 10px !important;
-  position: relative !important;
-  z-index: 1000 !important;
-}
 
 /* stop logo and menu from jumping around if content shifts */
 .header__icons {
@@ -3609,25 +3580,13 @@ main,
 }
 
 /* Clean the (1) number outside the span */
-.custom-menu > div.cart-icon {
-  display: none !important;
-}
 
 /* Responsive spacing for mobile */
 @media screen and (max-width: 600px) {
-  .custom-menu {
-    gap: 10px !important;
-    font-size: 6.84px !important;
-  }
 }
 
 
 /* Prevent highlight unless it's user or bag */
-.custom-menu a:not(:first-child):not(:nth-child(2)) {
-  background: transparent !important;
-  color: inherit !important;
-  pointer-events: none;
-}
 
 /* Cart count text alignment */
 .cart-count {
@@ -3637,10 +3596,6 @@ main,
 /* =============== RESPONSIVE STYLING =============== */
 
 @media screen and (max-width: 768px) {
-  .custom-menu {
-    font-size: 0.608rem;
-    gap: 0.7rem;
-  }
 
   .header__heading-logo {
     max-width: 90px;
@@ -3899,19 +3854,18 @@ cart-items.page-width {
 @media only screen and (max-width: 767px) {
   body,
   html {
-    overflow-x: hidden;
+    overflow-x: clip;
     padding: 0;
     margin: 0;
     font-size: 10.64px;
   }
 
-  .custom-menu {
-    font-size: 11.4px !important;
-    padding: 10px 15px;
-  }
 
-  /* sections stack vertically; the horizontal gutter lives on .page-width */
-  section,
+  /* sections stack vertically; the horizontal gutter lives on .page-width.
+     Theme sections only: a bare `section` also caught Shopify's cookie
+     banner (a fixed <section> at left:5%) and pushed it off-screen. */
+  main section,
+  .shopify-section > section,
   .section,
   .content-section,
   .main-content {
@@ -4033,7 +3987,7 @@ cart-items.page-width {
   }
 }
 html, body {
-  height: 100%;
+  min-height: 100%;
   margin: 0;
   padding: 0;
   background-color: var(--ss-bg); /* or your desired background */
@@ -4051,8 +4005,7 @@ html,
 body {
   margin: 0;
   padding: 0;
-  width: 100vw;
-  height: 100%;
+  min-height: 100%;
   background-color: var(--ss-bg); /* adjust to match your site's top background */
 }
 body {
@@ -4060,33 +4013,15 @@ body {
   padding-right: env(safe-area-inset-right);
   padding-bottom: env(safe-area-inset-bottom);
 }
-.header-wrapper {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  padding-top: env(safe-area-inset-top);
-  z-index: 1000;
-  background-color: var(--ss-bg); /* or use your header's gradient color */
-  width: 100%;
-}
-.custom-menu {
-  padding-top: env(safe-area-inset-top); /* avoid overlap with notch */
-  background-color: var(--ss-bg); /* make sure this blends in with top area */
-  position: relative;
-  z-index: 999;
-}
-.header-wrapper {
-  padding-top: env(safe-area-inset-top);
-  background-color: var(--ss-bg); /* match your site background */
-}
+
+
 body {
   margin: 0;
   padding: 0;
   background: var(--ss-bg);
 }
 body {
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 main, .main-content, .shopify-section, .template-index, .page-width {

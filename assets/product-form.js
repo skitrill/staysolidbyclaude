@@ -90,7 +90,7 @@ if (!customElements.get('product-form')) {
         // a variant change may have rewritten the label meanwhile; only undo our own text
         if (label.textContent === addedLabel) label.textContent = this.defaultSubmitLabel;
         this.submitButton.classList.remove('is-added');
-      }, 1000);
+      }, 900);
     }
 
     refreshBagCount() {
