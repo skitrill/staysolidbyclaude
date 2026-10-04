@@ -15,51 +15,60 @@
    ========================================================================== */
 
 /* 0. TOKENS ---------------------------------------------------------------- */
-/* colour tokens that change material in the filled BAG (html.ss-dark) are
-   registered so the whole surface can glide between them (§16) */
-@property --ss-bg { syntax: "<color>"; inherits: true; initial-value: #f4f3ef; }
-@property --ss-black { syntax: "<color>"; inherits: true; initial-value: #111111; }
-@property --ss-on-black { syntax: "<color>"; inherits: true; initial-value: #f4f3ef; }
-@property --ss-ink-nav { syntax: "<color>"; inherits: true; initial-value: #181818; }
-@property --ss-text { syntax: "<color>"; inherits: true; initial-value: #202020; }
-@property --ss-ink-price { syntax: "<color>"; inherits: true; initial-value: #242424; }
-@property --ss-charcoal { syntax: "<color>"; inherits: true; initial-value: #4a4a46; }
-@property --ss-muted { syntax: "<color>"; inherits: true; initial-value: #8a8881; }
-@property --ss-line { syntax: "<color>"; inherits: true; initial-value: #d8d5cf; }
-@property --ss-hover-wash { syntax: "<color>"; inherits: true; initial-value: rgba(17, 17, 17, 0.05); }
-@property --ss-press { syntax: "<color>"; inherits: true; initial-value: rgba(17, 17, 17, 0.09); }
-@property --ss-glass-tint { syntax: "<color>"; inherits: true; initial-value: rgba(255, 255, 255, 0.08); }
-@property --ss-glass-edge { syntax: "<color>"; inherits: true; initial-value: rgba(255, 255, 255, 0.46); }
-@property --ss-glass-light { syntax: "<color>"; inherits: true; initial-value: rgba(255, 255, 255, 0.34); }
+/* STAYSOLID is set in liquid graphite:
+     GRAPHITE      the environment
+     SMOKED GLASS  the floating system (nav, RETURN)
+     OFF-WHITE     interaction (primary buttons, selected states)
+     GRAY          information
+     ORANGE        identity — the logo, the BAG count, tiny feedback
+     PRODUCT       most of the colour on any screen
+   Colour tokens are registered so a surface can glide between values (the
+   filled BAG deepens, §16). */
+@property --ss-bg { syntax: "<color>"; inherits: true; initial-value: #121212; }
+@property --ss-primary { syntax: "<color>"; inherits: true; initial-value: #e9e8e3; }
+@property --ss-on-primary { syntax: "<color>"; inherits: true; initial-value: #141414; }
+@property --ss-ink-nav { syntax: "<color>"; inherits: true; initial-value: rgba(233, 232, 227, 0.88); }
+@property --ss-text { syntax: "<color>"; inherits: true; initial-value: #e5e4df; }
+@property --ss-ink-price { syntax: "<color>"; inherits: true; initial-value: #cfcec9; }
+@property --ss-secondary { syntax: "<color>"; inherits: true; initial-value: #aaa9a4; }
+@property --ss-muted { syntax: "<color>"; inherits: true; initial-value: #73726e; }
+@property --ss-line { syntax: "<color>"; inherits: true; initial-value: rgba(255, 255, 255, 0.1); }
+@property --ss-hover-wash { syntax: "<color>"; inherits: true; initial-value: rgba(255, 255, 255, 0.05); }
+@property --ss-press { syntax: "<color>"; inherits: true; initial-value: rgba(255, 255, 255, 0.12); }
+@property --ss-glass-tint { syntax: "<color>"; inherits: true; initial-value: rgba(255, 255, 255, 0.03); }
+@property --ss-glass-edge { syntax: "<color>"; inherits: true; initial-value: rgba(255, 255, 255, 0.07); }
+@property --ss-glass-light { syntax: "<color>"; inherits: true; initial-value: rgba(255, 255, 255, 0.06); }
 
 :root {
-  /* colour — a black hierarchy, so the site isn't equally black everywhere:
-       true black   buttons, selected states, strong interaction surfaces
-       nav ink      the floating navigation
-       text         product titles and running text
-       price        prices, a hair lighter than the name
-       charcoal     secondary information (labels, description, options)
-       muted        timestamps, footer, inactive metadata
-       orange       the BAG count and tiny moments of feedback, nothing else */
-  --ss-bg: #f4f3ef;
-  --ss-black: #111111;
-  --ss-ink-nav: #181818;
-  --ss-text: #202020;
-  --ss-ink-price: #242424;
-  --ss-charcoal: #4a4a46;
-  --ss-muted: #8a8881;
-  --ss-line: #d8d5cf;
-  --ss-orange: #eea620; /* sampled from the logo artwork */
-  --ss-on-orange: #111111;
-  --ss-on-black: #f4f3ef;
-  --ss-on-dark-text: #f2f1ec;
-  --ss-hover-wash: rgba(17, 17, 17, 0.05);
-  --ss-press: rgba(17, 17, 17, 0.09);
+  /* environment */
+  --ss-bg: #121212;            /* deep graphite: black garments keep an edge */
+  --ss-surface: #161616;
+  --ss-surface-raised: #1a1a1a;
+  /* a barely-there lift of light behind product imagery (grid, gallery, bag)
+     so black garments keep their silhouette without a card */
+  --ss-stage: radial-gradient(58% 52% at 50% 50%, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0) 100%);
 
-  /* glass: clear in the store, smoked in the filled BAG */
-  --ss-glass-tint: rgba(255, 255, 255, 0.08);
-  --ss-glass-edge: rgba(255, 255, 255, 0.46);
-  --ss-glass-light: rgba(255, 255, 255, 0.34);
+  /* ink */
+  --ss-primary: #e9e8e3;       /* off-white interaction surface: ADD TO BAG, CHECK OUT, selected */
+  --ss-on-primary: #141414;    /* graphite text on it */
+  --ss-ink-nav: rgba(233, 232, 227, 0.88);
+  --ss-text: #e5e4df;          /* titles and running text */
+  --ss-ink-price: #cfcec9;     /* prices, a step softer than the name */
+  --ss-secondary: #aaa9a4;     /* labels, description, options */
+  --ss-muted: #73726e;         /* timestamps, footer, inactive metadata */
+  --ss-line: rgba(255, 255, 255, 0.1);
+  --ss-line-strong: rgba(255, 255, 255, 0.16);
+  --ss-hover-wash: rgba(255, 255, 255, 0.05);
+  --ss-press: rgba(255, 255, 255, 0.12);
+
+  /* identity */
+  --ss-orange: #eea620;        /* sampled from the logo artwork */
+  --ss-on-orange: #111111;
+
+  /* smoked glass */
+  --ss-glass-tint: rgba(255, 255, 255, 0.03);
+  --ss-glass-edge: rgba(255, 255, 255, 0.07);
+  --ss-glass-light: rgba(255, 255, 255, 0.06);
 
   /* type: one face (the site's Source Code Pro), one weight.
      Sizes sit one ~5% step under the previous scale; hierarchy unchanged. */
@@ -109,7 +118,7 @@
 
   /* structure */
   --ss-border: 1px solid var(--ss-line);
-  --ss-border-strong: 1px solid var(--ss-black);
+  --ss-border-strong: 1px solid var(--ss-primary);
   --ss-control-h: 39px;  /* size / colour selectors */
   --ss-qty-w: 126px;     /* three equal 42px cells */
   --ss-qty-h: 37px;
@@ -134,7 +143,7 @@
   /* motion: one easing, three speeds */
   --ss-ease: cubic-bezier(0.22, 1, 0.36, 1);
   --ss-fast: 120ms;   /* state changes */
-  --ss-normal: 200ms; /* indicator, image changes, hovers */
+  --ss-normal: 200ms; /* image changes, hovers, RETURN */
   --ss-page: 280ms;   /* entrances */
 
   /* point the theme's own variables at the system */
@@ -143,14 +152,14 @@
   --font-body-weight: 400;
   --font-heading-weight: 400;
   --font-body-weight-bold: 400;
-  --color-base-text: 17, 17, 17;
-  --color-shadow: 17, 17, 17;
-  --color-base-background-1: 244, 243, 239;
-  --color-base-background-2: 244, 243, 239;
-  --color-base-solid-button-labels: 244, 243, 239;
-  --color-base-outline-button-labels: 17, 17, 17;
-  --color-base-accent-1: 17, 17, 17;
-  --color-base-accent-2: 17, 17, 17;
+  --color-base-text: 229, 228, 223;
+  --color-shadow: 0, 0, 0;
+  --color-base-background-1: 18, 18, 18;
+  --color-base-background-2: 18, 18, 18;
+  --color-base-solid-button-labels: 20, 20, 20;
+  --color-base-outline-button-labels: 229, 228, 223;
+  --color-base-accent-1: 233, 232, 227;
+  --color-base-accent-2: 233, 232, 227;
 }
 
 /* smallest phones: the nav keeps its size and weight and switches to the
@@ -214,7 +223,7 @@ html body :is(b, strong, th, dt, legend, summary) {
 html body .ss-meta {
   font-family: var(--ss-font);
   letter-spacing: var(--ss-track-tight);
-  color: var(--ss-charcoal);
+  color: var(--ss-secondary);
 }
 
 html body *:focus-visible {
@@ -266,10 +275,9 @@ html body main :is(.shopify-section, section, .section) {
    the rack, a RETURN tab hanging from its bottom-left corner. Content scrolls
    behind both. Their colour comes only from what passes under: backdrop blur
    + saturation, a near-zero tint, a hairline and a soft inner light.
-   The nav has its own voice — Archivo SemiCondensed 600 (loaded in
-   layout/theme.liquid) — while the page keeps the technical mono. Its
-   material tokens (--ss-glass-*, --ss-ink-nav) turn smoked in the filled
-   BAG (§16): the same object changing material, not a second design. */
+   The nav has its own voice — Archivo SemiCondensed 600, RETURN 550 (loaded
+   in layout/theme.liquid) — while the page keeps the technical mono. The
+   glass is identified by blur, surface and edge light, barely by outline. */
 html body .ss-navbar {
   --ss-nav-pad: 14px;
   position: fixed;
@@ -307,16 +315,14 @@ html body .ss-nav {
   align-items: center;
   box-shadow:
     inset 0 1px 0 var(--ss-glass-light),
-    0 0 0 0.5px rgba(17, 17, 17, 0.06),
-    0 12px 32px -22px rgba(17, 17, 17, 0.2);
+    0 14px 34px -22px rgba(0, 0, 0, 0.55);
   transition: height var(--ss-normal) var(--ss-ease);
-  animation: ss-nav-in var(--ss-page) var(--ss-ease) both;
 }
 
 /* older engines without backdrop-filter: quiet translucent panels instead */
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   html body :is(.ss-nav, .ss-return) {
-    background-color: rgba(244, 243, 239, 0.92);
+    background-color: rgba(22, 22, 22, 0.92);
   }
 }
 
@@ -336,17 +342,11 @@ html body .ss-nav.is-compact {
   height: var(--ss-nav-h-compact);
 }
 
-/* a word (or the tab) over genuinely dark content turns off-white; in the
-   smoked BAG the reverse — over something bright it turns charcoal (ss-nav.js) */
+/* the nav reads off-white over graphite; where something bright (a white
+   garment) passes directly under a word, that word turns graphite (ss-nav.js) */
 html body :is(.ss-nav__item, .ss-return).is-on-light {
-  color: #181818;
-  text-shadow: 0 0 6px rgba(244, 243, 239, 0.4);
-}
-
-html body :is(.ss-nav__item, .ss-return).is-on-dark {
-  color: var(--ss-on-dark-text);
-  /* faint halo keeps letters legible where a word straddles light and dark */
-  text-shadow: 0 0 6px rgba(17, 17, 17, 0.35);
+  color: #161616;
+  text-shadow: 0 0 6px rgba(233, 232, 227, 0.45);
 }
 
 /* USER anchors the left, BAG the right; flexible gaps never drop below a
@@ -451,7 +451,7 @@ html body .ss-nav__count.is-ticking {
 /* a changed number: only the digits refresh, the block stays put */
 @keyframes ss-count-tick {
   from {
-    color: rgba(17, 17, 17, 0.15);
+    color: rgba(17, 17, 17, 0.2);
   }
 }
 
@@ -470,9 +470,9 @@ html body .ss-return {
   padding: 0 calc(var(--ss-nav-pad) - 2px) 0 var(--ss-nav-pad);
   border-top: 0;
   box-shadow:
-    0 0 0 0.5px rgba(17, 17, 17, 0.05),
-    0 10px 24px -20px rgba(17, 17, 17, 0.2);
+    0 12px 26px -20px rgba(0, 0, 0, 0.5);
   font-size: calc(var(--ss-text-nav) * 0.88);
+  font-weight: 550;
   letter-spacing: -0.01em;
   text-decoration: none;
   white-space: nowrap;
@@ -525,17 +525,6 @@ html body .ss-return:active {
   opacity: 0.6;
 }
 
-@keyframes ss-nav-in {
-  from {
-    opacity: 0;
-    transform: translateY(-6px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
 /* 5. HEADER — logo and live timestamp, scrolling behind the glass ---------- */
 html body .section-header .header-wrapper {
   padding-top: calc(var(--ss-nav-clearance) + 30px) !important;
@@ -552,13 +541,12 @@ html body .header__heading-link {
 }
 
 /* logo: 144px wide on every screen (outranks the theme-editor width and the
-   legacy max-width caps), recoloured from the orange artwork to a neutral
-   gray — brightness(0) flattens it to black, invert lifts it to #8a8a8a */
+   legacy max-width caps), in its own orange — against graphite it is the
+   brand's strongest moment, so orange stays scarce everywhere else */
 html body .header__heading-link img.header__heading-logo {
   width: 144px !important;
   max-width: none !important;
   height: auto !important;
-  filter: brightness(0) invert(54%);
 }
 
 html body #shopdatetime {
@@ -610,6 +598,7 @@ html body .product-grid .card-wrapper > .card > .card__content {
    by stww-product-balance.js so every garment carries equal visual weight */
 html body .product-grid .card__inner {
   aspect-ratio: 1 / 1;
+  background-image: var(--ss-stage);
 }
 
 html body .product-grid .card__media img {
@@ -678,9 +667,9 @@ html body .product-grid .card__badge {
 
 html body .product-grid .card__badge .badge {
   padding: 5px 9px;
-  border: var(--ss-border-strong);
+  border: 1px solid rgba(255, 255, 255, 0.22);
   border-radius: 0;
-  background-color: rgba(244, 243, 239, 0.72);
+  background-color: rgba(18, 18, 18, 0.5);
   -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
   color: var(--ss-text);
@@ -692,7 +681,7 @@ html body .product-grid .card__badge .badge {
 
 @media (hover: hover) and (min-width: 750px) {
   html body .product-grid .card-wrapper:hover .card__media img {
-    transform: scale(1.012);
+    transform: scale(1.01);
   }
 
   html body .product-grid .card-wrapper:hover .card__heading a {
@@ -713,6 +702,7 @@ html body .product-grid .card-wrapper:active {
    than square so the garment stays large without dead bands above/below */
 html body .product__media-list .product__media {
   padding-top: 87% !important;
+  background-image: var(--ss-stage);
 }
 
 html body .product__media-list .product__media img {
@@ -783,7 +773,7 @@ html body .product .slider-counter {
   font-family: var(--ss-font);
   font-size: var(--ss-text-sm);
   letter-spacing: var(--ss-track);
-  color: var(--ss-charcoal);
+  color: var(--ss-secondary);
 }
 
 /* information column: one left edge, one rhythm */
@@ -875,7 +865,7 @@ html body :is(.product-form__input .form__label, .product-form__quantity .quanti
   font-size: var(--ss-text-sm);
   letter-spacing: var(--ss-track);
   line-height: var(--ss-lh-tight);
-  color: var(--ss-charcoal);
+  color: var(--ss-secondary);
 }
 
 html body .quantity__label .quantity__rules-cart {
@@ -951,15 +941,15 @@ html body .ss-options--grid input[type="radio"] + label {
 
 @media (hover: hover) {
   html body .ss-options input[type="radio"]:not(:checked) + label:hover {
-    border-color: var(--ss-black);
+    border-color: var(--ss-primary);
     background-color: var(--ss-hover-wash);
   }
 }
 
 html body .ss-options input[type="radio"]:checked + label {
-  border-color: var(--ss-black);
-  background-color: var(--ss-black);
-  color: var(--ss-on-black);
+  border-color: var(--ss-primary);
+  background-color: var(--ss-primary);
+  color: var(--ss-on-primary);
 }
 
 html body .ss-options input[type="radio"]:is(.disabled, :disabled) + label {
@@ -969,9 +959,9 @@ html body .ss-options input[type="radio"]:is(.disabled, :disabled) + label {
 }
 
 html body .ss-options input[type="radio"].disabled:checked + label {
-  border-color: var(--ss-charcoal);
-  background-color: var(--ss-charcoal);
-  color: #b9b5ad;
+  border-color: var(--ss-muted);
+  background-color: var(--ss-muted);
+  color: var(--ss-on-primary);
 }
 
 html body .ss-options input[type="radio"]:focus-visible + label {
@@ -1014,7 +1004,7 @@ html body quantity-input.quantity::after {
 
 @media (hover: hover) {
   html body quantity-input.quantity:hover {
-    border-color: var(--ss-black);
+    border-color: var(--ss-primary);
   }
 
   html body quantity-input .quantity__button:hover {
@@ -1090,7 +1080,7 @@ html body :is(.product__description, .product__description *) {
   font-size: 12.35px;
   letter-spacing: 0;
   line-height: var(--ss-lh-body);
-  color: var(--ss-charcoal);
+  color: var(--ss-secondary);
   text-transform: uppercase;
 }
 
@@ -1104,8 +1094,8 @@ html body .product__info-container > div:has(> product-form) {
 
 html body .koin-promotion-widget-wrapper {
   --koin-background-color: transparent;
-  --koin-text-primary: var(--ss-charcoal);
-  --koin-border-color: var(--ss-line);
+  --koin-text-primary: var(--ss-secondary);
+  --koin-border-color: var(--ss-glass-edge);
   margin: 0 0 var(--ss-v-md);
 }
 
@@ -1114,17 +1104,17 @@ html body .koin-promotion-widget {
   align-items: center;
   gap: var(--ss-3);
   padding: 7px var(--ss-4);
-  border: var(--ss-border);
+  border: 1px solid var(--ss-glass-edge);
   border-radius: 0;
-  background: transparent;
-  color: var(--ss-charcoal);
+  background: rgba(255, 255, 255, 0.025);
+  color: var(--ss-secondary);
 }
 
 html body .koin-promotion-widget .koin-icon-image {
   width: 18px;
   min-width: 18px;
   margin: 0;
-  filter: invert(1); /* the app's icon artwork is white */
+  filter: none; /* the app's icon artwork is white, as it should be on graphite */
 }
 
 html body :is(.koin-promotion-widget__description, .koin-promotion-widget__description *) {
@@ -1132,11 +1122,13 @@ html body :is(.koin-promotion-widget__description, .koin-promotion-widget__descr
   font-size: var(--ss-text-xs);
   letter-spacing: var(--ss-track-tight);
   line-height: var(--ss-lh-meta);
-  color: var(--ss-charcoal);
+  color: var(--ss-secondary);
 }
 
+/* the monetary value is the one bright detail */
 html body .koin-promotion-widget__description strong {
   color: var(--ss-text);
+  font-weight: var(--ss-weight);
 }
 
 /* 11. BUTTONS — primary / secondary / accent ------------------------------- */
@@ -1149,9 +1141,9 @@ html body :is(.button, .shopify-challenge__button) {
   padding: 0 var(--ss-5);
   border: var(--ss-border-strong);
   border-radius: 0;
-  background-color: var(--ss-black);
+  background-color: var(--ss-primary);
   box-shadow: none;
-  color: var(--ss-on-black);
+  color: var(--ss-on-primary);
   font-family: var(--ss-font);
   font-size: var(--ss-text-md);
   letter-spacing: var(--ss-track-wide);
@@ -1186,8 +1178,8 @@ html body .button--full-width {
   }
 
   html body .button--secondary:not([disabled]):hover {
-    background-color: var(--ss-black);
-    color: var(--ss-on-black);
+    background-color: var(--ss-primary);
+    color: var(--ss-on-primary);
   }
 }
 
@@ -1206,9 +1198,9 @@ html body .button:is([disabled], :disabled) {
 }
 
 html body .button--secondary {
-  border-color: var(--ss-black);
+  border-color: var(--ss-primary);
   background-color: transparent;
-  color: var(--ss-black);
+  color: var(--ss-primary);
 }
 
 html body .ss-button--accent {
@@ -1299,12 +1291,12 @@ html body .ss-index__arrow {
 
 @media (hover: hover) {
   html body .ss-index__row:hover {
-    background-color: var(--ss-black);
-    color: var(--ss-on-black);
+    background-color: var(--ss-primary);
+    color: var(--ss-on-primary);
   }
 
   html body .ss-index__row:hover .ss-index__num {
-    color: #a9a59d;
+    color: var(--ss-muted);
   }
 
   html body .ss-index__row:hover .ss-index__arrow {
@@ -1314,8 +1306,8 @@ html body .ss-index__arrow {
 }
 
 html body .ss-index__row:active {
-  background-color: var(--ss-black);
-  color: var(--ss-on-black);
+  background-color: var(--ss-primary);
+  color: var(--ss-on-primary);
 }
 
 html body .ss-index__row[aria-expanded="true"] .ss-index__arrow {
@@ -1366,7 +1358,7 @@ html body .cart__empty-text {
   font-weight: var(--ss-weight);
   letter-spacing: var(--ss-track);
   line-height: var(--ss-lh-tight);
-  color: var(--ss-charcoal);
+  color: var(--ss-secondary);
 }
 
 html body :is(.cart__login-title, .cart__login-paragraph) {
@@ -1389,7 +1381,7 @@ html body .ss-link-arrow {
   gap: 6px;
   padding: var(--ss-1h) 0;
   background-color: transparent;
-  color: var(--ss-charcoal);
+  color: var(--ss-secondary);
   font-family: var(--ss-font);
   font-size: var(--ss-text-xs);
   letter-spacing: var(--ss-track);
@@ -1446,7 +1438,7 @@ html body .cart-item :is(.product-option, .product-option *) {
   font-size: var(--ss-text-xs);
   letter-spacing: var(--ss-track-tight);
   line-height: var(--ss-lh-meta);
-  color: var(--ss-charcoal);
+  color: var(--ss-secondary);
 }
 
 html body .cart-item .cart-item__final-price {
@@ -1491,7 +1483,7 @@ html body cart-remove-button .button {
   padding: 0;
   border: 0;
   background-color: transparent;
-  color: var(--ss-charcoal);
+  color: var(--ss-secondary);
   font-family: var(--ss-font);
   font-size: var(--ss-text-xs);
   letter-spacing: var(--ss-track);
@@ -1561,6 +1553,7 @@ html body .cart-item__error-text:not(:empty) {
 
   /* identical image box for every line, garments never cropped */
   html body .cart-item__image-container {
+    background-image: var(--ss-stage);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1675,69 +1668,29 @@ html body footer :is(.policies li, .policies a) {
   }
 }
 
-/* 16. BAG — DARK LIQUID MODE ------------------------------------------------
-   When the bag holds something the cart page changes material: every colour
-   token glides from the light store to smoked graphite over one page beat.
-   html.ss-dark is driven by real cart data in ss-nav.js — added on a filled
-   BAG, removed when the last item goes; an empty bag stays light. The glass
-   nav and RETURN read the same tokens, so they turn smoked with it. */
+/* 16. BAG — deeper smoked graphite ----------------------------------------
+   The whole store is graphite; a bag that holds something sinks one shade
+   deeper so the garments and CHECK OUT come forward. html.ss-bag-deep is
+   driven by real cart data in ss-nav.js (added on a filled BAG, removed when
+   the last item goes), and the registered tokens glide between shades. */
 html {
   transition:
     --ss-bg var(--ss-page) var(--ss-ease),
-    --ss-black var(--ss-page) var(--ss-ease),
-    --ss-on-black var(--ss-page) var(--ss-ease),
-    --ss-ink-nav var(--ss-page) var(--ss-ease),
-    --ss-text var(--ss-page) var(--ss-ease),
-    --ss-ink-price var(--ss-page) var(--ss-ease),
-    --ss-charcoal var(--ss-page) var(--ss-ease),
-    --ss-muted var(--ss-page) var(--ss-ease),
-    --ss-line var(--ss-page) var(--ss-ease),
-    --ss-hover-wash var(--ss-page) var(--ss-ease),
-    --ss-press var(--ss-page) var(--ss-ease),
-    --ss-glass-tint var(--ss-page) var(--ss-ease),
-    --ss-glass-edge var(--ss-page) var(--ss-ease),
-    --ss-glass-light var(--ss-page) var(--ss-ease);
+    --ss-glass-tint var(--ss-page) var(--ss-ease);
 }
 
-html.ss-dark {
-  --ss-bg: #111111;
-  --ss-black: #f2f1ec;       /* the primary surface inverts: CHECK OUT is off-white */
-  --ss-on-black: #111111;
-  --ss-ink-nav: #f2f1ec;
-  --ss-text: #f2f1ec;
-  --ss-ink-price: #f2f1ec;
-  --ss-charcoal: rgba(242, 241, 236, 0.68);
-  --ss-muted: rgba(242, 241, 236, 0.42);
-  --ss-line: rgba(255, 255, 255, 0.12);
-  --ss-hover-wash: rgba(255, 255, 255, 0.06);
-  --ss-press: rgba(255, 255, 255, 0.14);
-  --ss-glass-tint: rgba(15, 15, 15, 0.2);
-  --ss-glass-edge: rgba(255, 255, 255, 0.1);
-  --ss-glass-light: rgba(255, 255, 255, 0.07);
-}
-
-/* barely-there depth: a faint lift of light at the top of the graphite */
-html.ss-dark body {
-  background-image: radial-gradient(120% 55% at 50% 0%, rgba(255, 255, 255, 0.035), transparent 70%);
-  background-repeat: no-repeat;
-}
-
-@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  html.ss-dark body :is(.ss-nav, .ss-return) {
-    background-color: rgba(17, 17, 17, 0.9);
-  }
-}
-
-/* the store-credit icon artwork is white: show it as-is on graphite */
-html.ss-dark body .koin-promotion-widget .koin-icon-image {
-  filter: none;
+html.ss-bag-deep {
+  --ss-bg: #0e0e0e;
+  --ss-glass-tint: rgba(255, 255, 255, 0.025);
 }
 
 /* 15. MOTION — one easing, three speeds ------------------------------------- */
+/* one graphite canvas from page to page: content settles in from a near-
+   resting state while the glass nav stays put */
 @keyframes ss-enter {
   from {
-    opacity: 0;
-    transform: translateY(5px);
+    opacity: 0.85;
+    transform: translateY(4px);
   }
   to {
     opacity: 1;
@@ -1747,8 +1700,8 @@ html.ss-dark body .koin-promotion-widget .koin-icon-image {
 
 @keyframes ss-step-in {
   from {
-    opacity: 0;
-    transform: translateY(4px);
+    opacity: 0.35;
+    transform: scale(0.985);
   }
   to {
     opacity: 1;
@@ -1767,15 +1720,15 @@ html.ss-dark body .koin-promotion-widget .koin-icon-image {
 
 @media (prefers-reduced-motion: no-preference) {
   html body :is(.header__heading, #shopdatetime, main) {
-    animation: ss-enter var(--ss-page) var(--ss-ease) both;
+    animation: ss-enter 220ms var(--ss-ease) both;
   }
 
   html body #shopdatetime {
-    animation-delay: 40ms;
+    animation-delay: 20ms;
   }
 
   html body main {
-    animation-delay: 80ms;
+    animation-delay: 40ms;
   }
 
   html body .fade-in {

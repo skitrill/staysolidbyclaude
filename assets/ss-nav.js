@@ -5,14 +5,13 @@
      real cart (data-cart-count, written by cart.js / product-form.js):
      0 -> n animates it in, n -> 0 animates it out and removes it, and any
      other change only refreshes the digits.
-  2. Filled BAG: on the cart page, while the bag holds something, the page
-     changes material to smoked graphite (html.ss-dark, staysolid-system.css
-     §16). Data-driven, so removing the last item dissolves it back to light.
+  2. Filled BAG: on the cart page, while the bag holds something, the
+     graphite sinks one shade deeper (html.ss-bag-deep, staysolid-system.css
+     §16). Data-driven, so removing the last item lifts it back.
   3. Compaction: the bar gets a little thinner once the page is scrolled.
-  4. Legibility: content scrolls behind colourless glass, so each word (and
-     the RETURN tab) reads what is directly underneath it — on the light
-     store it flips to off-white over something dark; in the smoked BAG it
-     flips to charcoal over something bright. Hysteresis keeps it calm.
+  4. Legibility: content scrolls behind smoked glass, so each word (and the
+     RETURN tab) reads what is directly underneath it and turns graphite over
+     something clearly bright (a white garment). Hysteresis keeps it calm.
   5. RETURN: a tab hanging under the bar on every screen but the rack. It
      slides out from behind the bar after the bar settles, stays put while
      moving between deeper screens, and retracts when the rack is reached.
@@ -63,9 +62,8 @@
   }
 
   function setBagMaterial(filled) {
-    if (!onCartPage || root.classList.contains('ss-dark') === filled) return;
-    root.classList.toggle('ss-dark', filled);
-    resetLegibility();
+    if (!onCartPage || root.classList.contains('ss-bag-deep') === filled) return;
+    root.classList.toggle('ss-bag-deep', filled);
   }
 
   function animateOnce(el, cls, done) {
@@ -108,7 +106,7 @@
     });
   }
 
-  // a filled bag opens light and glides into graphite, rather than hard-cutting
+  // a filled bag settles into the deeper shade rather than hard-cutting
   if (onCartPage && shownCount > 0) nextFrame(function () {
     setBagMaterial(true);
   });
@@ -194,13 +192,9 @@
   canvas.height = 32;
   var ctx = canvas.getContext('2d', { willReadFrequently: true });
 
-  function dark() {
-    return root.classList.contains('ss-dark');
-  }
-
-  // what an empty / transparent spot reads as: the page surface
+  // what an empty / transparent spot reads as: the graphite page surface
   function pageLuminance() {
-    return dark() ? 0.07 : 0.95;
+    return 0.07;
   }
 
   function luminance(r, g, b) {
@@ -279,11 +273,9 @@
   }
 
   // each word reads what is directly under it, so a garment crossing only
-  // part of the bar flips only the words it sits behind. Light store: flip
-  // to off-white over something clearly dark. Smoked BAG: flip to charcoal
-  // over something clearly bright. Hysteresis keeps it from flickering.
+  // part of the bar flips only the words it sits behind: clearly bright
+  // underneath turns the word graphite. Hysteresis keeps it from flickering.
   function sampleUnderneath() {
-    var smoked = dark();
     readable.forEach(function (item) {
       var rect = item.getBoundingClientRect();
       if (!rect.width) return;
@@ -293,24 +285,10 @@
         luminanceAt(rect.left + rect.width * 0.5, y) +
         luminanceAt(rect.left + rect.width * 0.75, y)
       ) / 3;
-      var cls = smoked ? 'is-on-light' : 'is-on-dark';
-      var on = item.classList.contains(cls);
-      if (smoked) {
-        if (!on && avg > 0.62) item.classList.add(cls);
-        else if (on && avg < 0.5) item.classList.remove(cls);
-      } else {
-        if (!on && avg < 0.38) item.classList.add(cls);
-        else if (on && avg > 0.5) item.classList.remove(cls);
-      }
+      var on = item.classList.contains('is-on-light');
+      if (!on && avg > 0.62) item.classList.add('is-on-light');
+      else if (on && avg < 0.5) item.classList.remove('is-on-light');
     });
-  }
-
-  function resetLegibility() {
-    readable.forEach(function (item) {
-      item.classList.remove('is-on-dark', 'is-on-light');
-    });
-    // sample again once the material has finished changing
-    setTimeout(sampleUnderneath, 320);
   }
 
   var ticking = false;

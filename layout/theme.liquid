@@ -3,7 +3,7 @@
   <head>
 {% include 'booster-seo' %}
 <!-- force status bar color across all platforms -->
-    <meta name="theme-color" content="#f4f3ef">
+    <meta name="theme-color" content="#121212">
 
 <!-- iOS Safari -->
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -20,13 +20,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="theme-color" content="black">
     <link rel="canonical" href="{{ canonical_url }}">
     <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
-    {%- comment -%} floating nav voice: Archivo 600, semi-condensed (+ condensed for the smallest phones), subset to the nav's capitals and digits {%- endcomment -%}
+    {%- comment -%} floating nav voice: Archivo 550–600 (variable), semi-condensed (+ condensed for the smallest phones), subset to the nav's capitals and digits {%- endcomment -%}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75,600;87.5,600&text=ABCDEGIKLNORSTU0123456789&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75,550..600;87.5,550..600&text=ABCDEGIKLNORSTU0123456789&display=swap">
     
 <style>
   .variant-picker,
@@ -370,8 +369,8 @@ html, body{
     background-color: {{ settings.custom_menu_drawer_bg }} !important;
   }
   .contact__button > .button{
-    background: black !important;
-    color: white !important;
+    background: var(--ss-primary) !important;
+    color: var(--ss-on-primary) !important;
   }
   .cart-count-bubble {
       background: {{ settings.custom_add_to_cart_bg }} !important;
@@ -392,7 +391,7 @@ html, body{
        viewport (this was causing a stray horizontal line near the bottom
        of short pages) */
     body.gradient {
-      background-color: var(--ss-bg, #f4f3ef) !important;
+      background-color: var(--ss-bg, #121212) !important;
     }
 
     @media screen and (max-width: 500px){

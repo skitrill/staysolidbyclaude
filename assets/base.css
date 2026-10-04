@@ -3205,7 +3205,7 @@ footer {
   line-height: 1.4 !important;
 }
 a.link.underlined-link {
-  color: #000000 !important;
+  color: inherit !important;
   text-decoration: none !important;
   background-color: transparent !important;
   transition: all 0.3s ease;
@@ -3408,7 +3408,7 @@ textarea {
 }
 
 .policy__link a {
-  color: #000 !important; /* Ensures default black in light mode */
+  color: var(--ss-secondary) !important;
   font-size: 10.64px;
 }
 
@@ -3431,7 +3431,7 @@ textarea {
 
 /* --- Ensure Forms & Input Fields Have Proper Borders --- */
 input, textarea {
-  border: 1px solid #000 !important; /* Black borders in light mode */
+  border: 1px solid var(--ss-line-strong) !important;
 }
 
 /* --- Fix Firstname & Lastname Field Margin --- */
@@ -3463,14 +3463,14 @@ input, textarea {
 
 /* --- Ensure Text Selection Looks Correct in Both Modes --- */
 ::selection {
-  background: black !important;
-  color: white !important;
+  background: var(--ss-primary) !important;
+  color: var(--ss-on-primary) !important;
 }
 
 /* --- Ensure Store Credit & Cart Text Matches Mode --- */
 .store-credit {
   background: var(--ss-bg) !important;
-  color: #000 !important;
+  color: var(--ss-secondary) !important;
 }
 
 /* === CONSISTENT, STATIC HEADER – FUSED & FINAL === */
